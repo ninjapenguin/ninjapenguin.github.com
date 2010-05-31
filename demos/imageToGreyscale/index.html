@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<title>ImageToGreyscale Demo</title>
+
+		<style type="text/css" media="screen">
+			/* PAGE STYLING - IGNORE */
+			*				{font-size:1em;}
+			body			{margin:0; padding:0; background-color:#333333; text-align:center; font:13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif; background-color:#E5F9FF; height:100%;}
+			html 			{height:100%;background-color:#333333; overflow: auto; background-color: #fff; -webkit-font-smoothing: antialiased; margin:0; padding:0;}
+			h1				{font-size:2.3em;margin:0;padding:10px 0;-webkit-text-shadow:1px 1px 2px rgba(255, 255, 255, 0.9),1px 1px 5px rgba(0, 0, 0, 0.3); -moz-text-shadow:1px 1px 2px rgba(255, 255, 255, 0.9),1px 1px 5px rgba(0, 0, 0, 0.3); text-shadow:1px 1px 2px rgba(255, 255, 255, 0.9),1px 1px 5px rgba(0, 0, 0, 0.3);}
+			p				{width:400px;margin:auto;padding:10px 0;}
+			.demo-box		{text-align:left; padding:10px; width:500px; border:1px solid #b6b6b6; margin:30px auto; background-color:#fff;}
+			.demo-box h2	{text-align:center; font-size:1.5em; padding:0; margin:0;}
+			.demo-box p		{margin:auto; text-align:center;}
+			p.breaker		{clear:both;}
+			code			{border-top:1px solid #CCC; border-bottom:1px solid #CCC; background-color:#eee;}
+		</style>
+		<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/ImageToGreyscale.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// Attached on load as we need the images to of loaded!
+			window.addEvent('load', function(){
+
+				$$('img.coloured-image').each(function(element){
+
+					element.toGreyscale();
+
+					// element.toSaturated will return image to saturated version if previously de-staurated with element.toGreyscale
+					element.addEvent('mouseover', function(ev){
+						this.toSaturated();
+					})
+					element.addEvent('mouseout', function(ev){
+						this.toGreyscale();
+					})
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<h1>Image to Greyscale Demo</h1>
+
+		<div class="demo-box">
+
+			<h2>Converted Images</h2>
+
+			<p>
+				<img src="/demo/np.jpg" class="coloured-image" />
+			</p>
+
+			<p>
+				<img src="/demo/np-stars.gif" class="coloured-image" />
+			</p>
+
+			<p>
+				<code>Element.toGreyscale()</code> will turn your colourful images into greyscale versions in IE 6+ and any other browser that supports the HTML canvas tag
+			</p>
+
+			<p>
+				<code>Element.toSaturated()</code> will return your images to their former glory!
+			</p>
+
+			<p>
+				<strong><span style="font-size:125%;">*Note:</span></strong> Non IE browsers will not convert the image if it is not being served from the same domain
+			</p>
+
+		</div>
+
+	</body>
+</html>
