@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Web Design | ninjapenguin]]></title>
+  <link href="https://ninjapenguin.co.uk/blog/categories/web-design/atom.xml" rel="self"/>
+  <link href="https://ninjapenguin.co.uk/"/>
+  <updated>2013-11-30T22:25:12+00:00</updated>
+  <id>https://ninjapenguin.co.uk/</id>
+  <author>
+    <name><![CDATA[Matthew Wells]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[New CSS printing article!]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2007/11/04/new-css-printing-article/"/>
+    <updated>2007-11-04T20:04:25+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2007/11/04/new-css-printing-article</id>
+    <content type="html"><![CDATA[<p>Just a quick post to let you know that I have just published a <strong><a href="/articles/printcss">short
+article</a></strong> I wrote on printing with CSS. I mentioned in an
+earlier blog that I had just put up a quick print stylesheet for this site and
+that I was planning on writing an article to cover the topics &hellip;so here it
+is!</p>
+
+<p>So the article deals with styling for print, which is something I promote, and
+believe can have a big impact on the usability of a site. Hopefully the
+article explains how to go about styling a site for print, and some of the
+advantages that it provides, it also has a further information section with
+some additional reading links.</p>
+
+<p>I&rsquo;ve decided not to enable commenting on the article itself and so instead
+will link to this post as its official comments area, if there are any!</p>
+
+<p>Read the article <a href="/articles/printcss">here</a></p>
+
+<p>~Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OmniGraffle greatness!]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2007/10/15/omnigraffle-greatness/"/>
+    <updated>2007-10-15T21:53:48+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2007/10/15/omnigraffle-greatness</id>
+    <content type="html"><![CDATA[<p><img src="/images/blog/grafimg.gif" alt="OmniGraffle uml chart" /></p>
+
+<p>Up until very recently any software diagrams I have put together have all been
+built through Microsoft Visio, however on the tip of a colleague I tried out
+OmniGraffle from the omni group, from this point on Visio can remain closed!</p>
+
+<p>I love the user interface, as with most things mac it just feels lighter and
+stuff is generally where you would expect it to be, which makes for a nice and
+shallow learning curve and less of the head-banging, &lsquo;microsoft-esc&rsquo;
+frustration!</p>
+
+<p>Diagrams are constructed through the standard set of vector tools you would
+expect combined with a number of pre-set &lsquo;stencils&rsquo;. These stencils offer a
+wealth of useful items, however when combined with the power of the community
+site i stumbled across earlier (<a href="http://www.graffletopia.com/">graffletopia</a>)
+the power of stencils really hits home. The site provides a huge number of
+quality, user submitted stencil sets which can be downloaded and dropped into
+the program, ready for you to use and customise to your hearts content.</p>
+
+<p>I have been mainly using the program for wireframes at the moment but am
+planning on creating a small article about product planning documentation and
+how this can be complimented through the use of OmniGraffle. Hopefully with
+that article I can include some links to the awesome stencils that i&rsquo;ve been
+making use of.</p>
+
+<p>For now I shall continue to familiarise myself with the nifty little program
+in preperation for my upcoming article.</p>
+
+<p>~Matt</p>
+]]></content>
+  </entry>
+  
+</feed>

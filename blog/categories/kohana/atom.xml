@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Kohana | ninjapenguin]]></title>
+  <link href="https://ninjapenguin.co.uk/blog/categories/kohana/atom.xml" rel="self"/>
+  <link href="https://ninjapenguin.co.uk/"/>
+  <updated>2013-11-30T22:25:12+00:00</updated>
+  <id>https://ninjapenguin.co.uk/</id>
+  <author>
+    <name><![CDATA[Matthew Wells]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OO Design in Kohana - Facade Pattern]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/05/04/oo-design-in-kohana-facade-pattern/"/>
+    <updated>2009-05-04T10:33:23+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/05/04/oo-design-in-kohana-facade-pattern</id>
+    <content type="html"><![CDATA[<p>For the second in my mini-series looking at Object Oriented Design within the
+Kohana framework I am going to look at the Facade pattern. I had this down for
+the third article, but I had a comment on the last one voicing some thoughts
+on a common grey area when it comes to this and the adapter pattern, and so I
+thought I would jump straight to the facade pattern in an attempt to clear up
+any confusion!</p>
+
+<!-- more -->
+
+
+<p>When it comes to design pattern history the starting point should probably be
+the book &ldquo;<em>Design Patterns Elements of Reusable Object-Oriented Software by
+Gamma, Helm, Johnson and Vlissides</em>&rdquo;. Most commonly referred to as the Gang of
+Four (GoF) the authors outlined 23 design patterns, potential solutions as
+they saw them to many common programing scenarios. When reading articles about
+design patterns you will often come accross references to the pages on which
+these patterns were described first, so if you havn&rsquo;t allready I would
+strongly suggest getting hold of a copy and taking a look.  In writing these
+articles my objective is really to attempt to show some of the potential
+theory behind certain implementations within the Kohana framework, and more
+over demonstrate the power they afford us as programmers in developing with,
+and extending from, the framework.</p>
+
+<h2>Swift Mailer in Kohana</h2>
+
+<p>One pretty universal piece of functionality to websites or applications now
+adays is email. There is a number of different potential solutions when it
+comes to sending emails, often dependant on the specific scenario, you will
+have undoubtedly used a few of these in your time. Whilst design patterns
+<em>suggest a potential</em> solution, frameworks <em>provide an implemented</em> solution
+(GoF). Seeing no need to reinvent the wheel, and identifying an exemplorary
+open source project Kohana comes with a bundled version of the swift mailer
+project.</p>
+
+<p>However with a new framework (or library technically) comes a new set of
+conventions. Along with these different conventions come a large and detailed
+API, which is to be expected from a library which is as specialised in an area
+as Swift mailer is. One of the biggest draws of a framework is familiarity
+which is achieved in large part through consistency: Configurations and files
+are held in the same format and location, method naming conventions, class,
+instance accessors/mutators etc etc</p>
+
+<p>So along comes the helper. Whilst sending email using Swift is increadibly
+easy it is done in a mannor which isn&rsquo;t entirely cohesive to the Kohana
+framework &lsquo;experience&rsquo;. The helper allows us to place our own, simpler
+interface on top of the swift mailer system (or <em>facade</em>), allowing us to send
+emails using it with syntax which will blend perfectly into our model or
+controller. Whats more we can provide configuration parameters for the system
+in exactly the same way the rest of Kohana does . .neat</p>
+
+<h2>Swift Mailer 4 in Kohana</h2>
+
+<p>Kohana currently comes bundled with swiftmailer 3 (and a helper for its API).
+To demonstrate the principles of helpers (and the facade pattern) I have put
+up a basic helper I use for Swiftmailer 4, though it isnt extensively tested!</p>
+
+<p>In this instance we can use the power of the facade pattern to turn:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$t = Swift_SmtpTransport::newInstance($hostname, $port);</p>
+
+<p>$t->setUsername($un); $t->setPassword($pw);</p>
+
+<p>$mailer = new Swift_Mailer::newInstance($t);</p>
+
+<p>$message = Swift_Message::newInstance($subject) &ndash;>setFrom($from) &ndash;>setTo($to)
+&ndash;>setSubject($subject) &ndash;>setBody($message, $mime) ;</p>
+
+<p>$mailer->send($message);
+```</p>
+
+<p>Into the more Kohana friendly:</p>
+
+<p><code>php
+&lt;?php
+email::send($to, $from, $subject, $message);
+</code></p>
+
+<p><strong>Bear in mind you will also need to of set up your email configuration in the relevant config folder (<a href="http://docs.kohanaphp.com/helpers/email"> Check the docs here </a>)</strong>
+The helper also caters for some of the most common sending scenarios and
+options (forme), though obviously will not cater for all (the side affect of
+simplifying the interface to an API is it&rsquo;s inherrent narrowing). However if
+you find your usage scenario to be different to others then simply ammending
+the helper allows you to simplify your particular usage pattern. . simple!</p>
+
+<p>Checkout my helper (bundled as a module with the latest swift download) over
+at <a href="http://github.com/ninjapenguin/Kohana-Swift4-Module/tree/master">github</a></p>
+
+<p><strong>To Recap</strong></p>
+
+<ul>
+<li>We have seen how the facade pattern allows us to provide a simpler, more intuitive (read Kohana-like) interface for a bundled sub-system, or third party solution</li>
+<li>The swiftmailer helper is a fine example of the facade pattern in use, it provides seemless kohana integration with a third party library which specialises in a particular niche of what we are working with</li>
+<li>As a bonus I&rsquo;ve posted up a swiftmailer 4 helper that I use to provide integration with the new Swiftmailer version (and thus new api) &ndash; it isnt tested though so beware!</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>The facade pattern is one of the most intuitive patterns, many will have been
+using such &lsquo;simplifying&rsquo; classes for some time and so their funtionality and
+purpose probably comes as no real suprise at all. But it is worth remembering
+the power and efficiency that they afford us as programmers. It&rsquo;s frequently
+said that no two programmers program the same, and so a wealth of helpers,
+designed around your own usage pattern, and systems which you are familiar
+with can be a very valuable tool when it comes to rapid applicatoin
+development using a framework.</p>
+
+<p>Kohanas modular system enables such usage very nicely, making it very easy for
+us to bundle Swiftmailer (or any other such third party library), along with a
+usage helper into a single module. This module can then be dropped into any of
+your projects allowing instant and intuitive use to whatever sub-system it
+contains.</p>
+
+<p>Hopfully the above is usefull to some, all feedback is greatly appreciated!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OO Design in Kohana - Adapter Pattern]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/04/18/oo-in-kohana-adapter-pattern/"/>
+    <updated>2009-04-18T11:36:54+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/04/18/oo-in-kohana-adapter-pattern</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/blog/interface.gif" title="&lsquo;OO Design in Kohana&rsquo; &lsquo;OO Design in Kohana&rsquo;" >
+Thought I would do a couple of posts on
+some basic Object Oriented design patterns and examples of their
+implementation within the Kohana framework. They&rsquo;re not going to go into any
+great detail but will hopefully provide a small insight into some of the inner
+workings of Kohana and enable  you to make full use of some of the inherent
+power these patterns provide.</p>
+
+<p>This article covers the <a href="http://en.wikipedia.org/wiki/Adapter_pattern">adapter
+pattern</a>. You can see some of
+the Kohana system libraries making use of this pattern by checking out the
+<em>system/libraries</em> directory. Within this directory you will find the drivers
+folder, for now take a quick look at it and see if you recognise any of the
+class names, we&rsquo;ll come back to it later.</p>
+
+<!-- more -->
+
+
+<p>The adapter pattern has a simple goal, that of &lsquo;adaption&rsquo;, that is to
+translate the interface of one class (or system) to that of another interface
+which some other class (or system) expects. Within the context of Kohana we
+are adapting the interface of different systems to fit with the standard
+Kohana libraries.</p>
+
+<p>For a high level overview of this, take a look at the imaege above</p>
+
+<ul>
+<li>A &ndash; Would represent the external library or system which we would like to make use of</li>
+<li>B &ndash; Would represent our adapter class, or &lsquo;driver&rsquo; to use the Kohana terminology</li>
+<li>C &ndash; Would represent the Kohana native class (in the case of currently existing libraries), or your own Kohana library perhaps
+<strong>Kohana Session Library</strong>
+One practical example of this within Kohana is the Session library. Kohana
+comes as standard with adapters (or drivers as I shall now refer to them) so
+that the Session library can work seemlessly with cookie, database or cache
+based storage.</li>
+</ul>
+
+
+<p>Each one of these solutions has a very different set of native php functions,
+and even different methodology in terms of achieving the same end result:
+Writing to a database is very different when compared to creating and storing
+a cookie, yet somehow the same Session library must work with all of these.</p>
+
+<p>Lets take a look at reading current session data with a couple of different
+solutions.</p>
+
+<p>``` php Database
+&lt;?php
+// Load the session
+$query = (/<em>query db here</em>/);</p>
+
+<p>if ($query->count() === 0) //return nothing</p>
+
+<p>// Load the data
+$data = $query->current()&ndash;>data;</p>
+
+<p>return $data;
+```</p>
+
+<p>``` php Cookie
+&lt;?php
+$data = (string) cookie::get(&lsquo;session-name&rsquo;);</p>
+
+<p>if ($data == &lsquo;&rsquo;) //return nothing</p>
+
+<p>return $data;
+```</p>
+
+<p>So how do we come up with a class, which can offer all of these different
+possibilities to our users?</p>
+
+<p><strong>One solution</strong>
+One relatively basic solution would be to put some inline logic into our
+Session class, something like the following;</p>
+
+<p>``` php
+&lt;?php
+if(//database driver)</p>
+
+<pre><code>//database specific read
+</code></pre>
+
+<p>else if (//cookie driver)</p>
+
+<pre><code>//cookie specific else if (//cache driver) //cache specific
+</code></pre>
+
+<p>&hellip;
+```</p>
+
+<p>this would certainly work, and would allow us to use the specific code
+depending on which configured method the user had chosen. The flaw with the
+above comes to light when we would like to add another method for storing and
+reading sessions, perhaps one of the currently trendy cloud services? We would
+need to directly edit the Session library and hunt out each area in which such
+a logic switch is employed. This would then lead to a very long and complex
+class, not fun to maintain! So how can we improve this scenario?</p>
+
+<p><strong>Enter the adapter pattern</strong>
+The problem here is because in the above situation the Session class has
+intrinsic knowledge of each of the currently available methods, if we could
+remove these dependencies then we could &lsquo;de-couple&rsquo; the session class from
+each of the individual implementations (the specifics of which, as the author
+of the Session library, do not interest us).</p>
+
+<p>So instead we build our library against some abstract functions, which are
+defined elsewhere. We can then delegate the specific implementation of each of
+these abstract functions to individual implementing classes (our drivers).</p>
+
+<p>``` php
+$driver = &lsquo;database&rsquo;;</p>
+
+<p>//How the data is read no longer interests us
+$data = $driver->read(); [/code]
+```</p>
+
+<p><strong>Defining our &lsquo;abstract&rsquo; functions</strong>
+So when creating our Session class we need a way of defining these generic
+functions against which we build the class, and which each driver <em>must</em>
+implement; enter the <em>interface</em>.</p>
+
+<p>An interface defines the functions an implementing class must provide. Take a
+look within the drivers directory, you will see a file named Session and a
+directory of the same name. The file is the interface of which we just spoke,
+open it up and take a look at it, within it you can see each of the functions
+that must be provided by any implementing class. The Session directory then is
+where all our drivers are stored . .easy!</p>
+
+<p><strong>To recap</strong></p>
+
+<ul>
+<li>We have seen how we can decouple a class from the individual, low level implementations of a scenario (e.g.  reading session data)</li>
+<li>We&rsquo;ve show that this leads to a very flexible, and ultimately resilient design, offering much greater scope for expandability and greater ease of maintenence</li>
+<li>****We have seen that Kohana provides a file structure and loading mechanism which enables easy and effective use of the adapter pattern</li>
+<li>We have shown an example of an implementing library (the Session library)</li>
+<li>We know where the interface which each of our adapters must implement resides</li>
+<li>We have found the directory within which our drivers are stored
+<strong>Conclusion</strong>
+Kohana has been written, from the ground up, with clean well architectured
+code, the benefits of which are two-fold. Firstly you benefit immediately from
+the existing libraries and helpers bundled with the framework. Secondly, and
+most importantly, you are encouraged (note encouraged <strong>not </strong>forced) to write
+your (inevitable) extensions to the system in a similarly well architectured
+fashion.</li>
+</ul>
+
+
+<p>IMO Kohana strikes the perfect balance between an overly &lsquo;nursed&rsquo; system (such
+as Codeignitor) and a well structured set of libraries (such as Zend). As such
+it facilitates RAD and at the same time provides ample scope for future
+expansion and custom system add-ons.</p>
+
+<p>As usual all comments greatly appreciated, I hope to have the next article in
+this mini-series up next week!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana Twitter Library]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/02/22/kohana-twitter-library/"/>
+    <updated>2009-02-22T14:00:41+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/02/22/kohana-twitter-library</id>
+    <content type="html"><![CDATA[<p>I previously posted the Curl library that came about as a result of needing
+this Twitter integration for something I was doing, so I thought it would be
+rude not to post up the twitter library as well!</p>
+
+<p>I gues you could say twitter has become <a href="http://headrush.typep%0Aad.com/creating_passionate_users/2006/12/httpwww37signal.html">fairly popular</a> (follow me at
+<a href="http://twitter.com/ninja_p">ninja_p</a>)  So if this library helps anyone out
+then feel free to take advantage of it. As usual any comments, critisism
+and/or requests are greatly received!</p>
+
+<!-- more -->
+
+
+<p><a href="http://github.com/ninjapenguin/kohana-twitter-%0Alibrary">Check it out over on github</a></p>
+
+<p><strong>Usage Examples</strong>
+[code lang=&ldquo;php&rdquo;] //Return latests 20 status updates in xml (default is json)
+var_dump($t->get_status(&lsquo;xml&rsquo;));</p>
+
+<p>//Set a new status var_dump($t->set_status(&lsquo;Just got through with dinner&rsquo;));</p>
+
+<p>//Delete a status var_dump($t->delete_status(&lsquo;status_id_int&rsquo;));</p>
+
+<p>//Get the latest 20 replies var_dump($t->get_replies());</p>
+
+<p>//Get all the info on the current user var_dump($t->get_user_info()); ?></p>
+
+<p>[/code]</p>
+
+<p>For more info check out the inline documentation &ndash; should be fairly self
+explanatory</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana Curl Library]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/02/22/kohana-curl-library/"/>
+    <updated>2009-02-22T13:45:20+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/02/22/kohana-curl-library</id>
+    <content type="html"><![CDATA[<p>So Curl is awesome! But due to my <a href="http://ezinearticles.com/?The-Goldfish-Memory---Is-%0AIt-A-Myth?&amp;id=378320">goldfish-esc
+memory</a> working with it is always a lesson in searching the
+docs. The great thing with working with a framework is that such tasks can
+easily be adapted to your own way of working. The great(est?) thing about
+Kohana is that it is just so damn adaptable, it provides you with a shed load
+of functionality right out the box, but it&rsquo;s true power (to me) is that it is
+easy to adapt to my way of thinking and my way of developing. Add to that the
+fact that adding extra stuff is laughably easy (<a href="http://projects.kohanaphp.com">if it hasn&rsquo;t been done
+allready</a>) and you have a mighty powerful
+weapon.</p>
+
+<p>I needed a bit of twitter integration for something I was doing, which
+required some use of Curl. I could of bundled this in with the Twitter library
+but like a good modular, OO programmer I seperated the logic out into its own
+library: the Kohana <a href="http://github.com/ninjapenguin%0A/kohana-curl-library">Curl library was born</a>.</p>
+
+<p>OK, after all that great white hype the lib is VERY basic, and as stated
+before works around my way of thinking so may not suit everybody, but if you
+have any requests / suggestions then I&rsquo;d love to hear them!</p>
+
+<p><strong>Usage Examples</strong><br/>
+[code lang=&ldquo;php&rdquo;]  [/code]</p>
+
+<p>[code lang=&ldquo;php&rdquo;]  &lsquo;beer&rsquo;, &lsquo;eat&rsquo; => &lsquo;meat&rsquo;)); ?> [/code]</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana 2.3 look ahead!]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-look-ahead/"/>
+    <updated>2008-10-18T11:01:25+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-look-ahead</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/blog/picture-1.png" title="&lsquo;Routing&rsquo; &lsquo;Routing&rsquo;" >
+I&rsquo;ve recently had the chance to have a little play with with the Kohana trunk
+(what will be Kohana 2.3) so I thought I would use this post to highlight some
+of the cool new features we can expect in the next release! The list is by no
+means exhaustive but will hopefully serve to lessen the learning curve when
+release day comes (or if you decide to have a play with the trunk). There has
+been some mixed reception to some of the changes, so if you&rsquo;ve missed any of
+these then hopefully the below will get you back up to speed!</p>
+
+<!-- more -->
+
+
+<p><strong>Folder Structure</strong>
+The first thing you will probably notice is the fairly major reorganisation of
+the folder layout: When looking in the top level of the application or system
+directories you will notice the controllers, helpers, libraries and models
+folders have all been removed in favor of a single classes folder. Within this
+classes folder can be found a controller and model folder (in which your
+controllers and models are placed respectively), the semantic difference
+between helpers and libraries has been lessened and as such both are now
+placed in the top level of the classes directory. I was always slightly unsure
+of the forced separation there, and so the combination of the two is a
+positive stop in my opinion.</p>
+
+<p>With the change comes future proofing against PHP 5.3, deceased complexity and
+transparent extension of classes (more later).</p>
+
+<p>There has been some uneasiness within the community about this change, so I
+encourage you to grab a copy of the trunk and take a look for yourself, I&rsquo;m
+pretty confident though that most will come to see the benefits of this.</p>
+
+<p><strong>Routing</strong>
+Another well talked about change is that of the new routing implementation.
+Going hand in hand with the directory structure the new routing implementation
+brings Kohanas own implementation of the <a href="http://dev.horde.org/routes/manual/index.html">Horde
+routing</a>. After a bit of
+playing with this and overcoming a couple of WTF!® moments, I have slowly
+began to really like this, especially the reverse routing concept which I
+looked into a while ago, I&rsquo;m definitely going to play with this more, and I&rsquo;m
+not sure if there are any plans to implement any of the other Horde features,
+but it definitely allows for a great deal of flexibility I&rsquo;m going to dedicate
+an article to this in the near future so I will purposely cut this a little
+short.</p>
+
+<p><strong>Class Extensions</strong>
+Extensions are now placed in a directory called . .. extensions, which resides
+in the top level (along with classes, views etc etc). Any classes (who&rsquo;s names
+are appended _Core) can now be extended..</p>
+
+<pre><code>  class ORM_Custom extends ORM
+ {
+ .....
+</code></pre>
+
+<p>The above code will extend ORM transparently allowing for the full power of
+extensions to be realised with even greater ease than previously, it also
+provides a nice logical organizational separation of all your extensions
+enabling you to easily keep track of extensions in your project</p>
+
+<p><strong>Kohana Modules</strong>
+Not so much coming in 2.3 as it has arrived already, but 2.3 will see the
+removal of some Kohana modules from the core support and their adding to the
+Kohana Modules project. Of note at the moment however is the object database
+which will come to replace the current database library (as far as I&rsquo;m aware
+anyway, please correct me if I&rsquo;m wrong!) &ndash; so keep an eye on that one</p>
+
+<p>So that covers the main points as I see them right now, hopefully I&rsquo;ll throw
+together an article that looks at the routing in a bit more detail soon, so
+check back for that!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+</feed>

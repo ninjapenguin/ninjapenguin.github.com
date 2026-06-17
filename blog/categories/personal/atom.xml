@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Personal | ninjapenguin]]></title>
+  <link href="https://ninjapenguin.co.uk/blog/categories/personal/atom.xml" rel="self"/>
+  <link href="https://ninjapenguin.co.uk/"/>
+  <updated>2013-11-30T22:25:12+00:00</updated>
+  <id>https://ninjapenguin.co.uk/</id>
+  <author>
+    <name><![CDATA[Matthew Wells]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana and Gearman - Practical Multitasking]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2011/08/29/kohana-and-gearman-practical-multitasking/"/>
+    <updated>2011-08-29T18:11:57+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2011/08/29/kohana-and-gearman-practical-multitasking</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/blog/antz.jpeg" title="&lsquo;Practical Multitasking with Kohana and Gearman&rsquo; &lsquo;Practical Multitasking with Kohana and Gearman&rsquo;" ></p>
+
+<p>Quite a large proportion of my day-to-day job involves the design,
+implementation and ongoing improvement of an in-house API.</p>
+
+<p>As a result of this, a commonly identified bottleneck arises when dealing with
+large, &lsquo;expensive&rsquo; data. This is commonly seen when an application posts a
+large volume of well structured data to the API (that some process must be
+carried out upon), before some form of structured receipt is then returned as
+a request response.</p>
+
+<p>Analysing such a request tends to show high PHP CPU usage with lower database
+consumption. This means that with an increase in data processing capacity we
+could make more use of this redundant database resource.</p>
+
+<p>The structured nature of data exchanged via an API means that we can,
+relatively simply and reliably, divide the submitted data and process it
+simultaneously with the help of a great tool called Gearman.</p>
+
+<!-- more -->
+
+
+<h2>Proposed Solution</h2>
+
+<p>Let&rsquo;s first agree on a contrived, theoretical scenario against which to design
+our solution:</p>
+
+<p>We have an API endpoint which receives a large number of entity ids and
+associated status updates. These ids must first be loaded from the database
+(to validate the ids) before their status is updated according to the posted
+value.</p>
+
+<p>Our current solution iterates the posted data (no matter the size), loading
+and updating as it goes, until the entire posted array of ids is dealt with.
+We then return a response indicating the ids of all entities updated. The time
+taken to process the request is therefore linearly proportional to the number
+of posted entity ids.</p>
+
+<p>Our solution will take the data passed by the user, divide it evenly into
+definable number of chunks and process each chunk in parallel -before finally
+combining the output from the individual processes and returning the
+combination to the user.</p>
+
+<p><img class="center" src="/images/blog/pmkg.gif" title="&lsquo;Practical Multitasking with Kohana and Gearman&rsquo; &lsquo;Practical Multitasking with Kohana and Gearman&rsquo;" ></p>
+
+<h2>Implementation</h2>
+
+<p>Kohana&rsquo;s HMVC methodology lends itself perfectly to this solution. Firstly,
+we&rsquo;ll need a parent controller that will transparently handle the splitting of
+the POSTED data. We&rsquo;ll call this the &lsquo;Farmable Controller&rsquo;. Secondly, we will
+need a Gearman worker &ndash; we&rsquo;ll call this our &lsquo;ant&rsquo; &ndash; which will handle the
+incoming request from Gearman, process the request via Kohana and return the
+output back to our Farmable Controller.</p>
+
+<h3>Controller_Farmable</h3>
+
+<p>You can grab the raw code <a href="https://github.com/ninjapenguin/Ant%0AFarm/blob/master/application/classes/controller/farmable.php">over at github</a>. Essentially
+this is an example controller which deals with the automatic detection of a
+request suitable for parallelisation, and the subsequent splitting, assignment
+and merging of the request data.</p>
+
+<p>``` php Dispatching each sub-request via gearman
+&lt;?php</p>
+
+<p>foreach ($arr_chunks as $chunk) {</p>
+
+<pre><code>// Format the string to be passed to the worker $arr_d = $_POST;
+$arr_d[$this-&gt;_key_name] = $arr_chunks[$c];
+
+$str_data = $str_route . "#" . http_build_query($arr_d);
+
+$obj_gearman-&gt;addTask('make_request', $str_data); $c++;
+</code></pre>
+
+<p>}</p>
+
+<p>?>
+```</p>
+
+<p>The above snippet demonstrates how we pass the request &ndash; along with the chunk of data
+that we want it to handle &ndash; to the ant (the Gearman worker).</p>
+
+<h3>Controller_Worker (ant)</h3>
+
+<p>This is our gearman worker. Its sole job is to listen for incoming requests,
+execute the passed request via an internal request and return the response to
+the parent process for later merging. You can view the <a href="https:%0A//github.com/ninjapenguin/AntFarm/blob/master/application/classes/controller/w%0Aorker.php">full code here</a>. The snippet below demonstrates how we make sense of the data
+received as part of the Gearman call, and how we execute the internal request:</p>
+
+<p>``` php Gearman worker example
+&lt;?php</p>
+
+<pre><code>$arr_pieces = explode('#', $job-&gt;workload());
+
+// Assign the data
+$str_uri = $arr_pieces[0]; parse_str($arr_pieces[1],$arr_post);
+
+// Create and execute the request..
+$str_data = Request::factory($str_uri)-&gt;post($arr_post) -&gt;execute() -&gt;body();
+
+return $str_data;
+</code></pre>
+
+<p>?>
+```</p>
+
+<h3>Controller_update</h3>
+
+<p>This is an example controller which simply takes the data posted to it and
+returns the data prefixed with the work &ldquo;affected&rdquo; (just to prove it has
+executed).</p>
+
+<p>Take note of the class level variables defined within this controller:</p>
+
+<ul>
+<li><p><strong>$_data_key</strong><br/>
+The key within POST which holds the items we are interested in</p></li>
+<li><p><strong>$_workable_limit</strong><br/>
+The number of items within $<em>POST[$</em>data_key] for which to parallelise the request</p></li>
+<li><p><strong>$_worker_count</strong><br/>
+The number of workers (ants) available over which to distribute the request</p></li>
+</ul>
+
+
+<h2>Running the Code</h2>
+
+<p>To run the code, you will need to ensure that you have Gearman installed
+locally as well as the Gearman PHP extension (see
+<a href="http://gearman.org/index.php?id=download">here</a>). Then checkout my example
+project from <a href="https://github.com/ninjapenguin/AntFarm">GitHub</a>.</p>
+
+<p>Once you have the prerequisites in place you can start up the required Gearman
+workers (I recommend three instances). Running the code below will start one
+worker instance (ant).</p>
+
+<p>``` bash</p>
+
+<pre><code>cd your_project_dir/public php index.php --uri=worker &amp;
+</code></pre>
+
+<p>```</p>
+
+<p>You can then make a request to the dummy update controller with the below</p>
+
+<p>``` bash</p>
+
+<pre><code>php index.php --uri=updater --post='header=some_data&amp;data;[]=penguin&amp;data;[]=giraffe&amp;data;[]=badger'
+</code></pre>
+
+<p>```</p>
+
+<p>On executing the above request you should see each worker output a debug line
+informing that it has been requested to serve a response. You should also see
+your main request respond with a single request. You can then edit the
+updater.php controller and set the _workable_limit to a fictitiously high
+value and re-run the test (you will need to restart your workers). You should
+now notice the workers are no longer called and the main request should take
+noticeably longer to execute.</p>
+
+<h2>Summary</h2>
+
+<p>Hopefully from this you will have seen some of the powerful capabilies
+available with the HMVC nature of Kohana, which makes this technique so easy
+to achieve. If you haven&rsquo;t come across Gearman before then this is a very
+basic introduction to an incredibly powerful tool, definitely check it out!</p>
+
+<p>Furthermore, we have shown how a slight change in our system architecture has
+transformed the fundamental behaviour, and thus scaleability pattern, of our
+application &ndash; brains before brawn!.</p>
+
+<p>I&rsquo;ve also provided a working demonstration using Gearman and Kohana. Whilst it
+certainly isn&rsquo;t production-ready, it should serve as a solid foundation for
+anyone wanting to play with the technique!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana simple REST server]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/04/05/kohana-simple-rest-server/"/>
+    <updated>2009-04-05T18:02:18+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/04/05/kohana-simple-rest-server</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been using something like this for a little while now, but initially held
+back on writing anything about it as I wanted to do something a little better
+using the Router3 module and/or KO3, however there has been some noise
+recently about REST, so I thought I would share this implementation as a
+possible starting point.</p>
+
+<p>REST service implementations seem to be growing in popularity at the moment,
+I&rsquo;m sure the likes of de.licio.us, twitter, flickr et al have done a lot to
+raise it&rsquo;s profile but essentially its a concept that still suffers from a
+lack of general understanding.</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;m not going to go into detail on describing the ins and outs of what a REST
+service <em>should</em> be, the post would quickly turn into something much larger,
+but instead I&rsquo;m going to try and show just how basic it is to set up your own
+Service Oriented Architecture (SOA) in Kohana which adheres to many of the
+standard REST principles. I&rsquo;ll then hopefully show some of the benefits of
+having done so, though they may follow in further posts.  One point I will
+cover briefly however is that of REST &lsquo;method&rsquo; names. When exposing data via
+an interface the information of what to do with that data must also be
+communicated in some fashion; it&rsquo;s fine to ask &ldquo;user&rdquo;, but what do you want to
+<strong>do</strong> with this information? <em>View</em> a user, <em>edit</em>, <em>create</em>, <em>delete</em>
+perhaps. REST states that the standard HTTP methods of GET, POST, PUT and
+DELETE suffice to enable the communication of all possible actions on a set of
+data, thus leaving the URI free of such information. This is in contrast to an
+XML-RPC implementation which will typically expose all possible actions an a
+data entity via its own URI.</p>
+
+<p>The use of these 4 HTTP verbs are often the first stumbling block for any
+budding REST service, and this is for a number of valid reasons: browser
+support as well as a slight increase in effort required to handle these on the
+server side are often good enough reasons to make adherence to this a
+concession (see twitter, de.licio.us and flickr ! ). For more information on
+this see <a href="http://www.apacheweek.com/features/put">this apacheweek article </a>.
+I&rsquo;m going to propose one such concession for this in my soon-to-follow Kohana
+implementation but may publish a future article showing how to adhere to this
+if there is any interest shown.</p>
+
+<p><strong>Kohana Implementation</strong> For our Kohana implementation we will need a service &lsquo;gateway&rsquo; (an entry point onto our service) and some method of interacting with our data. We can also use some of the benefits of Kohana to look at tidying up our interface and providing some simple but effective service error handling.
+Because we are not going to support (for now) PUT and DELETE operations, we
+are going to need some way of discerning our data &lsquo;methods&rsquo;. I&rsquo;m going to make
+use of POST (as opposed to our URI structure) and standardize on a post
+parameter which will need to be passed in order to designate the required
+operation. We can then simply throw an error if this is malformed or not
+present.</p>
+
+<p>``` php
+&lt;?php
+class Service_Controller extends Controller {</p>
+
+<pre><code>public function __construct()
+{
+    header('Content-type: text/xml');
+    parent::__construct();
+}
+
+public function __call($entity, $params)
+{
+    $entity = ORM::factory($entity, $params[0]);
+    $get = $this-&gt;input-&gt;get();
+    $post = $this-&gt;input-&gt;post();
+    if( count($post) == 0 )
+    {
+        return $this-&gt;get($entity);
+    } else {
+        switch ($post['action'])
+        {
+            case 'delete':
+                $this-&gt;delete($entity);
+                break;
+
+            case 'update':
+                $this-&gt;update($entity, $post);
+                break;
+
+            case 'create':
+                $this-&gt;create($entity, $params[0], $post);
+                break;
+
+            default:
+                //throw an error
+        }
+    }
+}
+
+protected function get(ORM $entity){}
+protected function update(ORM $entity, Array $post){}
+protected function create(ORM $entity, $identifier, Array $post){}
+public function delete(){}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The above code shows a stripped down version of the service controller, it has
+all the entity method functions taken out (their declarations are left for
+clarity) and all error handling removed as well. It shows though how simply
+such a standardized gateway can be set up. We can now access our service at
+/service// so for example:</p>
+
+<ul>
+<li><em>service/cart/matt</em></li>
+<li><em>service/product/product-slug</em></li>
+<li><em>service/category/2</em></li>
+</ul>
+
+
+<p><strong>Serviceable interface</strong> I create a serviceable interface, which models that wish to be accessible via this rest interface must implement:</p>
+
+<p>``` php
+&lt;?php
+interface serviceable_Driver {</p>
+
+<pre><code>public function set_identifier($id);
+public function get_representation($format = 'xml');
+public function read_representation($data, $format = 'xml');
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Enforcing implementation of this means that we can make sure we only attempt
+to serve entities which implement our interface, meaning that we can deploy
+our serviceable module in side any project and not have it enable access to
+all models</p>
+
+<p>An example implementation of this for a contrived cart example could look
+something like the following:</p>
+
+<p>``` php
+public function set_identifier($id)
+{</p>
+
+<pre><code>$this-&gt;user = $id;
+return $this;
+</code></pre>
+
+<p>}</p>
+
+<p>public function get_representation($format = &lsquo;xml&rsquo;)
+{</p>
+
+<pre><code>$v = View::factory('cart/cart');
+$v-&gt;cart = unserialize($this-&gt;cart_items);
+return $v;
+</code></pre>
+
+<p>}</p>
+
+<p>public function read_representation($data, $format = &lsquo;xml&rsquo;)
+{</p>
+
+<pre><code>$xml_Obj = simplexml_load_string($data);
+$items = array();
+//Rebuild the items
+foreach ($xml_Obj-&gt;items-&gt;item as $item)
+{
+    $tmp_Obj = new StdClass;
+    $tmp_Obj-&gt;id = (string) $item-&gt;id;
+    $tmp_Obj-&gt;name = (string) $item-&gt;name;
+    $tmp_Obj-&gt;price = (string) $item-&gt;price;
+    $items[] = $tmp_Obj;
+}
+$this-&gt;items = $items;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The above is just thrown together, but the idea is to handle the
+transformation between the object and the requested format (currently we just
+handle xml). With some more effort you could probably create an extension of
+ORM which went some way towards automatically handling the transformation .
+.again more for a later post maybe!</p>
+
+<p><strong>Error Handling</strong> The last thing I will touch on is how we could handle a unified error handling mechanism. Kohana has a great error handling mechanism as standard, by extending Kohana_Exception we can provide our own sendHeaders function (and return text/xml headers for instance) and our own error output view to format our error output:</p>
+
+<p>``` php
+class Kohana_Service_Exception extends Kohana_Exception
+{</p>
+
+<pre><code>protected $template = "service_error";
+
+public function __construct($message)
+{
+    parent::__construct($message);
+    $this-&gt;code = "Kohana Service Error";
+}
+/**
+ * Sends an Internal Server Error header.
+ * @return void
+ */
+public function sendHeaders()
+{
+    // Send the 500 header
+    header('HTTP/1.1 500 Internal Server Error');
+    header('Content-type: text/xml');
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This works fine for returning an xml formatted error for consumers of our
+service to react to.</p>
+
+<p><strong>Conclusion</strong> The purpose of this has been to demonstrate how simply such a service <em>could</em> be set up, I have a module which I can deploy which follows this general pattern, but obviously includes error handling as well as the method implementations, if theres any interest in this, then I can tidy it up and put it up on Github for anyone that wants it.
+I&rsquo;m going to follow up on this and show how simple it would now be to
+implement caching for our entire service. I&rsquo;ll also hopefully talk about how
+to set up a testing suite for your service using phpUnit.</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unit Testing basic html output - assertTag]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/03/06/unit-testing-basic-html-output-asserttag/"/>
+    <updated>2009-03-06T22:30:11+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/03/06/unit-testing-basic-html-output-asserttag</id>
+    <content type="html"><![CDATA[<p>About 18 months ago I started to dabble with unit testing within PHP, I first
+looked at <a href="http://www.simpletest.org/">simpletest</a> before ultimately settling
+with <a href="http://www.phpunit.de/">PHPUnit</a>. I was a little cautious at first,
+primarily concerned with the amount of time writing the tests were taking and
+maintenance of said tests, but soon realised their full potential.</p>
+
+<p>It&rsquo;s safe to say now I couldn&rsquo;t really imagine developing anything of
+significant size without them, and I just simply havn&rsquo;t yet come across any
+argument which can go anyway to persuading me otherwise.  One exceptionally
+useful tool I make use of is <a href="http://www.phpunit.de/manual/3.0/en/code-coverage-analysis.html">code coverage
+analysis</a>
+using <a href="http://www.xdebug.org/">xdebug</a> with PHPUnit. This is an amazing tool
+which will analyze my tests telling me exactly what code (at class, function
+or line level) is covered by which tests, and how many times. More important
+than telling me which code IS covered it will tell me what code IS NOT
+covered. <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic
+complexity</a> tells us that
+the number of unique linearly independent paths through a function relates
+directly to that functions complexity, to accurately test this function we
+need to cover all possible execution paths. Code coverage analysis flags this
+up for us in a clear, readable fashion &ndash; brilliant.</p>
+
+<!-- more -->
+
+
+<p>I would frequently notice when running these analysis that the same areas of
+my applications were always lacking in test case coverage &ndash; helpers. I often
+place code for repetitive rendering functions, possibly generating select
+lists, or different types of entity specific html widgets inside helpers,
+these functions were frequently poorly tested, similarly these functions often
+exhibited poor reliability, or were the first to suffer at the hand of any
+system regression.</p>
+
+<p>That is until I came across <a href="http://www.phpunit.de/manual/3.3/en/api.html#api.assert.assertTag">this test
+assertion</a>
+which allows you to test html output, for tags matching certain criteria, it&rsquo;s
+a really lightweight option to allow for some pretty in-depth testing:</p>
+
+<p><strong>Example</strong></p>
+
+<p>``` php
+&lt;?php
+//Load dataset
+$html = entity_helper::build_table();</p>
+
+<p>$matcher = array(</p>
+
+<pre><code>'tag' =&gt; 'table',
+'attributes' =&gt; array(
+    'id' =&gt; 'entity-table'
+),
+'children' =&gt; array(
+    'count' =&gt; 6,
+    'only' =&gt; array(
+        'tag' =&gt; 'tr'
+    )
+)
+</code></pre>
+
+<p>);</p>
+
+<p>$this->assertTag($matcher, $html);
+```</p>
+
+<p>The above will ensure that a valid table is produced, with exactly 6 rows and
+an id of &lsquo;entity-table&rsquo;.  It&rsquo;s easy to incorparate this type of testing as part
+of a larger assertion as well, for example you could make sure that a rendering
+helper generates a table with the correct amount of rows after a DB insert has
+been made, (i.e. purging any existing caches etc), and so on&hellip;</p>
+
+<p>Check the available testable parameters for assertTag, you&rsquo;ll be amazed at the
+flexibility it offers, and I guarantee that your code will benefit as a result
+of covering these things.</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git Resources]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/02/24/git-resources/"/>
+    <updated>2009-02-24T22:30:12+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/02/24/git-resources</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/blog/old-git-wit-168x300.jpg" title="&lsquo;Old Git Wit&rsquo; &lsquo;Old Git Wit&rsquo;" >
+I&rsquo;ve been using svn for a good few years now, and
+until a few months ago resisted the change of moving to another versioning
+software. However as the general buz of the internet turned more and more to
+distributed version control systems I started to read up a little on them.</p>
+
+<p>I saw bazaar and git as the two potential front runners but after some of the
+Kohana devs made some noise about Git (and hinted Kohana may ultimately move
+towards Git), I decided to pick up and Git as my potential weapon of choice.</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;m not going to lie, the learning curve (for me at least) was steep, and I
+still have a whole lot to learn, but I think I&rsquo;m now at the point where I
+could replace svn at least.</p>
+
+<p>So in the hope it may help others, I have included some of the resources I
+found most helpful here. If you have any others I would love to hear them!</p>
+
+<p><strong>Git Resources</strong></p>
+
+<ul>
+<li><a href="http://www.kernel.org/pub/software/scm/git/docs/everyday.html">Everyday Git with 20 commands or so</a></li>
+<li><a href="http://andy.delcambre.com/2008/03/04/git-svn-workflow.html">Git SVN Workflow</a></li>
+<li><a href="http://www.kernel.org/pub/software/scm/git/docs/user-manual.html">User Manual</a></li>
+<li><a href="http://info.wsisiz.edu.pl/~blizinsk/git-bzr.html">Git and Bazaar</a></li>
+<li><a href="http://git.or.cz/course/svn.html">Git &ndash; SVN Crash Course</a></li>
+<li><a href="http://www.viget.com/extend/effectively-using-git-with-subversion">Using Git with Subversion</a></li>
+</ul>
+
+
+<p>Hope the above help others out, each one proved invaluable to me</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana 2.3 routing]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-routing/"/>
+    <updated>2008-10-18T14:29:11+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-routing</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/blog/routing.png" title="&lsquo;Kohana Routing&rsquo; &lsquo;Kohana Routing&rsquo;" >
+In my last post I mentioned that there&rsquo;s a change in the works for Kohana 2.3,
+and I wasn&rsquo;t lying! If you watch the forum then you will of certainly seen
+some discussions on it, of particular note are:<a href="http://forum.kohanaphp.com/comments.php?DiscussionID=1096&amp;page=1#Item_0">Routing in
+2.3</a>
+and <a href="http://forum.kohanaphp.com/comments.php?DiscussionI%0AD=1217&amp;page=1#Item_0">2.3 Routing Examples</a>.</p>
+
+<p>I think initially the change was met with skepticism , as these things so
+often are, people don&rsquo;t like future compatibility issues, which is
+understandable, but in this case I think the additional advantage gained is
+great enough to offset this potential cause of frustration. Hopefully this
+post will outline some of those benefits to you, allowing you to make up your
+own mind!</p>
+
+<!-- more -->
+
+
+<p><strong>Configuration</strong>
+So the first thing you will notice is that routing is now configured
+differently, imo when you get to grips with that is going on then it is
+actually now SIMPLER to setup more complex routes, you can now achieve
+scenarios with equal or greater flexibility to those of before but without the
+use of any regular expressions. The new default route is as follows:</p>
+
+<pre><code>$config['default'] = array
+(
+    // Default routing
+    ':controller/:method/:id',
+    // Defaults for route keys
+    'controller' =&gt; 'welcome',
+    'method' =&gt; 'index',
+);
+</code></pre>
+
+<p><strong>$config[&lsquo;default&rsquo;]</strong> Now this may or may not appear self-explanatory, we&rsquo;ll go through it anyway! Routes are now given a name, this route is called &lsquo;default&rsquo;, the name itself is not technically important, though we will come to their usage later!
+<strong>&lsquo;:controller/:method/:id&rsquo;</strong> This is the definition of our routing arguments, prefixing a segment with a colon &lsquo;:&rsquo; makes it a router argument, and interpretable as such, :controller and :method are ignored as arguments and if present are used as you would imagine (:controller is used as the request controller, :method for the method)
+<strong>&lsquo;controller&rsquo; => &lsquo;welcome&rsquo;,&lsquo;method&rsquo; => &lsquo;index&rsquo;,</strong> Here we set the defaults, this basically says that if the controller is not present then use the &lsquo;welcome&rsquo; controller and the &lsquo;index&rsquo; method within it. If controller is present with no method then use the index method within whichever controller
+<strong>Play Time</strong> Confused? maybe, but with that under our belt we can now start playing around with this. Best way to get to grips with this is to grab a checkout of the development head (<a href="http://source.kohanaphp.com/trunk">http://source.kohanaphp.com/trunk</a> (or <a href="http://dev.kohanaphp.com/browser/trunk">http://dev.kohanaphp.com/browser/trunk</a> if your more graphically inclined)) and set yourself up a sandbox! Once installed if you go to your local address you should be presented with the nice new green welcome page.
+<strong>New Controller</strong> Create yourself a new controller &lsquo;Page&rsquo; (remember controllers are now defined as &lsquo;class Controller_Page&rsquo;), and give it an empty index method which echos your favorite hello world substitute before exiting. Going to &lt;your-site>/page will now show you your hello world substitute. This behavior shouldn&rsquo;t bowl you off your feet, in fact the more astute will probably of noticed that this is <em>exactly the same as with the previous (read current) release!</em>.
+Going to <em>&lt;your-site>/page/index</em> will provide the same, <em>&lt;your-
+site>/page/index/12</em> will give the same again (notice the trend),  <em>&lt;your-
+site>/page/index/12/long</em> <strong>WILL BREAK</strong> however, this is in contrast to
+previous (current) versions in which we could continue to add War and Peace
+after the matched route and the framework would continue to hurry us along
+without any problem, this gives us MUCH tighter control over our routes and
+could potentially provide security benefits (I havn&rsquo;t worked through that
+scenario yet &ndash; any input?). It means if we want to capture data then we have
+to define it within our route.</p>
+
+<p>If we wanted to capture that fourth segment potentially then we could change
+our default route to:</p>
+
+<pre><code>$config['default'] = array
+(
+    // Default routing
+    ':controller/:method/:id/:style',
+    // Defaults for route keys
+    'controller' =&gt; 'welcome',
+    'method' =&gt; 'index',
+);
+</code></pre>
+
+<p>Above we have added another router argument called &lsquo;<em>style</em>&rsquo;, visiting our
+page with 4 segments no longer gives us an error &hellip; making any more sense
+yet?</p>
+
+<p><strong>Accessing URI parameters (arguments)</strong>
+So above we have seen how to add additional parameters to the route, how can
+we access these named parameters? <strong>Router::$arguments</strong> is the answer, add to
+your index method in your page controller the following, then visit your four
+segment route again:</p>
+
+<pre><code>    var_dump(router::$arguments['style']);
+</code></pre>
+
+<p>Very nice. We now have a nice, unified way of accessing these named
+parameters.</p>
+
+<p><strong>Practical Example</strong>
+So lets now run quickly through a practical example to demonstrate some more
+of the functionality we can leverage from this . .yes there is more!</p>
+
+<p>Lets re-use our page controller and add a blog_posts function to it. We define
+the following route:</p>
+
+<pre><code>$config['blog_post'] = array
+(
+    // Default routing
+    'post/:year/:month/:day',
+    // Defaults for route keys
+    'controller'    =&gt; 'page',
+    'method'    =&gt; 'blog_post',
+    'year'      =&gt; date('Y'),
+    //Ensure we get the correct date formats!
+    'regex'     =&gt; array(
+                'year'  =&gt; '[0-9]{4}',
+                'month' =&gt; '[0-9]{2}',
+                'day'   =&gt; '[0-9]{2}'
+                )
+);
+</code></pre>
+
+<p>The above has introduced the <em>regex</em> functionality, hopefully it is relatively
+self-explanatory there. We can basically provide individual regex patterns for
+each of our defined url arguments, which makes for some <strong>really</strong>
+nice and simple pattern matching options. Also note how we define our default
+year to be the current one, very simple, very effective and very future proof!
+All from the routing configuration.</p>
+
+<p>Add the below function into your Page controller (from before):</p>
+
+<pre><code>public function blog_post()
+{
+  $year     = router::$arguments['year'];
+  $month    = isset(router::$arguments['month']) ? router::$arguments['month'] : null ;
+  $day  = isset(router::$arguments['day']) ? router::$arguments['day'] : null ;
+  echo "Blog Post";
+  var_dump($year);
+  var_dump($month);
+  var_dump($day);
+  exit;
+}
+</code></pre>
+
+<p>Now visit &lt;your-site>/post and you should see what is going on here! I think
+that the set up we&rsquo;re looking at here is really only scratching the surface of
+how versatile and solid the new routing solution will be. Any thoughts?</p>
+
+<p><strong>Reverse Routing</strong>
+Just to finish this off lets take a look at what really tidies all this up
+into a neat package: Reverse routing. This allows us to generate application
+links using our configured routes set-up. For instance:</p>
+
+<pre><code>echo router::uri('blog_post', array(
+    'year' =&gt; '1983',
+    'month' =&gt; '08',
+    'day' =&gt; '22')
+);
+</code></pre>
+
+<p>The above will now happily generate the route <em>post/1983/08/22</em>. On its own
+not to fantastic, and it came at the price of a slightly longer link
+generation syntax. However as some of you are probably realising if we ship
+this app over to the states where they do everything backwards ( :) ) we now
+want to switch our urls to read &lsquo;post/:year/:day/:month&rsquo;, so by making that
+<strong>ONE</strong> change in our routes config every single one of our application links
+will now match this backwards way of doing things, and because we retrieve our
+url arguments by name none of our code will be affected . . truly awsome.
+Reorganising methods and controllers is no longer an issue either. Play around
+with it and see what you think. Hopefully you will be impressed!</p>
+
+<p><em>Breath</em> &ndash; That turned out to be a bit longer than anticipated so hopefully you got all the way through it, as usual any problems, glaring omissions then please don&rsquo;t hesitate to drop me a line!
+/Matt</p>
+]]></content>
+  </entry>
+  
+</feed>

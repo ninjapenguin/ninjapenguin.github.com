@@ -1,0 +1,265 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Unit Testing basic html output - assertTag - ninjapenguin</title>
+	<meta name="author" content="Matthew Wells">
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+	<meta name="description" content="About 18 months ago I started to dabble with unit testing within PHP, I first
+looked at simpletest before ultimately settling
+with PHPUnit. I was a &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="ninjapenguin" type="application/atom+xml">
+	
+	<link rel="canonical" href="https://ninjapenguin.co.uk/blog/2009/03/06/unit-testing-basic-html-output-asserttag">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+	<link href='https://fonts.googleapis.com/css?text=ninjapenguin&family=Slackey' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+	
+	
+
+</head>
+
+
+<body>
+    <div id="wrapper">
+    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
+<h1 class="animated bounceInDown">
+    <div id="headerbg">
+        ninjapenguin
+    </div>
+</h1>
+<br>
+
+<ul id="social-links" style="text-align:center">
+  
+  <!-- GitHub -->
+  <li>
+  <a href="https://github.com/ninjapenguin" class="github" title="Github"></a>
+  </li>
+  
+  
+  
+  
+  <!-- Twitter -->
+  <li>
+  <a href="http://www.twitter.com/ninja_p" class="twitter" title="Twitter"></a>
+  </li>
+  
+  
+  
+  
+  
+</ul>
+
+
+<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+    <li id="ajax"><a href="/blog/index.html">Blog</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+    
+</ul>
+
+
+
+
+</header>
+
+<div id="toload">
+<!-- begin toload --> 
+    <div id="content" class="inner">
+        <article class="post">
+	<h2 class="title">Unit Testing Basic Html Output - assertTag</h2>
+	<div class="meta">
+		<div class="date">Published on: 
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-06T22:30:11+00:00" pubdate data-updated="true">Mar 6<span>th</span>, 2009</time></div>
+		<div class="tags">Tags: 
+
+
+	<a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/personal/'>Personal</a>
+
+
+</div>
+	</div>
+	<div class="entry-content"><p>About 18 months ago I started to dabble with unit testing within PHP, I first
+looked at <a href="http://www.simpletest.org/">simpletest</a> before ultimately settling
+with <a href="http://www.phpunit.de/">PHPUnit</a>. I was a little cautious at first,
+primarily concerned with the amount of time writing the tests were taking and
+maintenance of said tests, but soon realised their full potential.</p>
+
+<p>It&rsquo;s safe to say now I couldn&rsquo;t really imagine developing anything of
+significant size without them, and I just simply havn&rsquo;t yet come across any
+argument which can go anyway to persuading me otherwise.  One exceptionally
+useful tool I make use of is <a href="http://www.phpunit.de/manual/3.0/en/code-coverage-analysis.html">code coverage
+analysis</a>
+using <a href="http://www.xdebug.org/">xdebug</a> with PHPUnit. This is an amazing tool
+which will analyze my tests telling me exactly what code (at class, function
+or line level) is covered by which tests, and how many times. More important
+than telling me which code IS covered it will tell me what code IS NOT
+covered. <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic
+complexity</a> tells us that
+the number of unique linearly independent paths through a function relates
+directly to that functions complexity, to accurately test this function we
+need to cover all possible execution paths. Code coverage analysis flags this
+up for us in a clear, readable fashion &ndash; brilliant.</p>
+
+<!-- more -->
+
+
+<p>I would frequently notice when running these analysis that the same areas of
+my applications were always lacking in test case coverage &ndash; helpers. I often
+place code for repetitive rendering functions, possibly generating select
+lists, or different types of entity specific html widgets inside helpers,
+these functions were frequently poorly tested, similarly these functions often
+exhibited poor reliability, or were the first to suffer at the hand of any
+system regression.</p>
+
+<p>That is until I came across <a href="http://www.phpunit.de/manual/3.3/en/api.html#api.assert.assertTag">this test
+assertion</a>
+which allows you to test html output, for tags matching certain criteria, it&rsquo;s
+a really lightweight option to allow for some pretty in-depth testing:</p>
+
+<p><strong>Example</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="c1">//Load dataset</span>
+</span><span class='line'><span class="nv">$html</span> <span class="o">=</span> <span class="nx">entity_helper</span><span class="o">::</span><span class="na">build_table</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$matcher</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>  <span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;entity-table&#39;</span>
+</span><span class='line'>  <span class="p">),</span>
+</span><span class='line'>  <span class="s1">&#39;children&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="s1">&#39;count&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
+</span><span class='line'>      <span class="s1">&#39;only&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tr&#39;</span>
+</span><span class='line'>      <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTag</span><span class="p">(</span><span class="nv">$matcher</span><span class="p">,</span> <span class="nv">$html</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above will ensure that a valid table is produced, with exactly 6 rows and
+an id of &lsquo;entity-table&rsquo;.  It&rsquo;s easy to incorparate this type of testing as part
+of a larger assertion as well, for example you could make sure that a rendering
+helper generates a table with the correct amount of rows after a DB insert has
+been made, (i.e. purging any existing caches etc), and so on&hellip;</p>
+
+<p>Check the available testable parameters for assertTag, you&rsquo;ll be amazed at the
+flexibility it offers, and I guarantee that your code will benefit as a result
+of covering these things.</p>
+
+<p>/Matt</p>
+</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+    </div>
+    <footer id="footer">
+    <div style="display:inline">
+    Copyright &copy; 2013
+
+    Matthew Wells
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+
+    </footer>
+    <script src="/javascripts/fabric.js"></script>
+
+
+
+
+
+
+
+<!-- end toload --> 
+</div>
+</div>
+<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
+/*]]>*/
+</script><!-- remove it to remove the scroll to top button -->
+</body>
+</html>

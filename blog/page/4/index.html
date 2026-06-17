@@ -1,0 +1,583 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>ninjapenguin</title>
+	<meta name="author" content="Matthew Wells">
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+	<meta name="description" content="Published on: Jun 21st, 2008 Tags: Kohana, PHP A couple days back Dlib posted over at the learning Kohana
+Blog asking people for some tutorial &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="ninjapenguin" type="application/atom+xml">
+	
+	<link rel="canonical" href="https://ninjapenguin.co.uk/blog/page/4">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+	<link href='https://fonts.googleapis.com/css?text=ninjapenguin&family=Slackey' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+	
+	
+
+</head>
+
+
+<body>
+    <div id="wrapper">
+    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
+<h1 class="animated bounceInDown">
+    <div id="headerbg">
+        ninjapenguin
+    </div>
+</h1>
+<br>
+
+<ul id="social-links" style="text-align:center">
+  
+  <!-- GitHub -->
+  <li>
+  <a href="https://github.com/ninjapenguin" class="github" title="Github"></a>
+  </li>
+  
+  
+  
+  
+  <!-- Twitter -->
+  <li>
+  <a href="http://www.twitter.com/ninja_p" class="twitter" title="Twitter"></a>
+  </li>
+  
+  
+  
+  
+  
+</ul>
+
+
+<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+    <li id="ajax"><a href="/blog/index.html">Blog</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+    
+</ul>
+
+
+
+
+</header>
+
+<div id="toload">
+<!-- begin toload --> 
+    <div id="content" class="inner">
+        
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2008/06/21/kohana-pagination-tutorial/">
+		
+			Kohana Pagination Tutorial</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-21T17:17:56+01:00" pubdate data-updated="true">Jun 21<span>st</span>, 2008</time></div>
+      <div class="tags">Tags: 
+
+
+	<a class='category' href='/blog/categories/kohana/'>Kohana</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+
+
+</div>
+    </div>
+		<p><img src="/images/blog/pagination.png" alt="An unimaginative image of pagination" /></p>
+
+<p>A couple days back Dlib posted over at the <a href="http://learn.kohanaphp.com">learning Kohana
+Blog</a> asking people for some tutorial topics, one
+of the mentioned options was that of the Pagination library so I thought I
+would help out and throw one together for it (as it&rsquo;s very simple and
+shouldn&rsquo;t take to long!</p>
+
+<p>Pagination is (in most of my projects anyway) a frequently used option, it is
+something users have come to expect, and from an interface point of view can
+give us more controll over the display of large datasets, in short its
+probably something you should be providing if you allready arn&rsquo;t! The
+pagination library in Kohana takes out the monotinous side to calculating the
+pagination links, and allows us to rapidly provide the functionality with a
+minimal of fuss.</p>
+
+<p><strong>Using Pagination Library </strong><br/>
+First thing to note about Pagination in Kohana is that it is implemented
+within a library (system/libraries), being a library this means that we always
+instantiate it (as oposed to helpers which we call statically):</p>
+
+<p>Another important point is that the pagination library has an associated
+configuration file (found in system/config/pagination.php), this configuartion
+file should be copied into your application/config directory so that you can
+customise it.</p>
+
+<p>The pagination library also provides a number of different default link
+display styles (the views for which can be found in system/views/pagination),
+tbhI have never found any need for generating a different display style over
+any of those provided, but by looking at the view files you can see how easy
+this is to achiveve if the situation should arise!</p>
+
+<p><strong>Configuring Pagination</strong><br/>
+The default pagination config sets up a number of params you may want to
+change, though it is important to note that any of these can be overridden
+each time you create a Pagination object, for an explanation of these
+variables then check the config file out!</p>
+
+<p><strong>Implementing Pagination</strong><br/>
+<em>Scenario: I have a page which displays a number of users in a table, I want
+to be able to provide pagination of this table</em></p>
+
+<p>The code below demonstrates an example usage:</p>
+
+<pre><code>count_all();  
+ //Pagination configuration
+ $num_per_page = 10;  
+ //Setup pagination
+ $pagination = new Pagination(array(
+        'uri_segment' =&gt; 2,
+    'total_items'=&gt; $tot,
+    'style' =&gt; "digg",
+    'items_per_page' =&gt; $num_per_page,
+    'auto_hide' =&gt; true
+ ));  
+ $offset = $pagination-&gt;sql_offset;  
+ $users = ORM::factory('ntuser')
+         -&gt;orderby('id','desc')
+         -&gt;find_all($num_per_page,$offset);  
+$view-&gt;pagination = $pagination;
+$view-&gt;users = $users;
+?&gt;
+</code></pre>
+
+<p>You can see how with very little effort we have created paginated results!
+I&rsquo;ll go through and explain whats hapening in a little more detail now</p>
+
+<p><strong>Creating the object</strong><br/>
+This deals with the creation of the pagination obect (where all the magic
+happens), i&rsquo;ll deal with each of those options passed in:</p>
+
+<ul>
+<li><em>uri_segment</em> &ndash; The library has to have a way of knowing which page of the pagination we are currently on at any one time, it does this by adding the page number to the url, this value (an integer) represents the segment of the url in which this number resides (more info below)</li>
+<li><em>total_items &ndash; </em>The total number of items that we are paginating over, in the above example I use ORM to count the total number of results in the table I will be returning (I could infact optimise and just count the actual results that I am passing into the view, but for clarity I wrote it out like this)</li>
+<li><em>style &ndash; </em>I am overwriting the default style set in my application config here to the &lsquo;digg&rsquo; style</li>
+<li><em>items_per_page &ndash; </em>The total number of items to display on any one page (self explanatory, this can be populated dynamically if you want the user to decide!)</li>
+<li><em>auto_hide &ndash; </em>If there are fewer results than the value of <em>items_per_page </em>then the pagination links will be hidden
+uri-segment continued: &ndash; In the example above the code resides in the Users
+controller within a function called list (our path would be users/list), in
+the example above I have set up the route below which enables the pagination
+number to be set as the second uri segment</li>
+</ul>
+
+
+<p>This route maps users/<any number> to the users/list/<the number> path thus
+enabling the Pagination library to extract the current page number from the
+second uri segment</p>
+
+<p><strong>Outputting the Pagination links</strong><br/>
+All that is left to do now is output the links in the view using the following
+code (assuming you have made the profiler object available to the view in the
+$profiler variable (as above))</p>
+
+<p>And that is all there is to it!, how to use the Pagination library in a nut
+shell!</p>
+
+<p>If anyone has any questions then please dont hesitate to contact me!</p>
+
+<p>/Matt</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2008/02/24/kohana-simple-blog-screencast/">
+		
+			Kohana Simple Blog Screencast</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-24T14:22:18+00:00" pubdate data-updated="true">Feb 24<span>th</span>, 2008</time></div>
+      <div class="tags">Tags: 
+
+
+	<a class='category' href='/blog/categories/kohana/'>Kohana</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+
+
+</div>
+    </div>
+		<p>So following on from <a href="/blog/2008/02/23/kohana-setup-screencast/">yesterdays
+screencast</a> I have put together another short tutorial showing the first part
+of a simple blog application.</p>
+
+<p>The tutorial touches on the template controller use, basic ORM implementation
+and basic configuration issues. It picks up straight from where the previous
+tutorial left off and will be concluded by a second part showing how to make
+use of the forge module and ORM to create and save blog entries.</p>
+
+<p>I had some feedback yesterday on the sound levels of the first screencast so I
+have upped the levels on this one, I have also increased the quality slightly,
+although this has also increased the file size (this screencast is 30mb when
+zipped with 13minute length)</p>
+
+<p>I will only offer this one as compressed download (due to the bigger size) so
+any feedback would be greatly received!</p>
+
+<p><strong><a href="#downloads-unavailable">[Download the second screencast here &ndash; 31mb] </a></strong><br/>
+Cheers</p>
+
+<p>/Matt</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2008/02/23/kohana-setup-screencast/">
+		
+			Kohana Setup Screencast</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-23T12:33:11+00:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2008</time></div>
+      <div class="tags">Tags: 
+
+
+	<a class='category' href='/blog/categories/kohana/'>Kohana</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+
+
+</div>
+    </div>
+		<p><img src="/images/blog/kohana.png" alt="Kohana logo" /></p>
+
+<p>So, I have been following the progress of the Kohana php framework for a
+little while now, after completing a number of projects using CodeIgniter I
+started looking for a more php5 competent framework and came across the
+community branch of CodeIgniter called <a href="http://kohanaphp.com">Kohana.</a></p>
+
+<p>I&rsquo;ve been slowly getting to grips with the framework for a couple of weeks now
+and plan to use it in the next project I&rsquo;m about to take on. It seems like a
+fantastic framework with some really good developers who have done some
+awesome stuff with the core but like any early project currently suffers (IMO)
+from a lack of basic documentation . .so I have decided to help (hopefully)
+with a short screencast on how to set up a small application (a blog) just to
+get people using the framework.</p>
+
+<p>The first screencast focuses on setting it for for development, it covers the
+following topics:</p>
+
+<ul>
+<li>Downloading the source code from svn</li>
+<li>Setting up a local site in apache (running on localhost)</li>
+<li>Placing the index.php into a webroot</li>
+<li>Removing the index.php from the url
+It&rsquo;s the first screencast I have ever attempted so it is most likely very
+rough around the edges but I hope it can be of some to someone!</li>
+</ul>
+
+
+<p>The only bit of accompanying code you will need is the rewrite rule I used
+within the virtual host which you can copy and paste from below;</p>
+
+<pre><code># Turn on URL rewriting
+RewriteEngine On  
+# Protect application and system files from being viewed
+RewriteCond $1 ^(application|system)  
+# Rewrite to index.php/access_denied/URL
+RewriteRule ^(.*)$ index.php/access_denied/$1 [PT,L]  
+# Do not enable rewriting for files that exist
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-d
+RewriteCond $1 !/index.+  
+# Rewrite to index.php/URL
+RewriteRule ^(.*)$ /index.php/$1 [PT,L]
+</code></pre>
+
+<p>If you have any questions then please do not hesitate to contact me about
+them!</p>
+
+<p><strong><a href="#downloads-unavailable">[Download the QT movie here]</a> <a href="#downloads-unavailable">[Download the compressed movie here]</a> </strong><br/>
+/Matt</p>
+
+<p><strong>EDIT</strong> &ndash; The second part in this series has now been posted up and is available <a href="https://ninjapenguin.co.uk/blog/2008/02/24/kohana-simple-blog-screencast/">here </a></p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2008/01/12/wishlist-application/">
+		
+			Wishlist Application</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-01-12T19:20:27+00:00" pubdate data-updated="true">Jan 12<span>th</span>, 2008</time></div>
+      <div class="tags">Tags: 
+
+
+	<a class='category' href='/blog/categories/codeigniter/'>CodeIgniter</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/mootools/'>Mootools</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+
+
+</div>
+    </div>
+		<p><img src="/images/blog/wishlist.gif" alt="Ninjapenguin Wishlist logo" /></p>
+
+<p>So today I got around to writing up the accompanying &lsquo;article&rsquo; for my small
+wishlist application. The app was written in conjunction with the miniseries I
+wrote on &lsquo;Modern Project Management&rsquo; (of which I&rsquo;m still formatting the last
+article).</p>
+
+<p>The app was used over christmas by me and a few friends and seemed to serve
+its purpose! (I did quite well off of my list :P).</p>
+
+<p>Written in CodeIgniter with a generous splash of Mootools thrown in for some
+AJAX&#8217;y goodness the app is quick and liteweight and allows users to create a
+list, add and delete items (asynchronously) and mark other users items as
+bought. The app also has a built in help system.</p>
+
+<p>Check out the article
+<a href="https://ninjapenguin.co.uk/articles/wishlist_application">here</a> for some
+screenshots, or alternatively head over to the application and sign up at <a href="/blog/2008/01/12/wishlist-application/">htt
+p://www.ninjapenguin.co.uk/wishlist/signup.</a></p>
+
+<p>The application was only written as a proof of concept, not as a production
+level app so if you find any bugs then just give me a shout.I have written a
+few useful small Javascript classes that I will be posting up separately,
+including a form validation class and a modal pop up class, so keep an eye out
+for them!</p>
+
+<p><a href="https://ninjapenguin.co.uk/articles/wishlist_application">Read the article here
+</a></p>
+
+<p>~Matt</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2007/12/15/mootools-bind-function/">
+		
+			Mootools Bind Function</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-15T23:08:10+00:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time></div>
+      <div class="tags">Tags: 
+
+
+	<a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/mootools/'>Mootools</a>
+
+
+</div>
+    </div>
+		<p>Well it&rsquo;s my first blog entry for a little while (I have a few almost ready to
+publish) and its going to be a short one.</p>
+
+<p>I have been doing a lot of client side scripting work recently, mostly with
+the <a href="http://mootools.net">Mootools</a> framework, if you havn&rsquo;t heard of it then
+it&rsquo;s definitely worth a look, it is a really powerfull javascript framework
+made of modules that you can pick and mix in, meaning that it is increadably
+lightweight when compared to the likes of prototype etc.</p>
+
+<p>One really cool little function is the <em>bind</em> function. The bind function is
+prototyped to the function element and so is called directly upon a function.
+When calling bind you pass it an element to which the &lsquo;this&rsquo; of the function
+then corresponds to. A demonstration is probably in order!</p>
+
+<pre><code>element.addEvent('focus', function(e) {
+    alert(this.id)
+})
+</code></pre>
+
+<p>The above code would attach the focus event to &lsquo;element&rsquo;, on focus the browser
+would alert the id of that element.</p>
+
+<pre><code>element.addEvent('focus', function(e) {
+    alert(this.id)
+}.bind(element2))
+</code></pre>
+
+<p>This time the alert would output the id of element2. This practise is
+particularly handy within classes, meaning that the event listener can be
+bound to the instance of the class, and not the element that is firing the
+event.</p>
+
+<p>Hope that helps someone!</p>
+
+<p>Matt</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+<nav id="pagenavi">
+    
+        <a href="/blog/page/3/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/5/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+
+    </div>
+    <footer id="footer">
+    <div style="display:inline">
+    Copyright &copy; 2013
+
+    Matthew Wells
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+
+    </footer>
+    <script src="/javascripts/fabric.js"></script>
+
+
+
+
+
+
+
+<!-- end toload --> 
+</div>
+</div>
+<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
+/*]]>*/
+</script><!-- remove it to remove the scroll to top button -->
+</body>
+</html>

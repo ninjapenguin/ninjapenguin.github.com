@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Articles | ninjapenguin]]></title>
+  <link href="https://ninjapenguin.co.uk/blog/categories/articles/atom.xml" rel="self"/>
+  <link href="https://ninjapenguin.co.uk/"/>
+  <updated>2013-11-30T22:25:12+00:00</updated>
+  <id>https://ninjapenguin.co.uk/</id>
+  <author>
+    <name><![CDATA[Matthew Wells]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[New article released! "Modern Project Management"]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2007/11/18/new-article-released-modern-project-management/"/>
+    <updated>2007-11-18T17:59:09+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2007/11/18/new-article-released-modern-project-management</id>
+    <content type="html"><![CDATA[<p>So I have just released my next new article, I&rsquo;m hoping it will be the first
+of a four-parter based around what I am calling &lsquo;Modern Project Management&rsquo;.
+It&rsquo;s basically my view on steps modern project management should be taking for
+small to medium sized projects.</p>
+
+<p>The first article is based on Requirements Analysis (the beginning to any
+great project!) and discusses it&rsquo;s advantages and some brief points about it.
+The articles are meant to be short and act as pointers to more valuable and
+detailed information should you wish to read up on the subject.</p>
+
+<p>I&rsquo;m going to base the articles around a small project &lsquo;the ninjapenguin wish
+list&rsquo; application which should act to as a nice little demonstration for some
+of the topics covered, so go and have a read!</p>
+
+<p>With any luck the serious will be ready before Christmas so I will be able to
+put the wish list app to the test!</p>
+
+<p><a href="/articles/modern_project_management">Read the article here</a></p>
+
+<p>~Matt</p>
+]]></content>
+  </entry>
+  
+</feed>

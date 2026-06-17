@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mootools | ninjapenguin]]></title>
+  <link href="https://ninjapenguin.co.uk/blog/categories/mootools/atom.xml" rel="self"/>
+  <link href="https://ninjapenguin.co.uk/"/>
+  <updated>2013-11-30T22:25:12+00:00</updated>
+  <id>https://ninjapenguin.co.uk/</id>
+  <author>
+    <name><![CDATA[Matthew Wells]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Wishlist application]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/01/12/wishlist-application/"/>
+    <updated>2008-01-12T19:20:27+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/01/12/wishlist-application</id>
+    <content type="html"><![CDATA[<p><img src="/images/blog/wishlist.gif" alt="Ninjapenguin Wishlist logo" /></p>
+
+<p>So today I got around to writing up the accompanying &lsquo;article&rsquo; for my small
+wishlist application. The app was written in conjunction with the miniseries I
+wrote on &lsquo;Modern Project Management&rsquo; (of which I&rsquo;m still formatting the last
+article).</p>
+
+<p>The app was used over christmas by me and a few friends and seemed to serve
+its purpose! (I did quite well off of my list :P).</p>
+
+<p>Written in CodeIgniter with a generous splash of Mootools thrown in for some
+AJAX'y goodness the app is quick and liteweight and allows users to create a
+list, add and delete items (asynchronously) and mark other users items as
+bought. The app also has a built in help system.</p>
+
+<p>Check out the article
+<a href="https://ninjapenguin.co.uk/articles/wishlist_application">here</a> for some
+screenshots, or alternatively head over to the application and sign up at <a href="/blog/2008/01/12/wishlist-application/">htt
+p://www.ninjapenguin.co.uk/wishlist/signup.</a></p>
+
+<p>The application was only written as a proof of concept, not as a production
+level app so if you find any bugs then just give me a shout.I have written a
+few useful small Javascript classes that I will be posting up separately,
+including a form validation class and a modal pop up class, so keep an eye out
+for them!</p>
+
+<p><a href="https://ninjapenguin.co.uk/articles/wishlist_application">Read the article here
+</a></p>
+
+<p>~Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mootools bind function]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2007/12/15/mootools-bind-function/"/>
+    <updated>2007-12-15T23:08:10+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2007/12/15/mootools-bind-function</id>
+    <content type="html"><![CDATA[<p>Well it&rsquo;s my first blog entry for a little while (I have a few almost ready to
+publish) and its going to be a short one.</p>
+
+<p>I have been doing a lot of client side scripting work recently, mostly with
+the <a href="http://mootools.net">Mootools</a> framework, if you havn&rsquo;t heard of it then
+it&rsquo;s definitely worth a look, it is a really powerfull javascript framework
+made of modules that you can pick and mix in, meaning that it is increadably
+lightweight when compared to the likes of prototype etc.</p>
+
+<p>One really cool little function is the <em>bind</em> function. The bind function is
+prototyped to the function element and so is called directly upon a function.
+When calling bind you pass it an element to which the &lsquo;this&rsquo; of the function
+then corresponds to. A demonstration is probably in order!</p>
+
+<pre><code>element.addEvent('focus', function(e) {
+    alert(this.id)
+})
+</code></pre>
+
+<p>The above code would attach the focus event to &lsquo;element&rsquo;, on focus the browser
+would alert the id of that element.</p>
+
+<pre><code>element.addEvent('focus', function(e) {
+    alert(this.id)
+}.bind(element2))
+</code></pre>
+
+<p>This time the alert would output the id of element2. This practise is
+particularly handy within classes, meaning that the event listener can be
+bound to the instance of the class, and not the element that is firing the
+event.</p>
+
+<p>Hope that helps someone!</p>
+
+<p>Matt</p>
+]]></content>
+  </entry>
+  
+</feed>

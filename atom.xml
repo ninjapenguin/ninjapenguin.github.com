@@ -1,0 +1,2047 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[ninjapenguin]]></title>
+  <link href="https://ninjapenguin.co.uk/atom.xml" rel="self"/>
+  <link href="https://ninjapenguin.co.uk/"/>
+  <updated>2013-11-30T22:25:12+00:00</updated>
+  <id>https://ninjapenguin.co.uk/</id>
+  <author>
+    <name><![CDATA[Matthew Wells]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[One Million Man Startup]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2013/11/30/one-million-man-startup/"/>
+    <updated>2013-11-30T13:35:00+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2013/11/30/one-million-man-startup</id>
+    <content type="html"><![CDATA[<p>Just over 3 years ago I joined a startup. The next 18 months went fast, they went <em>really</em> fast. We went from an idea, to having sold a product to some of the biggest brands in the world. We went from a tiny room in an incubator office in the North East to 3 offices in 2 continents and a staff count that was rapidly on the increase. We had a lot of fun.</p>
+
+<p>Within this time I made (a lot of) tea, put together advertising stands and office furniture, evangelised our product at conferences, booked travel tickets,  brainstormed product features, talked to potential clients, interviewed and hired new team members &ndash; and I developed a bunch of code. I was able to try new development techniques, new tools (some of which failed!), and push a bunch of code to live. Some deployments broke things and I panicked &ndash; those were fixed quickly! Did I mention we had a lot of fun?</p>
+
+<!-- more -->
+
+
+
+
+<blockquote><p>“Nine woman can’t make a baby in one month&#8221;</p><footer><strong>Fred Brooks</strong> <cite>The Mythical Man Month</cite></footer></blockquote>
+
+
+<p>Fast forward another 6 months and our product had been in the market for over a year, we had an incredible client list, a rapidly expanding codebase and an even more rapidly expanding list of desired functionality. The company was no longer a startup and we needed to expand our capacity for both development and support.</p>
+
+<p>So we needed to expand, but we needed to do it right. It&rsquo;s widely accepted and understood that simply throwing people at software projects serves to slow development down. Attempting to attribute this to Brooks&rsquo;s Law would be oversimplifying the scenario. However we needed to apply the same engineering oriented approach to scaling our team that we were applying to scaling areas of our codebase.</p>
+
+<p>Along the way we had identified some specific challenges that we faced when bringing new members into the team. So the question was, how should we continue to expand both the team and the product, yet at the same time maintain all the aspects of the startup culture that enabled us to thrive so early on.</p>
+
+<h2>The Scaleable Startup</h2>
+
+<p>Why was that startup phase so fast and effective? why was it so fun?</p>
+
+<p><span class='pullquote-right' data-pullquote='We were a functionality machine!'>
+At that point our product was small and we knew it all (inside out). We could brainstorm a problem in the morning, try out some ideas, and have them deployed before going home in the evening. We could do this because everyone was on the same page, was focusing on that same problem. Everyone felt the pain of that problem in the morning and the elation of the problem being removed in the evening. We were a small, multi disciplined team and within that team we had the source of the questions being asked, the answers to those same questions and the abilities to implement and test these solutions. We were a functionality machine!
+</span></p>
+
+<p>And so that has to be the answer. Small, multi disciplined teams will always promote that same startup attitude. Our expanded &lsquo;development team’ should instead be a well orchestrated development ecosystem. This ecosystem should harbour multiple &#8216;product teams’, each of which have complete ownership of a single product or a group of smaller related products. Each team should then be free to drive the direction and development (given functional requirements) of that product in whatever way they see fit &ndash; just as we did in those early days.</p>
+
+<p><img class="left" src="https://ninjapenguin.co.uk/images/avengers.jpg" title="A small multi-disciplined team!" alt="A small multi-disciplined team!"></p>
+
+<p>Each team should be looked at as a small development unit. They will need product direction, developers, testers and sysadmins. The requirement for the balance of these skill sets will be largely dependant on the type of product the team would be developing and so should be dealt with on a team by team basis.</p>
+
+<p>The task then, is to create the ecosystem within which these ‘small startups’ can thrive. This ecosystem must support, nurture and provide each team with everything they need to be able to build and innovate within that ecosystem. For this ecosystem to work however, we must provide some basic building blocks.</p>
+
+<h2>Lessons Learned</h2>
+
+<p>Much value should be placed in domain specific lessons learned over time. These might take the form of tried and tested design patterns, tool configurations, UI constructs etc. There should be a &lsquo;place’ to go to for these and it should be well used and well updated. Just look at <a href="https://blog.twitter.com/2013/twitter-university-building-a-world-class-engineering-organization">Twitter’s University</a> for an exemplary example.</p>
+
+<p>Team discoveries should be actively percolated throughout the ecosystem. This can take the form of discipline specific mini summits or more regular meet ups. The overall concept here is to generate a passion within the disciplines that all teams can subsequently benefit from as well as supporting the distribution of learnings. Active emphasis should be placed on personal development within these disciplines.</p>
+
+<h2>Infastructure as a Service</h2>
+
+<p>Elements of infrastructure should be provided as easily consumable services to the product teams. Access to configuration servers and automated deployment through the use of manifests, cache clusters, load balanced app servers etc should all be simple and streamlined. Teams shouldn&rsquo;t need to go through the awkward evaluation, analysis and deployment stages. Well defined interfaces should exist for each of these services, along with integration tool kits if required.</p>
+
+<p>The aforementioned learning elements should make these infrastructure elements no brainers. They should be able to be utilised and rolled out quickly and as such will make valuable assets to each of the teams.</p>
+
+<p>These infrastructure elements then are integral to the ecosystem building blocks being garnered. Development of them should be considered, active, and driven directly by the product teams themselves. Prioritisation should be given to elements that bring the most benefit to the ecosystem as a whole and these elements should be released to the product teams directly and frequently.</p>
+
+<h2>Team Interoperability</h2>
+
+<p>Team interoperability should be finely considered. When defining the product ecosystem the specific products being developed within this framework should be considered to be individual services. By adopting a service oriented approach to architecture, a natural boundary between products emerge. Product domain segregation becomes self enforcing and the sense of product &lsquo;self identity’ is enhanced within the individual teams.</p>
+
+<p>Taking a service oriented approach means teams within the company are able to manage interdependencies and service boundaries naturally. Teams should never be dependent on other teams for functional completeness and can instead take a more classic approach to engineering solutions by implementing against interfaces instead.</p>
+
+<h2>Summary</h2>
+
+<p>In reality, I’ve only really covered a high level overview of how the team, and loosely, system architecture should look. There are many other specific topics that could be expanded on in much more detail. I’ve also specifically not covered development methodologies as I believe they fit into this architecture. Again a topic for another post!</p>
+
+<p>To summarise however, this approach favours the empowerment of small teams, each having complete creative ownership over specific products sitting within the larger, supporting ecosystem. This directly combats many of the perceived issues with larger scale, horizontally structured teams. It aims to distribute creative responsibility appropriately and enable a scenario within which multiple product specialists emerge within a wider, service oriented, architecture. Product boundaries remain defined, teams remain focused and at the same time motivated to enhance their &lsquo;product’.</p>
+
+<p>Given then an adequate imagination and ample requirement for functionality, this scenario enables the true <em>One Million Man Startup</em>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Redis Monitoring Server]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2013/07/28/redis-testing-server/"/>
+    <updated>2013-07-28T16:50:00+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2013/07/28/redis-testing-server</id>
+    <content type="html"><![CDATA[<p>It&rsquo;s been quite some time since my last post &ndash; but as I decided recently to refresh the sites template I
+thought I would celebrate with a new post on a recent release I made.</p>
+
+<p>Redis Monitoring Server is a small python server which monitors and logs one or more <a href="http://www.redis.io/">redis</a> instances,
+the server can then be queried in a number of ways to retrieve the commands run on the observed instances</p>
+
+<!-- more -->
+
+
+<p>The requirement came from the need to perform automated, external tests on a number of different applications,
+all of which are written in different languages. When testing the applications it is required to assert the
+commands being run on the server. This necessitated the stand alone server, for the queryable interface to the
+server I chose to use the excellent <a href="http://www.zeromq.org/">ØMQ</a>, this enables anyone to communicate with the
+server rapidly without the need for redundent boilerplate (or me writing specific)</p>
+
+<p>See below for a couple of examples of querying the monitoring server:</p>
+
+<figure class='code'><figcaption><span>Python Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">zmq</span>
+</span><span class='line'><span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REQ</span><span class="p">)</span>
+</span><span class='line'><span class="n">socket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://localhost:5559&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&#39;last&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">response</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Lua Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">zmq&quot;</span>
+</span><span class='line'><span class="kd">local</span> <span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">local</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">context</span><span class="p">:</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="p">.</span><span class="n">REQ</span><span class="p">)</span>
+</span><span class='line'><span class="n">socket</span><span class="p">:</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">tcp://localhost:5559&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">socket</span><span class="p">:</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">last&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="kd">local</span> <span class="n">response</span> <span class="o">=</span> <span class="n">socket</span><span class="p">:</span><span class="n">recv</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even in PHP!</p>
+
+<figure class='code'><figcaption><span>Php Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$context</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ZMQContext</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ZMQSocket</span><span class="p">(</span><span class="nv">$context</span><span class="p">,</span> <span class="nx">ZMQ</span><span class="o">::</span><span class="na">SOCKET_REQ</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$socket</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s2">&quot;tcp://localhost:5559&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$socket</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="s2">&quot;last&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$socket</span><span class="o">-&gt;</span><span class="na">recv</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;ve included a very basic python interface wrapper for the tool, mainly as means of an example, which i&rsquo;m currently
+using in a number of different projects</p>
+
+<p>It can be used in the following way:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">monitor</span> <span class="kn">import</span> <span class="n">RedisMonitor</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">rm</span> <span class="o">=</span> <span class="n">RedisMonitor</span><span class="p">(</span><span class="n">redis_ports</span><span class="o">=</span><span class="p">[</span><span class="mi">6997</span><span class="p">,</span><span class="mi">6998</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># do a test</span>
+</span><span class='line'><span class="n">rm</span><span class="o">.</span><span class="n">get_last_command</span><span class="p">()</span>   <span class="c"># returns the last command run accross all instances</span>
+</span><span class='line'><span class="n">rm</span><span class="o">.</span><span class="n">get_last_command_by_instance</span><span class="p">(</span><span class="mi">6997</span><span class="p">)</span>   <span class="c"># returns the last command run on instance @ port 6997</span>
+</span><span class='line'><span class="n">rm</span><span class="o">.</span><span class="n">get_all_commands</span><span class="p">()</span>   <span class="c"># returns all commands run to date</span>
+</span><span class='line'><span class="n">rm</span><span class="o">.</span><span class="n">get_command_counts</span><span class="p">()</span> <span class="c"># returns a dict of port =&gt; number of commands recorded</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">rm</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>  <span class="c"># reset the current lists..</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># more tests...</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">rm</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more information on the tool checkout the <a href="http://ninjapenguin.github.io/redis-monitor-server/">GitHub Page</a></p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana and Gearman - Practical Multitasking]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2011/08/29/kohana-and-gearman-practical-multitasking/"/>
+    <updated>2011-08-29T18:11:57+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2011/08/29/kohana-and-gearman-practical-multitasking</id>
+    <content type="html"><![CDATA[<p><img class="center" src="https://ninjapenguin.co.uk/images/blog/antz.jpeg" title="Practical Multitasking with Kohana and Gearman" alt="Practical Multitasking with Kohana and Gearman"></p>
+
+<p>Quite a large proportion of my day-to-day job involves the design,
+implementation and ongoing improvement of an in-house API.</p>
+
+<p>As a result of this, a commonly identified bottleneck arises when dealing with
+large, &lsquo;expensive&rsquo; data. This is commonly seen when an application posts a
+large volume of well structured data to the API (that some process must be
+carried out upon), before some form of structured receipt is then returned as
+a request response.</p>
+
+<p>Analysing such a request tends to show high PHP CPU usage with lower database
+consumption. This means that with an increase in data processing capacity we
+could make more use of this redundant database resource.</p>
+
+<p>The structured nature of data exchanged via an API means that we can,
+relatively simply and reliably, divide the submitted data and process it
+simultaneously with the help of a great tool called Gearman.</p>
+
+<!-- more -->
+
+
+<h2>Proposed Solution</h2>
+
+<p>Let&rsquo;s first agree on a contrived, theoretical scenario against which to design
+our solution:</p>
+
+<p>We have an API endpoint which receives a large number of entity ids and
+associated status updates. These ids must first be loaded from the database
+(to validate the ids) before their status is updated according to the posted
+value.</p>
+
+<p>Our current solution iterates the posted data (no matter the size), loading
+and updating as it goes, until the entire posted array of ids is dealt with.
+We then return a response indicating the ids of all entities updated. The time
+taken to process the request is therefore linearly proportional to the number
+of posted entity ids.</p>
+
+<p>Our solution will take the data passed by the user, divide it evenly into
+definable number of chunks and process each chunk in parallel -before finally
+combining the output from the individual processes and returning the
+combination to the user.</p>
+
+<p><img class="center" src="https://ninjapenguin.co.uk/images/blog/pmkg.gif" title="Practical Multitasking with Kohana and Gearman" alt="Practical Multitasking with Kohana and Gearman"></p>
+
+<h2>Implementation</h2>
+
+<p>Kohana&rsquo;s HMVC methodology lends itself perfectly to this solution. Firstly,
+we&rsquo;ll need a parent controller that will transparently handle the splitting of
+the POSTED data. We&rsquo;ll call this the &lsquo;Farmable Controller&rsquo;. Secondly, we will
+need a Gearman worker &ndash; we&rsquo;ll call this our &lsquo;ant&rsquo; &ndash; which will handle the
+incoming request from Gearman, process the request via Kohana and return the
+output back to our Farmable Controller.</p>
+
+<h3>Controller_Farmable</h3>
+
+<p>You can grab the raw code <a href="https://github.com/ninjapenguin/Ant%0AFarm/blob/master/application/classes/controller/farmable.php">over at github</a>. Essentially
+this is an example controller which deals with the automatic detection of a
+request suitable for parallelisation, and the subsequent splitting, assignment
+and merging of the request data.</p>
+
+<figure class='code'><figcaption><span>Dispatching each sub-request via gearman</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr_chunks</span> <span class="k">as</span> <span class="nv">$chunk</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Format the string to be passed to the worker $arr_d = $_POST;</span>
+</span><span class='line'>  <span class="nv">$arr_d</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_key_name</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$arr_chunks</span><span class="p">[</span><span class="nv">$c</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$str_data</span> <span class="o">=</span> <span class="nv">$str_route</span> <span class="o">.</span> <span class="s2">&quot;#&quot;</span> <span class="o">.</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$arr_d</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$obj_gearman</span><span class="o">-&gt;</span><span class="na">addTask</span><span class="p">(</span><span class="s1">&#39;make_request&#39;</span><span class="p">,</span> <span class="nv">$str_data</span><span class="p">);</span> <span class="nv">$c</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above snippet demonstrates how we pass the request &ndash; along with the chunk of data
+that we want it to handle &ndash; to the ant (the Gearman worker).</p>
+
+<h3>Controller_Worker (ant)</h3>
+
+<p>This is our gearman worker. Its sole job is to listen for incoming requests,
+execute the passed request via an internal request and return the response to
+the parent process for later merging. You can view the <a href="https:%0A//github.com/ninjapenguin/AntFarm/blob/master/application/classes/controller/w%0Aorker.php">full code here</a>. The snippet below demonstrates how we make sense of the data
+received as part of the Gearman call, and how we execute the internal request:</p>
+
+<figure class='code'><figcaption><span>Gearman worker example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>  <span class="nv">$arr_pieces</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="nv">$job</span><span class="o">-&gt;</span><span class="na">workload</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Assign the data</span>
+</span><span class='line'>  <span class="nv">$str_uri</span> <span class="o">=</span> <span class="nv">$arr_pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="nb">parse_str</span><span class="p">(</span><span class="nv">$arr_pieces</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nv">$arr_post</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Create and execute the request..</span>
+</span><span class='line'>  <span class="nv">$str_data</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">factory</span><span class="p">(</span><span class="nv">$str_uri</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$arr_post</span><span class="p">)</span> <span class="o">-&gt;</span><span class="na">execute</span><span class="p">()</span> <span class="o">-&gt;</span><span class="na">body</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$str_data</span><span class="p">;</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Controller_update</h3>
+
+<p>This is an example controller which simply takes the data posted to it and
+returns the data prefixed with the work &ldquo;affected&rdquo; (just to prove it has
+executed).</p>
+
+<p>Take note of the class level variables defined within this controller:</p>
+
+<ul>
+<li><p><strong>$_data_key</strong><br/>
+The key within POST which holds the items we are interested in</p></li>
+<li><p><strong>$_workable_limit</strong><br/>
+The number of items within $<em>POST[$</em>data_key] for which to parallelise the request</p></li>
+<li><p><strong>$_worker_count</strong><br/>
+The number of workers (ants) available over which to distribute the request</p></li>
+</ul>
+
+
+<h2>Running the Code</h2>
+
+<p>To run the code, you will need to ensure that you have Gearman installed
+locally as well as the Gearman PHP extension (see
+<a href="http://gearman.org/index.php?id=download">here</a>). Then checkout my example
+project from <a href="https://github.com/ninjapenguin/AntFarm">GitHub</a>.</p>
+
+<p>Once you have the prerequisites in place you can start up the required Gearman
+workers (I recommend three instances). Running the code below will start one
+worker instance (ant).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>your_project_dir/public php index.php --uri<span class="o">=</span>worker &amp;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can then make a request to the dummy update controller with the below</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>php index.php --uri<span class="o">=</span>updater --post<span class="o">=</span><span class="s1">&#39;header=some_data&amp;data;[]=penguin&amp;data;[]=giraffe&amp;data;[]=badger&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On executing the above request you should see each worker output a debug line
+informing that it has been requested to serve a response. You should also see
+your main request respond with a single request. You can then edit the
+updater.php controller and set the _workable_limit to a fictitiously high
+value and re-run the test (you will need to restart your workers). You should
+now notice the workers are no longer called and the main request should take
+noticeably longer to execute.</p>
+
+<h2>Summary</h2>
+
+<p>Hopefully from this you will have seen some of the powerful capabilies
+available with the HMVC nature of Kohana, which makes this technique so easy
+to achieve. If you haven&rsquo;t come across Gearman before then this is a very
+basic introduction to an incredibly powerful tool, definitely check it out!</p>
+
+<p>Furthermore, we have shown how a slight change in our system architecture has
+transformed the fundamental behaviour, and thus scaleability pattern, of our
+application &ndash; brains before brawn!.</p>
+
+<p>I&rsquo;ve also provided a working demonstration using Gearman and Kohana. Whilst it
+certainly isn&rsquo;t production-ready, it should serve as a solid foundation for
+anyone wanting to play with the technique!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OO Design in Kohana - Facade Pattern]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/05/04/oo-design-in-kohana-facade-pattern/"/>
+    <updated>2009-05-04T10:33:23+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/05/04/oo-design-in-kohana-facade-pattern</id>
+    <content type="html"><![CDATA[<p>For the second in my mini-series looking at Object Oriented Design within the
+Kohana framework I am going to look at the Facade pattern. I had this down for
+the third article, but I had a comment on the last one voicing some thoughts
+on a common grey area when it comes to this and the adapter pattern, and so I
+thought I would jump straight to the facade pattern in an attempt to clear up
+any confusion!</p>
+
+<!-- more -->
+
+
+<p>When it comes to design pattern history the starting point should probably be
+the book &ldquo;<em>Design Patterns Elements of Reusable Object-Oriented Software by
+Gamma, Helm, Johnson and Vlissides</em>&rdquo;. Most commonly referred to as the Gang of
+Four (GoF) the authors outlined 23 design patterns, potential solutions as
+they saw them to many common programing scenarios. When reading articles about
+design patterns you will often come accross references to the pages on which
+these patterns were described first, so if you havn&rsquo;t allready I would
+strongly suggest getting hold of a copy and taking a look.  In writing these
+articles my objective is really to attempt to show some of the potential
+theory behind certain implementations within the Kohana framework, and more
+over demonstrate the power they afford us as programmers in developing with,
+and extending from, the framework.</p>
+
+<h2>Swift Mailer in Kohana</h2>
+
+<p>One pretty universal piece of functionality to websites or applications now
+adays is email. There is a number of different potential solutions when it
+comes to sending emails, often dependant on the specific scenario, you will
+have undoubtedly used a few of these in your time. Whilst design patterns
+<em>suggest a potential</em> solution, frameworks <em>provide an implemented</em> solution
+(GoF). Seeing no need to reinvent the wheel, and identifying an exemplorary
+open source project Kohana comes with a bundled version of the swift mailer
+project.</p>
+
+<p>However with a new framework (or library technically) comes a new set of
+conventions. Along with these different conventions come a large and detailed
+API, which is to be expected from a library which is as specialised in an area
+as Swift mailer is. One of the biggest draws of a framework is familiarity
+which is achieved in large part through consistency: Configurations and files
+are held in the same format and location, method naming conventions, class,
+instance accessors/mutators etc etc</p>
+
+<p>So along comes the helper. Whilst sending email using Swift is increadibly
+easy it is done in a mannor which isn&rsquo;t entirely cohesive to the Kohana
+framework &lsquo;experience&rsquo;. The helper allows us to place our own, simpler
+interface on top of the swift mailer system (or <em>facade</em>), allowing us to send
+emails using it with syntax which will blend perfectly into our model or
+controller. Whats more we can provide configuration parameters for the system
+in exactly the same way the rest of Kohana does . .neat</p>
+
+<h2>Swift Mailer 4 in Kohana</h2>
+
+<p>Kohana currently comes bundled with swiftmailer 3 (and a helper for its API).
+To demonstrate the principles of helpers (and the facade pattern) I have put
+up a basic helper I use for Swiftmailer 4, though it isnt extensively tested!</p>
+
+<p>In this instance we can use the power of the facade pattern to turn:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$t</span> <span class="o">=</span> <span class="nx">Swift_SmtpTransport</span><span class="o">::</span><span class="na">newInstance</span><span class="p">(</span><span class="nv">$hostname</span><span class="p">,</span> <span class="nv">$port</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">setUsername</span><span class="p">(</span><span class="nv">$un</span><span class="p">);</span> <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$pw</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Swift_Mailer</span><span class="o">::</span><span class="na">newInstance</span><span class="p">(</span><span class="nv">$t</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$message</span> <span class="o">=</span> <span class="nx">Swift_Message</span><span class="o">::</span><span class="na">newInstance</span><span class="p">(</span><span class="nv">$subject</span><span class="p">)</span> <span class="o">-&gt;</span><span class="na">setFrom</span><span class="p">(</span><span class="nv">$from</span><span class="p">)</span> <span class="o">-&gt;</span><span class="na">setTo</span><span class="p">(</span><span class="nv">$to</span><span class="p">)</span>
+</span><span class='line'><span class="o">-&gt;</span><span class="na">setSubject</span><span class="p">(</span><span class="nv">$subject</span><span class="p">)</span> <span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="nv">$message</span><span class="p">,</span> <span class="nv">$mime</span><span class="p">)</span> <span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Into the more Kohana friendly:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="nx">email</span><span class="o">::</span><span class="na">send</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$from</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Bear in mind you will also need to of set up your email configuration in the relevant config folder (<a href="http://docs.kohanaphp.com/helpers/email"> Check the docs here </a>)</strong>
+The helper also caters for some of the most common sending scenarios and
+options (forme), though obviously will not cater for all (the side affect of
+simplifying the interface to an API is it&rsquo;s inherrent narrowing). However if
+you find your usage scenario to be different to others then simply ammending
+the helper allows you to simplify your particular usage pattern. . simple!</p>
+
+<p>Checkout my helper (bundled as a module with the latest swift download) over
+at <a href="http://github.com/ninjapenguin/Kohana-Swift4-Module/tree/master">github</a></p>
+
+<p><strong>To Recap</strong></p>
+
+<ul>
+<li>We have seen how the facade pattern allows us to provide a simpler, more intuitive (read Kohana-like) interface for a bundled sub-system, or third party solution</li>
+<li>The swiftmailer helper is a fine example of the facade pattern in use, it provides seemless kohana integration with a third party library which specialises in a particular niche of what we are working with</li>
+<li>As a bonus I&rsquo;ve posted up a swiftmailer 4 helper that I use to provide integration with the new Swiftmailer version (and thus new api) &ndash; it isnt tested though so beware!</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>The facade pattern is one of the most intuitive patterns, many will have been
+using such &lsquo;simplifying&rsquo; classes for some time and so their funtionality and
+purpose probably comes as no real suprise at all. But it is worth remembering
+the power and efficiency that they afford us as programmers. It&rsquo;s frequently
+said that no two programmers program the same, and so a wealth of helpers,
+designed around your own usage pattern, and systems which you are familiar
+with can be a very valuable tool when it comes to rapid applicatoin
+development using a framework.</p>
+
+<p>Kohanas modular system enables such usage very nicely, making it very easy for
+us to bundle Swiftmailer (or any other such third party library), along with a
+usage helper into a single module. This module can then be dropped into any of
+your projects allowing instant and intuitive use to whatever sub-system it
+contains.</p>
+
+<p>Hopfully the above is usefull to some, all feedback is greatly appreciated!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OO Design in Kohana - Adapter Pattern]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/04/18/oo-in-kohana-adapter-pattern/"/>
+    <updated>2009-04-18T11:36:54+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/04/18/oo-in-kohana-adapter-pattern</id>
+    <content type="html"><![CDATA[<p><img class="right" src="https://ninjapenguin.co.uk/images/blog/interface.gif" title="OO Design in Kohana" alt="OO Design in Kohana">
+Thought I would do a couple of posts on
+some basic Object Oriented design patterns and examples of their
+implementation within the Kohana framework. They&rsquo;re not going to go into any
+great detail but will hopefully provide a small insight into some of the inner
+workings of Kohana and enable  you to make full use of some of the inherent
+power these patterns provide.</p>
+
+<p>This article covers the <a href="http://en.wikipedia.org/wiki/Adapter_pattern">adapter
+pattern</a>. You can see some of
+the Kohana system libraries making use of this pattern by checking out the
+<em>system/libraries</em> directory. Within this directory you will find the drivers
+folder, for now take a quick look at it and see if you recognise any of the
+class names, we&rsquo;ll come back to it later.</p>
+
+<!-- more -->
+
+
+<p>The adapter pattern has a simple goal, that of &lsquo;adaption&rsquo;, that is to
+translate the interface of one class (or system) to that of another interface
+which some other class (or system) expects. Within the context of Kohana we
+are adapting the interface of different systems to fit with the standard
+Kohana libraries.</p>
+
+<p>For a high level overview of this, take a look at the imaege above</p>
+
+<ul>
+<li>A &ndash; Would represent the external library or system which we would like to make use of</li>
+<li>B &ndash; Would represent our adapter class, or &lsquo;driver&rsquo; to use the Kohana terminology</li>
+<li>C &ndash; Would represent the Kohana native class (in the case of currently existing libraries), or your own Kohana library perhaps
+<strong>Kohana Session Library</strong>
+One practical example of this within Kohana is the Session library. Kohana
+comes as standard with adapters (or drivers as I shall now refer to them) so
+that the Session library can work seemlessly with cookie, database or cache
+based storage.</li>
+</ul>
+
+
+<p>Each one of these solutions has a very different set of native php functions,
+and even different methodology in terms of achieving the same end result:
+Writing to a database is very different when compared to creating and storing
+a cookie, yet somehow the same Session library must work with all of these.</p>
+
+<p>Lets take a look at reading current session data with a couple of different
+solutions.</p>
+
+<figure class='code'><figcaption><span>Database</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="c1">// Load the session</span>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="p">(</span><span class="cm">/*query db here*/</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">//return nothing</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Load the data</span>
+</span><span class='line'><span class="nv">$data</span> <span class="o">=</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">current</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="nv">$data</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Cookie</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="nv">$data</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nx">cookie</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;session-name&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$data</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1">//return nothing</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="nv">$data</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So how do we come up with a class, which can offer all of these different
+possibilities to our users?</p>
+
+<p><strong>One solution</strong>
+One relatively basic solution would be to put some inline logic into our
+Session class, something like the following;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="c1">//database driver)</span>
+</span><span class='line'>  <span class="c1">//database specific read</span>
+</span><span class='line'><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="c1">//cookie driver)</span>
+</span><span class='line'>  <span class="c1">//cookie specific else if (//cache driver) //cache specific</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this would certainly work, and would allow us to use the specific code
+depending on which configured method the user had chosen. The flaw with the
+above comes to light when we would like to add another method for storing and
+reading sessions, perhaps one of the currently trendy cloud services? We would
+need to directly edit the Session library and hunt out each area in which such
+a logic switch is employed. This would then lead to a very long and complex
+class, not fun to maintain! So how can we improve this scenario?</p>
+
+<p><strong>Enter the adapter pattern</strong>
+The problem here is because in the above situation the Session class has
+intrinsic knowledge of each of the currently available methods, if we could
+remove these dependencies then we could &lsquo;de-couple&rsquo; the session class from
+each of the individual implementations (the specifics of which, as the author
+of the Session library, do not interest us).</p>
+
+<p>So instead we build our library against some abstract functions, which are
+defined elsewhere. We can then delegate the specific implementation of each of
+these abstract functions to individual implementing classes (our drivers).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$driver</span> <span class="o">=</span> <span class="s1">&#39;database&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//How the data is read no longer interests us</span>
+</span><span class='line'><span class="nv">$data</span> <span class="o">=</span> <span class="nv">$driver</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">();</span> <span class="p">[</span><span class="o">/</span><span class="nx">code</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Defining our &lsquo;abstract&rsquo; functions</strong>
+So when creating our Session class we need a way of defining these generic
+functions against which we build the class, and which each driver <em>must</em>
+implement; enter the <em>interface</em>.</p>
+
+<p>An interface defines the functions an implementing class must provide. Take a
+look within the drivers directory, you will see a file named Session and a
+directory of the same name. The file is the interface of which we just spoke,
+open it up and take a look at it, within it you can see each of the functions
+that must be provided by any implementing class. The Session directory then is
+where all our drivers are stored . .easy!</p>
+
+<p><strong>To recap</strong></p>
+
+<ul>
+<li>We have seen how we can decouple a class from the individual, low level implementations of a scenario (e.g.  reading session data)</li>
+<li>We&rsquo;ve show that this leads to a very flexible, and ultimately resilient design, offering much greater scope for expandability and greater ease of maintenence</li>
+<li>****We have seen that Kohana provides a file structure and loading mechanism which enables easy and effective use of the adapter pattern</li>
+<li>We have shown an example of an implementing library (the Session library)</li>
+<li>We know where the interface which each of our adapters must implement resides</li>
+<li>We have found the directory within which our drivers are stored
+<strong>Conclusion</strong>
+Kohana has been written, from the ground up, with clean well architectured
+code, the benefits of which are two-fold. Firstly you benefit immediately from
+the existing libraries and helpers bundled with the framework. Secondly, and
+most importantly, you are encouraged (note encouraged <strong>not </strong>forced) to write
+your (inevitable) extensions to the system in a similarly well architectured
+fashion.</li>
+</ul>
+
+
+<p>IMO Kohana strikes the perfect balance between an overly &lsquo;nursed&rsquo; system (such
+as Codeignitor) and a well structured set of libraries (such as Zend). As such
+it facilitates RAD and at the same time provides ample scope for future
+expansion and custom system add-ons.</p>
+
+<p>As usual all comments greatly appreciated, I hope to have the next article in
+this mini-series up next week!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana simple REST server]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/04/05/kohana-simple-rest-server/"/>
+    <updated>2009-04-05T18:02:18+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/04/05/kohana-simple-rest-server</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been using something like this for a little while now, but initially held
+back on writing anything about it as I wanted to do something a little better
+using the Router3 module and/or KO3, however there has been some noise
+recently about REST, so I thought I would share this implementation as a
+possible starting point.</p>
+
+<p>REST service implementations seem to be growing in popularity at the moment,
+I&rsquo;m sure the likes of de.licio.us, twitter, flickr et al have done a lot to
+raise it&rsquo;s profile but essentially its a concept that still suffers from a
+lack of general understanding.</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;m not going to go into detail on describing the ins and outs of what a REST
+service <em>should</em> be, the post would quickly turn into something much larger,
+but instead I&rsquo;m going to try and show just how basic it is to set up your own
+Service Oriented Architecture (SOA) in Kohana which adheres to many of the
+standard REST principles. I&rsquo;ll then hopefully show some of the benefits of
+having done so, though they may follow in further posts.  One point I will
+cover briefly however is that of REST &lsquo;method&rsquo; names. When exposing data via
+an interface the information of what to do with that data must also be
+communicated in some fashion; it&rsquo;s fine to ask &ldquo;user&rdquo;, but what do you want to
+<strong>do</strong> with this information? <em>View</em> a user, <em>edit</em>, <em>create</em>, <em>delete</em>
+perhaps. REST states that the standard HTTP methods of GET, POST, PUT and
+DELETE suffice to enable the communication of all possible actions on a set of
+data, thus leaving the URI free of such information. This is in contrast to an
+XML-RPC implementation which will typically expose all possible actions an a
+data entity via its own URI.</p>
+
+<p>The use of these 4 HTTP verbs are often the first stumbling block for any
+budding REST service, and this is for a number of valid reasons: browser
+support as well as a slight increase in effort required to handle these on the
+server side are often good enough reasons to make adherence to this a
+concession (see twitter, de.licio.us and flickr ! ). For more information on
+this see <a href="http://www.apacheweek.com/features/put">this apacheweek article </a>.
+I&rsquo;m going to propose one such concession for this in my soon-to-follow Kohana
+implementation but may publish a future article showing how to adhere to this
+if there is any interest shown.</p>
+
+<p><strong>Kohana Implementation</strong> For our Kohana implementation we will need a service &lsquo;gateway&rsquo; (an entry point onto our service) and some method of interacting with our data. We can also use some of the benefits of Kohana to look at tidying up our interface and providing some simple but effective service error handling.
+Because we are not going to support (for now) PUT and DELETE operations, we
+are going to need some way of discerning our data &lsquo;methods&rsquo;. I&rsquo;m going to make
+use of POST (as opposed to our URI structure) and standardize on a post
+parameter which will need to be passed in order to designate the required
+operation. We can then simply throw an error if this is malformed or not
+present.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Service_Controller</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Content-type: text/xml&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__call</span><span class="p">(</span><span class="nv">$entity</span><span class="p">,</span> <span class="nv">$params</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$entity</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">factory</span><span class="p">(</span><span class="nv">$entity</span><span class="p">,</span> <span class="nv">$params</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span><span class='line'>      <span class="nv">$get</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+</span><span class='line'>      <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$post</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$entity</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">switch</span> <span class="p">(</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="k">case</span> <span class="s1">&#39;delete&#39;</span><span class="o">:</span>
+</span><span class='line'>                  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$entity</span><span class="p">);</span>
+</span><span class='line'>                  <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="k">case</span> <span class="s1">&#39;update&#39;</span><span class="o">:</span>
+</span><span class='line'>                  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="nv">$entity</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+</span><span class='line'>                  <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="k">case</span> <span class="s1">&#39;create&#39;</span><span class="o">:</span>
+</span><span class='line'>                  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$entity</span><span class="p">,</span> <span class="nv">$params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nv">$post</span><span class="p">);</span>
+</span><span class='line'>                  <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>                  <span class="c1">//throw an error</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nx">ORM</span> <span class="nv">$entity</span><span class="p">){}</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nx">ORM</span> <span class="nv">$entity</span><span class="p">,</span> <span class="k">Array</span> <span class="nv">$post</span><span class="p">){}</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">ORM</span> <span class="nv">$entity</span><span class="p">,</span> <span class="nv">$identifier</span><span class="p">,</span> <span class="k">Array</span> <span class="nv">$post</span><span class="p">){}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(){}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above code shows a stripped down version of the service controller, it has
+all the entity method functions taken out (their declarations are left for
+clarity) and all error handling removed as well. It shows though how simply
+such a standardized gateway can be set up. We can now access our service at
+/service// so for example:</p>
+
+<ul>
+<li><em>service/cart/matt</em></li>
+<li><em>service/product/product-slug</em></li>
+<li><em>service/category/2</em></li>
+</ul>
+
+
+<p><strong>Serviceable interface</strong> I create a serviceable interface, which models that wish to be accessible via this rest interface must implement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">interface</span> <span class="nx">serviceable_Driver</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">set_identifier</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">get_representation</span><span class="p">(</span><span class="nv">$format</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">read_representation</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$format</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enforcing implementation of this means that we can make sure we only attempt
+to serve entities which implement our interface, meaning that we can deploy
+our serviceable module in side any project and not have it enable access to
+all models</p>
+
+<p>An example implementation of this for a contrived cart example could look
+something like the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">set_identifier</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">get_representation</span><span class="p">(</span><span class="nv">$format</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$v</span> <span class="o">=</span> <span class="nx">View</span><span class="o">::</span><span class="na">factory</span><span class="p">(</span><span class="s1">&#39;cart/cart&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$v</span><span class="o">-&gt;</span><span class="na">cart</span> <span class="o">=</span> <span class="nb">unserialize</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cart_items</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$v</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">read_representation</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$format</span> <span class="o">=</span> <span class="s1">&#39;xml&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$xml_Obj</span> <span class="o">=</span> <span class="nb">simplexml_load_string</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$items</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>  <span class="c1">//Rebuild the items</span>
+</span><span class='line'>  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$xml_Obj</span><span class="o">-&gt;</span><span class="na">items</span><span class="o">-&gt;</span><span class="na">item</span> <span class="k">as</span> <span class="nv">$item</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$tmp_Obj</span> <span class="o">=</span> <span class="k">new</span> <span class="k">StdClass</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$tmp_Obj</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$tmp_Obj</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$tmp_Obj</span><span class="o">-&gt;</span><span class="na">price</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">price</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$items</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$tmp_Obj</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">items</span> <span class="o">=</span> <span class="nv">$items</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above is just thrown together, but the idea is to handle the
+transformation between the object and the requested format (currently we just
+handle xml). With some more effort you could probably create an extension of
+ORM which went some way towards automatically handling the transformation .
+.again more for a later post maybe!</p>
+
+<p><strong>Error Handling</strong> The last thing I will touch on is how we could handle a unified error handling mechanism. Kohana has a great error handling mechanism as standard, by extending Kohana_Exception we can provide our own sendHeaders function (and return text/xml headers for instance) and our own error output view to format our error output:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">class</span> <span class="nc">Kohana_Service_Exception</span> <span class="k">extends</span> <span class="nx">Kohana_Exception</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="nv">$template</span> <span class="o">=</span> <span class="s2">&quot;service_error&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$message</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span><span class='line'>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">code</span> <span class="o">=</span> <span class="s2">&quot;Kohana Service Error&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="sd">/**</span>
+</span><span class='line'><span class="sd">  * Sends an Internal Server Error header.</span>
+</span><span class='line'><span class="sd">  * @return void</span>
+</span><span class='line'><span class="sd">  */</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">sendHeaders</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// Send the 500 header</span>
+</span><span class='line'>      <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;HTTP/1.1 500 Internal Server Error&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Content-type: text/xml&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works fine for returning an xml formatted error for consumers of our
+service to react to.</p>
+
+<p><strong>Conclusion</strong> The purpose of this has been to demonstrate how simply such a service <em>could</em> be set up, I have a module which I can deploy which follows this general pattern, but obviously includes error handling as well as the method implementations, if theres any interest in this, then I can tidy it up and put it up on Github for anyone that wants it.
+I&rsquo;m going to follow up on this and show how simple it would now be to
+implement caching for our entire service. I&rsquo;ll also hopefully talk about how
+to set up a testing suite for your service using phpUnit.</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unit Testing basic html output - assertTag]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/03/06/unit-testing-basic-html-output-asserttag/"/>
+    <updated>2009-03-06T22:30:11+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/03/06/unit-testing-basic-html-output-asserttag</id>
+    <content type="html"><![CDATA[<p>About 18 months ago I started to dabble with unit testing within PHP, I first
+looked at <a href="http://www.simpletest.org/">simpletest</a> before ultimately settling
+with <a href="http://www.phpunit.de/">PHPUnit</a>. I was a little cautious at first,
+primarily concerned with the amount of time writing the tests were taking and
+maintenance of said tests, but soon realised their full potential.</p>
+
+<p>It&rsquo;s safe to say now I couldn&rsquo;t really imagine developing anything of
+significant size without them, and I just simply havn&rsquo;t yet come across any
+argument which can go anyway to persuading me otherwise.  One exceptionally
+useful tool I make use of is <a href="http://www.phpunit.de/manual/3.0/en/code-coverage-analysis.html">code coverage
+analysis</a>
+using <a href="http://www.xdebug.org/">xdebug</a> with PHPUnit. This is an amazing tool
+which will analyze my tests telling me exactly what code (at class, function
+or line level) is covered by which tests, and how many times. More important
+than telling me which code IS covered it will tell me what code IS NOT
+covered. <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic
+complexity</a> tells us that
+the number of unique linearly independent paths through a function relates
+directly to that functions complexity, to accurately test this function we
+need to cover all possible execution paths. Code coverage analysis flags this
+up for us in a clear, readable fashion &ndash; brilliant.</p>
+
+<!-- more -->
+
+
+<p>I would frequently notice when running these analysis that the same areas of
+my applications were always lacking in test case coverage &ndash; helpers. I often
+place code for repetitive rendering functions, possibly generating select
+lists, or different types of entity specific html widgets inside helpers,
+these functions were frequently poorly tested, similarly these functions often
+exhibited poor reliability, or were the first to suffer at the hand of any
+system regression.</p>
+
+<p>That is until I came across <a href="http://www.phpunit.de/manual/3.3/en/api.html#api.assert.assertTag">this test
+assertion</a>
+which allows you to test html output, for tags matching certain criteria, it&rsquo;s
+a really lightweight option to allow for some pretty in-depth testing:</p>
+
+<p><strong>Example</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="c1">//Load dataset</span>
+</span><span class='line'><span class="nv">$html</span> <span class="o">=</span> <span class="nx">entity_helper</span><span class="o">::</span><span class="na">build_table</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$matcher</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>  <span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;entity-table&#39;</span>
+</span><span class='line'>  <span class="p">),</span>
+</span><span class='line'>  <span class="s1">&#39;children&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="s1">&#39;count&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
+</span><span class='line'>      <span class="s1">&#39;only&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tr&#39;</span>
+</span><span class='line'>      <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTag</span><span class="p">(</span><span class="nv">$matcher</span><span class="p">,</span> <span class="nv">$html</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above will ensure that a valid table is produced, with exactly 6 rows and
+an id of &lsquo;entity-table&rsquo;.  It&rsquo;s easy to incorparate this type of testing as part
+of a larger assertion as well, for example you could make sure that a rendering
+helper generates a table with the correct amount of rows after a DB insert has
+been made, (i.e. purging any existing caches etc), and so on&hellip;</p>
+
+<p>Check the available testable parameters for assertTag, you&rsquo;ll be amazed at the
+flexibility it offers, and I guarantee that your code will benefit as a result
+of covering these things.</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git Resources]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/02/24/git-resources/"/>
+    <updated>2009-02-24T22:30:12+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/02/24/git-resources</id>
+    <content type="html"><![CDATA[<p><img class="left" src="https://ninjapenguin.co.uk/images/blog/old-git-wit-168x300.jpg" title="Old Git Wit" alt="Old Git Wit">
+I&rsquo;ve been using svn for a good few years now, and
+until a few months ago resisted the change of moving to another versioning
+software. However as the general buz of the internet turned more and more to
+distributed version control systems I started to read up a little on them.</p>
+
+<p>I saw bazaar and git as the two potential front runners but after some of the
+Kohana devs made some noise about Git (and hinted Kohana may ultimately move
+towards Git), I decided to pick up and Git as my potential weapon of choice.</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;m not going to lie, the learning curve (for me at least) was steep, and I
+still have a whole lot to learn, but I think I&rsquo;m now at the point where I
+could replace svn at least.</p>
+
+<p>So in the hope it may help others, I have included some of the resources I
+found most helpful here. If you have any others I would love to hear them!</p>
+
+<p><strong>Git Resources</strong></p>
+
+<ul>
+<li><a href="http://www.kernel.org/pub/software/scm/git/docs/everyday.html">Everyday Git with 20 commands or so</a></li>
+<li><a href="http://andy.delcambre.com/2008/03/04/git-svn-workflow.html">Git SVN Workflow</a></li>
+<li><a href="http://www.kernel.org/pub/software/scm/git/docs/user-manual.html">User Manual</a></li>
+<li><a href="http://info.wsisiz.edu.pl/~blizinsk/git-bzr.html">Git and Bazaar</a></li>
+<li><a href="http://git.or.cz/course/svn.html">Git &ndash; SVN Crash Course</a></li>
+<li><a href="http://www.viget.com/extend/effectively-using-git-with-subversion">Using Git with Subversion</a></li>
+</ul>
+
+
+<p>Hope the above help others out, each one proved invaluable to me</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana Twitter Library]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/02/22/kohana-twitter-library/"/>
+    <updated>2009-02-22T14:00:41+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/02/22/kohana-twitter-library</id>
+    <content type="html"><![CDATA[<p>I previously posted the Curl library that came about as a result of needing
+this Twitter integration for something I was doing, so I thought it would be
+rude not to post up the twitter library as well!</p>
+
+<p>I gues you could say twitter has become <a href="http://headrush.typep%0Aad.com/creating_passionate_users/2006/12/httpwww37signal.html">fairly popular</a> (follow me at
+<a href="http://twitter.com/ninja_p">ninja_p</a>)  So if this library helps anyone out
+then feel free to take advantage of it. As usual any comments, critisism
+and/or requests are greatly received!</p>
+
+<!-- more -->
+
+
+<p><a href="http://github.com/ninjapenguin/kohana-twitter-%0Alibrary">Check it out over on github</a></p>
+
+<p><strong>Usage Examples</strong>
+[code lang=&ldquo;php&rdquo;] //Return latests 20 status updates in xml (default is json)
+var_dump($t->get_status(&lsquo;xml&rsquo;));</p>
+
+<p>//Set a new status var_dump($t->set_status(&lsquo;Just got through with dinner&rsquo;));</p>
+
+<p>//Delete a status var_dump($t->delete_status(&lsquo;status_id_int&rsquo;));</p>
+
+<p>//Get the latest 20 replies var_dump($t->get_replies());</p>
+
+<p>//Get all the info on the current user var_dump($t->get_user_info()); ?></p>
+
+<p>[/code]</p>
+
+<p>For more info check out the inline documentation &ndash; should be fairly self
+explanatory</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana Curl Library]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2009/02/22/kohana-curl-library/"/>
+    <updated>2009-02-22T13:45:20+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2009/02/22/kohana-curl-library</id>
+    <content type="html"><![CDATA[<p>So Curl is awesome! But due to my <a href="http://ezinearticles.com/?The-Goldfish-Memory---Is-%0AIt-A-Myth?&amp;id=378320">goldfish-esc
+memory</a> working with it is always a lesson in searching the
+docs. The great thing with working with a framework is that such tasks can
+easily be adapted to your own way of working. The great(est?) thing about
+Kohana is that it is just so damn adaptable, it provides you with a shed load
+of functionality right out the box, but it&rsquo;s true power (to me) is that it is
+easy to adapt to my way of thinking and my way of developing. Add to that the
+fact that adding extra stuff is laughably easy (<a href="http://projects.kohanaphp.com">if it hasn&rsquo;t been done
+allready</a>) and you have a mighty powerful
+weapon.</p>
+
+<p>I needed a bit of twitter integration for something I was doing, which
+required some use of Curl. I could of bundled this in with the Twitter library
+but like a good modular, OO programmer I seperated the logic out into its own
+library: the Kohana <a href="http://github.com/ninjapenguin%0A/kohana-curl-library">Curl library was born</a>.</p>
+
+<p>OK, after all that great white hype the lib is VERY basic, and as stated
+before works around my way of thinking so may not suit everybody, but if you
+have any requests / suggestions then I&rsquo;d love to hear them!</p>
+
+<p><strong>Usage Examples</strong><br/>
+[code lang=&ldquo;php&rdquo;]  [/code]</p>
+
+<p>[code lang=&ldquo;php&rdquo;]  &lsquo;beer&rsquo;, &lsquo;eat&rsquo; => &lsquo;meat&rsquo;)); ?> [/code]</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana 2.3 routing]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-routing/"/>
+    <updated>2008-10-18T14:29:11+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-routing</id>
+    <content type="html"><![CDATA[<p><img class="left" src="https://ninjapenguin.co.uk/images/blog/routing.png" title="Kohana Routing" alt="Kohana Routing">
+In my last post I mentioned that there&rsquo;s a change in the works for Kohana 2.3,
+and I wasn&rsquo;t lying! If you watch the forum then you will of certainly seen
+some discussions on it, of particular note are:<a href="http://forum.kohanaphp.com/comments.php?DiscussionID=1096&amp;page=1#Item_0">Routing in
+2.3</a>
+and <a href="http://forum.kohanaphp.com/comments.php?DiscussionI%0AD=1217&amp;page=1#Item_0">2.3 Routing Examples</a>.</p>
+
+<p>I think initially the change was met with skepticism , as these things so
+often are, people don&rsquo;t like future compatibility issues, which is
+understandable, but in this case I think the additional advantage gained is
+great enough to offset this potential cause of frustration. Hopefully this
+post will outline some of those benefits to you, allowing you to make up your
+own mind!</p>
+
+<!-- more -->
+
+
+<p><strong>Configuration</strong>
+So the first thing you will notice is that routing is now configured
+differently, imo when you get to grips with that is going on then it is
+actually now SIMPLER to setup more complex routes, you can now achieve
+scenarios with equal or greater flexibility to those of before but without the
+use of any regular expressions. The new default route is as follows:</p>
+
+<pre><code>$config['default'] = array
+(
+    // Default routing
+    ':controller/:method/:id',
+    // Defaults for route keys
+    'controller' =&gt; 'welcome',
+    'method' =&gt; 'index',
+);
+</code></pre>
+
+<p><strong>$config[&lsquo;default&rsquo;]</strong> Now this may or may not appear self-explanatory, we&rsquo;ll go through it anyway! Routes are now given a name, this route is called &lsquo;default&rsquo;, the name itself is not technically important, though we will come to their usage later!
+<strong>&lsquo;:controller/:method/:id&rsquo;</strong> This is the definition of our routing arguments, prefixing a segment with a colon &lsquo;:&rsquo; makes it a router argument, and interpretable as such, :controller and :method are ignored as arguments and if present are used as you would imagine (:controller is used as the request controller, :method for the method)
+<strong>&lsquo;controller&rsquo; => &lsquo;welcome&rsquo;,&lsquo;method&rsquo; => &lsquo;index&rsquo;,</strong> Here we set the defaults, this basically says that if the controller is not present then use the &lsquo;welcome&rsquo; controller and the &lsquo;index&rsquo; method within it. If controller is present with no method then use the index method within whichever controller
+<strong>Play Time</strong> Confused? maybe, but with that under our belt we can now start playing around with this. Best way to get to grips with this is to grab a checkout of the development head (<a href="http://source.kohanaphp.com/trunk">http://source.kohanaphp.com/trunk</a> (or <a href="http://dev.kohanaphp.com/browser/trunk">http://dev.kohanaphp.com/browser/trunk</a> if your more graphically inclined)) and set yourself up a sandbox! Once installed if you go to your local address you should be presented with the nice new green welcome page.
+<strong>New Controller</strong> Create yourself a new controller &lsquo;Page&rsquo; (remember controllers are now defined as &lsquo;class Controller_Page&rsquo;), and give it an empty index method which echos your favorite hello world substitute before exiting. Going to &lt;your-site>/page will now show you your hello world substitute. This behavior shouldn&rsquo;t bowl you off your feet, in fact the more astute will probably of noticed that this is <em>exactly the same as with the previous (read current) release!</em>.
+Going to <em>&lt;your-site>/page/index</em> will provide the same, <em>&lt;your-
+site>/page/index/12</em> will give the same again (notice the trend),  <em>&lt;your-
+site>/page/index/12/long</em> <strong>WILL BREAK</strong> however, this is in contrast to
+previous (current) versions in which we could continue to add War and Peace
+after the matched route and the framework would continue to hurry us along
+without any problem, this gives us MUCH tighter control over our routes and
+could potentially provide security benefits (I havn&rsquo;t worked through that
+scenario yet &ndash; any input?). It means if we want to capture data then we have
+to define it within our route.</p>
+
+<p>If we wanted to capture that fourth segment potentially then we could change
+our default route to:</p>
+
+<pre><code>$config['default'] = array
+(
+    // Default routing
+    ':controller/:method/:id/:style',
+    // Defaults for route keys
+    'controller' =&gt; 'welcome',
+    'method' =&gt; 'index',
+);
+</code></pre>
+
+<p>Above we have added another router argument called &lsquo;<em>style</em>&rsquo;, visiting our
+page with 4 segments no longer gives us an error &hellip; making any more sense
+yet?</p>
+
+<p><strong>Accessing URI parameters (arguments)</strong>
+So above we have seen how to add additional parameters to the route, how can
+we access these named parameters? <strong>Router::$arguments</strong> is the answer, add to
+your index method in your page controller the following, then visit your four
+segment route again:</p>
+
+<pre><code>    var_dump(router::$arguments['style']);
+</code></pre>
+
+<p>Very nice. We now have a nice, unified way of accessing these named
+parameters.</p>
+
+<p><strong>Practical Example</strong>
+So lets now run quickly through a practical example to demonstrate some more
+of the functionality we can leverage from this . .yes there is more!</p>
+
+<p>Lets re-use our page controller and add a blog_posts function to it. We define
+the following route:</p>
+
+<pre><code>$config['blog_post'] = array
+(
+    // Default routing
+    'post/:year/:month/:day',
+    // Defaults for route keys
+    'controller'    =&gt; 'page',
+    'method'    =&gt; 'blog_post',
+    'year'      =&gt; date('Y'),
+    //Ensure we get the correct date formats!
+    'regex'     =&gt; array(
+                'year'  =&gt; '[0-9]{4}',
+                'month' =&gt; '[0-9]{2}',
+                'day'   =&gt; '[0-9]{2}'
+                )
+);
+</code></pre>
+
+<p>The above has introduced the <em>regex</em> functionality, hopefully it is relatively
+self-explanatory there. We can basically provide individual regex patterns for
+each of our defined url arguments, which makes for some <strong>really</strong>
+nice and simple pattern matching options. Also note how we define our default
+year to be the current one, very simple, very effective and very future proof!
+All from the routing configuration.</p>
+
+<p>Add the below function into your Page controller (from before):</p>
+
+<pre><code>public function blog_post()
+{
+  $year     = router::$arguments['year'];
+  $month    = isset(router::$arguments['month']) ? router::$arguments['month'] : null ;
+  $day  = isset(router::$arguments['day']) ? router::$arguments['day'] : null ;
+  echo "Blog Post";
+  var_dump($year);
+  var_dump($month);
+  var_dump($day);
+  exit;
+}
+</code></pre>
+
+<p>Now visit &lt;your-site>/post and you should see what is going on here! I think
+that the set up we&rsquo;re looking at here is really only scratching the surface of
+how versatile and solid the new routing solution will be. Any thoughts?</p>
+
+<p><strong>Reverse Routing</strong>
+Just to finish this off lets take a look at what really tidies all this up
+into a neat package: Reverse routing. This allows us to generate application
+links using our configured routes set-up. For instance:</p>
+
+<pre><code>echo router::uri('blog_post', array(
+    'year' =&gt; '1983',
+    'month' =&gt; '08',
+    'day' =&gt; '22')
+);
+</code></pre>
+
+<p>The above will now happily generate the route <em>post/1983/08/22</em>. On its own
+not to fantastic, and it came at the price of a slightly longer link
+generation syntax. However as some of you are probably realising if we ship
+this app over to the states where they do everything backwards ( :) ) we now
+want to switch our urls to read &lsquo;post/:year/:day/:month&rsquo;, so by making that
+<strong>ONE</strong> change in our routes config every single one of our application links
+will now match this backwards way of doing things, and because we retrieve our
+url arguments by name none of our code will be affected . . truly awsome.
+Reorganising methods and controllers is no longer an issue either. Play around
+with it and see what you think. Hopefully you will be impressed!</p>
+
+<p><em>Breath</em> &ndash; That turned out to be a bit longer than anticipated so hopefully you got all the way through it, as usual any problems, glaring omissions then please don&rsquo;t hesitate to drop me a line!
+/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana 2.3 look ahead!]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-look-ahead/"/>
+    <updated>2008-10-18T11:01:25+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-look-ahead</id>
+    <content type="html"><![CDATA[<p><img class="right" src="https://ninjapenguin.co.uk/images/blog/picture-1.png" title="Routing" alt="Routing">
+I&rsquo;ve recently had the chance to have a little play with with the Kohana trunk
+(what will be Kohana 2.3) so I thought I would use this post to highlight some
+of the cool new features we can expect in the next release! The list is by no
+means exhaustive but will hopefully serve to lessen the learning curve when
+release day comes (or if you decide to have a play with the trunk). There has
+been some mixed reception to some of the changes, so if you&rsquo;ve missed any of
+these then hopefully the below will get you back up to speed!</p>
+
+<!-- more -->
+
+
+<p><strong>Folder Structure</strong>
+The first thing you will probably notice is the fairly major reorganisation of
+the folder layout: When looking in the top level of the application or system
+directories you will notice the controllers, helpers, libraries and models
+folders have all been removed in favor of a single classes folder. Within this
+classes folder can be found a controller and model folder (in which your
+controllers and models are placed respectively), the semantic difference
+between helpers and libraries has been lessened and as such both are now
+placed in the top level of the classes directory. I was always slightly unsure
+of the forced separation there, and so the combination of the two is a
+positive stop in my opinion.</p>
+
+<p>With the change comes future proofing against PHP 5.3, deceased complexity and
+transparent extension of classes (more later).</p>
+
+<p>There has been some uneasiness within the community about this change, so I
+encourage you to grab a copy of the trunk and take a look for yourself, I&rsquo;m
+pretty confident though that most will come to see the benefits of this.</p>
+
+<p><strong>Routing</strong>
+Another well talked about change is that of the new routing implementation.
+Going hand in hand with the directory structure the new routing implementation
+brings Kohanas own implementation of the <a href="http://dev.horde.org/routes/manual/index.html">Horde
+routing</a>. After a bit of
+playing with this and overcoming a couple of WTF!® moments, I have slowly
+began to really like this, especially the reverse routing concept which I
+looked into a while ago, I&rsquo;m definitely going to play with this more, and I&rsquo;m
+not sure if there are any plans to implement any of the other Horde features,
+but it definitely allows for a great deal of flexibility I&rsquo;m going to dedicate
+an article to this in the near future so I will purposely cut this a little
+short.</p>
+
+<p><strong>Class Extensions</strong>
+Extensions are now placed in a directory called . .. extensions, which resides
+in the top level (along with classes, views etc etc). Any classes (who&rsquo;s names
+are appended _Core) can now be extended..</p>
+
+<pre><code>  class ORM_Custom extends ORM
+ {
+ .....
+</code></pre>
+
+<p>The above code will extend ORM transparently allowing for the full power of
+extensions to be realised with even greater ease than previously, it also
+provides a nice logical organizational separation of all your extensions
+enabling you to easily keep track of extensions in your project</p>
+
+<p><strong>Kohana Modules</strong>
+Not so much coming in 2.3 as it has arrived already, but 2.3 will see the
+removal of some Kohana modules from the core support and their adding to the
+Kohana Modules project. Of note at the moment however is the object database
+which will come to replace the current database library (as far as I&rsquo;m aware
+anyway, please correct me if I&rsquo;m wrong!) &ndash; so keep an eye on that one</p>
+
+<p>So that covers the main points as I see them right now, hopefully I&rsquo;ll throw
+together an article that looks at the routing in a bit more detail soon, so
+check back for that!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana ORM Tip : ORM Tree]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/09/25/kohana-orm-tip-orm-tree/"/>
+    <updated>2008-09-25T20:35:41+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/09/25/kohana-orm-tip-orm-tree</id>
+    <content type="html"><![CDATA[<p>Well the last ORM tip seemed to get a bit of traffic so I thought I would
+throw another one together. This time it covers the little known ORM_Tree
+library. This is (IMO) a spectacular example of the flexibility and power of
+Kohana, by taking a look at this ORM extension (system/libraries/ORM_Tree) you
+can see quite how easily this age old storage pattern is solved by extending
+the ORM class.</p>
+
+<p>Using it is even simpler!</p>
+
+<p><strong>Our Scenario</strong><br/>
+We want to implement a standard categories system in our site but not have to
+go through all the trouble of building it from scratch and would love to
+harness the existing power of the ORM library . .enter ORM_Tree</p>
+
+<p><strong>The table</strong></p>
+
+<pre><code>CREATE TABLE `categories` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) NOT NULL default '',
+  `parent_id` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+)
+</code></pre>
+
+<p><strong>The Model</strong></p>
+
+<pre><code>class Category_Model extends ORM_Tree
+{
+    protected $children = "categories";
+}
+</code></pre>
+
+<p><strong>Using it</strong><br/>
+To test this let&rsquo;s add some test data;</p>
+
+<pre><code>  INSERT INTO `categories` VALUES (1,'root',0),(2,'beer',1),(3,'meat',1),(4,'pork',3),(5,'beef',3);
+</code></pre>
+
+<p>So after adding some appropriate information using it is as simple as..</p>
+
+<pre><code>  print_r(ORM::factory("Category", 1)-&gt;children-&gt;as_array());
+</code></pre>
+
+<p>&hellip;to return the children for the category with id 1</p>
+
+<pre><code>  echo ORM::factory("category", 4)-&gt;parent-&gt;name;
+</code></pre>
+
+<p>..would print the parent name of the category with ID 4</p>
+
+<p>Hopefully that little tip will help someone! Any questions then please don&rsquo;t
+hesitate to ask!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana ORM Tip]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/09/02/kohana-orm-tip/"/>
+    <updated>2008-09-02T19:49:24+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/09/02/kohana-orm-tip</id>
+    <content type="html"><![CDATA[<p>Well, I havn&rsquo;t posted anything for a little while, what with work, work and
+even some personal things i&rsquo;ve been working on time just seems to of
+evapourated.</p>
+
+<p>During the time Kohana 2.2 has been released, congratulations to everyone
+involved in that, there now seems to be the slow but inevitable move towards
+bringing the documentation up to date. Im hoping that I will find the time to
+put together a few tutorials soon to show of some of the new features in
+Kohana, and with even more hope I will be releasing a couple of small apps
+(fngers crossed)</p>
+
+<p>So in an attempt to kick things off I thought I would mention a small but
+often overlooked feature of the ORM library: <strong>unique_key</strong>.</p>
+
+<p>The orm library provides a function within it called unique_key, which is
+primarily meant to be overloaded by any extending classes, by overloading this
+method we have the ability to load models based on any unique field in our
+table.</p>
+
+<p>For instance:</p>
+
+<pre><code>$a = new Blog_Model(1);
+</code></pre>
+
+<p>The above will load a blog model with an &lsquo;id&rsquo; field (our primary key) value of
+1, all very standard. What if each blog had a &lsquo;slug&rsquo; field, this slug was a
+user readable/friendly unique attribute given to each blog post, wouldnt it be
+great if we could load a blog post by this attribute? . .well we can with the
+unique_key function!</p>
+
+<pre><code>public function unique_key($id)
+{
+    if(is_string($id) AND ! ctype_digit($id))
+    {
+        //the id passed to the constructor was a string
+        return 'slug';
+    }  
+    //default to returning the standard orm field ('id')
+    return parent::unique_key($id);
+}
+</code></pre>
+
+<p>With this function in our Blog_Model class we can now do the following:</p>
+
+<pre><code>$a = new Blog_Model("user_friendly_blog_name");
+</code></pre>
+
+<p>A very nice little piece of functionality, bear in mind though that you must
+ensure that the field returned by unique_key must be unique in your system in
+order to be effective.</p>
+
+<p>Hope that helps someone!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Practical Kohana Hooks example: PHPIDS]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/06/29/practical-kohana-hooks-example-phpids/"/>
+    <updated>2008-06-29T11:12:15+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/06/29/practical-kohana-hooks-example-phpids</id>
+    <content type="html"><![CDATA[<p><img src="/images/blog/phpids_logo.png" alt="PHPIDS Logo" /></p>
+
+<p>So further to Dlibs <a href="http://learn.kohanaphp.com/2008/06/13%0A/events-and-hooks-in-kohana/">tutorial on hooks</a>, I thought I would help to demonstrate the power
+of this with a practical example of their usage: whilst reading <a href="http://phpimpact.wordpress.com/2008/06/22/intrusion-detection-for-php-%0Aapplications-with-phpids/">this
+entry</a> on <a href="http://php-ids.org/">PHPIDS</a> I thought that
+seemed like a prime candidate for an example and so by following along below
+you should have a nice example of integrating a third party app into Kohana
+using the hooks/events system!</p>
+
+<p><strong>PHPIDS</strong><br/>
+From the site..</p>
+
+<blockquote><p>&ldquo;PHPIDS (PHP-Intrusion Detection System) is a simple to use, well
+structured, fast and state-of-the-art security layer for your PHP based web
+application. The IDS neither strips, sanitizes nor filters any malicious
+input, it simply recognizes when an attacker tries to break your site and
+reacts in exactly the way you want it to.&rdquo;</p></blockquote>
+
+<p>So we can simply insert PHPIDS into the Kohana system and have it silently
+monitor requests to our app/page informing us (if we wish) when it detects any
+potential attacks.</p>
+
+<p><strong>Third party apps in Kohana</strong><br/>
+Kohana loves third party applications, so much so that it makes it easy for us
+to integrate them . .meaning we have to write even less code. Kohana provides
+us with an area to centrally store any such applications (referred to as
+vendor apps) within the system folder. This folder can be found at
+&lt;system_path>/vendor and is where any vendor apps we would like to use in our
+projects should be placed. If you look within that folder now you will see
+there are allready a number of such applications used within Kohana which you
+may or may not be familiar with.</p>
+
+<p>If after reading this tutorial you would like more information on integrating
+other third party apps then you should definitely take a closer look at the
+email helper ( system/helpers/email.php ) which is a fantastic example of
+creating a helper to integrate a vendor app (in this case the Swift email
+library).</p>
+
+<p><strong>1 &ndash; Getting PHPIDS</strong><br/>
+The first step is to get yourself a copy of PHPIDS <a href="http://php-%0Aids.org/downloads/">from here</a> (the version I am working with is 0.5). After downloading
+this you can then extract the file into the system/vendor directory so that
+your vendor dir now contains a phpids folder aswell. Within the download we
+get three directories (tests, docs and lib) we are onlt really interested in
+lib although leaving the other two there for reference/testing is no bad idea.</p>
+
+<p>We now have access to our third party app!</p>
+
+<p><strong>2 &ndash; Registering our hook</strong><br/>
+As I mentioned above one part of this tutorial was to demonstrate the power or
+hooks, allthough as a single feature they are actually very well documented
+within Kohana, for more information on them see the following pages:</p>
+
+<ul>
+<li><a href="http://docs.kohanaphp.com/general/hooks">Kohana hooks documentation</a></li>
+<li><a href="http://docs.kohanaphp.com/general/events">Kohana events documentation</a></li>
+<li><a href="http://learn.kohanaphp.com/2008/06/13/events-and-hooks-in-kohana/">Learn Kohana Blog on hooks/events</a>
+In essence a hook is just a normal piece of code, nothing special at all. The
+power comes in when we are allowed to execute this piece of code at a number
+of pre-determined points through the execution process of the Kohana process
+(see the events docs), we can therefore deploy (in this case) PHPIDS at avery
+early point the in the page rendering process (prior to our controllers being
+executed for example), in many cases this is ideal in terms of security,
+efficiency, speed etc.</li>
+</ul>
+
+
+<p>So to register our hook simply copy the config file (system/config/hooks.php)
+into our application config directory (resulting in
+application/config/hooks.php). We can then enable hooks by changing the
+contents of the hooks.php (within our application config dir) to:</p>
+
+<pre><code>$config['enable'] = TRUE;
+</code></pre>
+
+<p>Doing this means Kohana will now scan the application/hooks directory for any
+files and attempt to include and execute them.</p>
+
+<p><strong>3 &ndash; Creating our hook</strong><br/>
+The final step is creating our hook and configuring PHPIDS. Whilst doing this
+all code will be fairly PHPIDS specific, I was able to basically follow the
+included examples (and the examples in the blog posts above) in order to set
+it up (as I found documentation on their site fairly lacking), the code below
+represents a simple hook which will get your system running!</p>
+
+<pre><code>class Phpidsloader
+{
+   public static function load()
+   {
+      $path = get_include_path();
+      set_include_path($path . ':' . SYSPATH .'vendor/phpids/lib');  
+      require_once 'IDS/Init.php';  
+      //Define constants for the ini file (they should be using a dynamic format!)
+      define('IDS_FILTER_PATH', SYSPATH.'vendor/phpids/lib/IDS/default_filter.xml');
+      define('IDS_TMP_PATH', SYSPATH.'vendor/phpids/lib/IDS/tmp');
+      //this file must exist
+      define('IDS_LOG_FILE', APPPATH.'logs/phpids_log.txt');    
+      define('IDS_CACHE_FILE', SYSPATH.'vendor/phpids/lib/IDS/tmp/default_filter.cache');     
+      //Run the monitor
+      $init = IDS_Init::init(SYSPATH.'vendor/phpids/lib/IDS/Config/Config.ini');
+      $ids = new IDS_Monitor($_REQUEST, $init);
+      $result = $ids-&gt;run();  
+      if (!$result-&gt;isEmpty()) {
+         require_once 'IDS/Log/File.php';
+         require_once 'IDS/Log/Composite.php';
+
+     //Log all scores
+     $compositeLog = new IDS_Log_Composite();
+     $compositeLog-&gt;addLogger(IDS_Log_File::getInstance($init));
+     $compositeLog-&gt;execute($result);
+      }
+
+      //reset the include path
+      set_include_path($path);
+   }
+}
+Event::add('system.ready', array('Phpidsloader', 'load'));
+?&gt;
+</code></pre>
+
+<p>The above is a simplified version of my final hook (which I will show later),
+but it demonstrates clearly the power or exactly what we are doing here.</p>
+
+<p>The basic workflow is to set up the system in order that PHPIDS will run (so
+define include paths etc, define config path constants (for the PHPIDS config
+file)), run the application and finally return the system back to how we left
+it (as near as possible), so reset include paths etc . .that is all there is
+to it</p>
+
+<p>You will need to then setup the PHPIDS config file which you will find in
+system/vendor/phpids/lib/IDS/Config/config.ini, I left the file as it was
+except for the paths in there which I ammended with the defined constants
+above (You can probably get away with using my config file below), another
+little gotcha is that in this case we will need to create the log file within
+application/logs (called phpids_log.txt) and make it writeable by the server
+as PHPIDS doesnt seem to automatically create this file</p>
+
+<p><strong>Additional Extras</strong><br/>
+So there we have an example of integrating a third party app (PHPIDS) into
+Kohana, the demonstration so far doesnt really do a great deal however so I
+went forward and added some extra logic into the hook which made use of some
+of the power of PHPIDS, using the attatched hook below we now</p>
+
+<ul>
+<li>Track users actions accross the site, measing their threat level between pages</li>
+<li>Enable actions to be taken at pre-defined threat levels (25 sends us a warning email, 50 kicks them off the site etc)</li>
+<li>Record all registered warnings in the log file</li>
+<li>Use the system to gather forensic evidence on the potential attack
+I have included my hook, along with the PHPIDS config file so that you can see
+exctly how I have them set up, as normal any questions or comments please do
+not hesitate to ask!</li>
+</ul>
+
+
+<p><a href="#downloads-unavailable">Download here</a></p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana Pagination Tutorial]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/06/21/kohana-pagination-tutorial/"/>
+    <updated>2008-06-21T17:17:56+01:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/06/21/kohana-pagination-tutorial</id>
+    <content type="html"><![CDATA[<p><img src="/images/blog/pagination.png" alt="An unimaginative image of pagination" /></p>
+
+<p>A couple days back Dlib posted over at the <a href="http://learn.kohanaphp.com">learning Kohana
+Blog</a> asking people for some tutorial topics, one
+of the mentioned options was that of the Pagination library so I thought I
+would help out and throw one together for it (as it&rsquo;s very simple and
+shouldn&rsquo;t take to long!</p>
+
+<p>Pagination is (in most of my projects anyway) a frequently used option, it is
+something users have come to expect, and from an interface point of view can
+give us more controll over the display of large datasets, in short its
+probably something you should be providing if you allready arn&rsquo;t! The
+pagination library in Kohana takes out the monotinous side to calculating the
+pagination links, and allows us to rapidly provide the functionality with a
+minimal of fuss.</p>
+
+<p><strong>Using Pagination Library </strong><br/>
+First thing to note about Pagination in Kohana is that it is implemented
+within a library (system/libraries), being a library this means that we always
+instantiate it (as oposed to helpers which we call statically):</p>
+
+<p>Another important point is that the pagination library has an associated
+configuration file (found in system/config/pagination.php), this configuartion
+file should be copied into your application/config directory so that you can
+customise it.</p>
+
+<p>The pagination library also provides a number of different default link
+display styles (the views for which can be found in system/views/pagination),
+tbhI have never found any need for generating a different display style over
+any of those provided, but by looking at the view files you can see how easy
+this is to achiveve if the situation should arise!</p>
+
+<p><strong>Configuring Pagination</strong><br/>
+The default pagination config sets up a number of params you may want to
+change, though it is important to note that any of these can be overridden
+each time you create a Pagination object, for an explanation of these
+variables then check the config file out!</p>
+
+<p><strong>Implementing Pagination</strong><br/>
+<em>Scenario: I have a page which displays a number of users in a table, I want
+to be able to provide pagination of this table</em></p>
+
+<p>The code below demonstrates an example usage:</p>
+
+<pre><code>count_all();  
+ //Pagination configuration
+ $num_per_page = 10;  
+ //Setup pagination
+ $pagination = new Pagination(array(
+        'uri_segment' =&gt; 2,
+    'total_items'=&gt; $tot,
+    'style' =&gt; "digg",
+    'items_per_page' =&gt; $num_per_page,
+    'auto_hide' =&gt; true
+ ));  
+ $offset = $pagination-&gt;sql_offset;  
+ $users = ORM::factory('ntuser')
+         -&gt;orderby('id','desc')
+         -&gt;find_all($num_per_page,$offset);  
+$view-&gt;pagination = $pagination;
+$view-&gt;users = $users;
+?&gt;
+</code></pre>
+
+<p>You can see how with very little effort we have created paginated results!
+I&rsquo;ll go through and explain whats hapening in a little more detail now</p>
+
+<p><strong>Creating the object</strong><br/>
+This deals with the creation of the pagination obect (where all the magic
+happens), i&rsquo;ll deal with each of those options passed in:</p>
+
+<ul>
+<li><em>uri_segment</em> &ndash; The library has to have a way of knowing which page of the pagination we are currently on at any one time, it does this by adding the page number to the url, this value (an integer) represents the segment of the url in which this number resides (more info below)</li>
+<li><em>total_items &ndash; </em>The total number of items that we are paginating over, in the above example I use ORM to count the total number of results in the table I will be returning (I could infact optimise and just count the actual results that I am passing into the view, but for clarity I wrote it out like this)</li>
+<li><em>style &ndash; </em>I am overwriting the default style set in my application config here to the &lsquo;digg&rsquo; style</li>
+<li><em>items_per_page &ndash; </em>The total number of items to display on any one page (self explanatory, this can be populated dynamically if you want the user to decide!)</li>
+<li><em>auto_hide &ndash; </em>If there are fewer results than the value of <em>items_per_page </em>then the pagination links will be hidden
+uri-segment continued: &ndash; In the example above the code resides in the Users
+controller within a function called list (our path would be users/list), in
+the example above I have set up the route below which enables the pagination
+number to be set as the second uri segment</li>
+</ul>
+
+
+<p>This route maps users/<any number> to the users/list/<the number> path thus
+enabling the Pagination library to extract the current page number from the
+second uri segment</p>
+
+<p><strong>Outputting the Pagination links</strong><br/>
+All that is left to do now is output the links in the view using the following
+code (assuming you have made the profiler object available to the view in the
+$profiler variable (as above))</p>
+
+<p>And that is all there is to it!, how to use the Pagination library in a nut
+shell!</p>
+
+<p>If anyone has any questions then please dont hesitate to contact me!</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana simple blog screencast]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/02/24/kohana-simple-blog-screencast/"/>
+    <updated>2008-02-24T14:22:18+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/02/24/kohana-simple-blog-screencast</id>
+    <content type="html"><![CDATA[<p>So following on from <a href="/blog/2008/02/23/kohana-setup-screencast/">yesterdays
+screencast</a> I have put together another short tutorial showing the first part
+of a simple blog application.</p>
+
+<p>The tutorial touches on the template controller use, basic ORM implementation
+and basic configuration issues. It picks up straight from where the previous
+tutorial left off and will be concluded by a second part showing how to make
+use of the forge module and ORM to create and save blog entries.</p>
+
+<p>I had some feedback yesterday on the sound levels of the first screencast so I
+have upped the levels on this one, I have also increased the quality slightly,
+although this has also increased the file size (this screencast is 30mb when
+zipped with 13minute length)</p>
+
+<p>I will only offer this one as compressed download (due to the bigger size) so
+any feedback would be greatly received!</p>
+
+<p><strong><a href="#downloads-unavailable">[Download the second screencast here &ndash; 31mb] </a></strong><br/>
+Cheers</p>
+
+<p>/Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kohana setup screencast]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/02/23/kohana-setup-screencast/"/>
+    <updated>2008-02-23T12:33:11+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/02/23/kohana-setup-screencast</id>
+    <content type="html"><![CDATA[<p><img src="/images/blog/kohana.png" alt="Kohana logo" /></p>
+
+<p>So, I have been following the progress of the Kohana php framework for a
+little while now, after completing a number of projects using CodeIgniter I
+started looking for a more php5 competent framework and came across the
+community branch of CodeIgniter called <a href="http://kohanaphp.com">Kohana.</a></p>
+
+<p>I&rsquo;ve been slowly getting to grips with the framework for a couple of weeks now
+and plan to use it in the next project I&rsquo;m about to take on. It seems like a
+fantastic framework with some really good developers who have done some
+awesome stuff with the core but like any early project currently suffers (IMO)
+from a lack of basic documentation . .so I have decided to help (hopefully)
+with a short screencast on how to set up a small application (a blog) just to
+get people using the framework.</p>
+
+<p>The first screencast focuses on setting it for for development, it covers the
+following topics:</p>
+
+<ul>
+<li>Downloading the source code from svn</li>
+<li>Setting up a local site in apache (running on localhost)</li>
+<li>Placing the index.php into a webroot</li>
+<li>Removing the index.php from the url
+It&rsquo;s the first screencast I have ever attempted so it is most likely very
+rough around the edges but I hope it can be of some to someone!</li>
+</ul>
+
+
+<p>The only bit of accompanying code you will need is the rewrite rule I used
+within the virtual host which you can copy and paste from below;</p>
+
+<pre><code># Turn on URL rewriting
+RewriteEngine On  
+# Protect application and system files from being viewed
+RewriteCond $1 ^(application|system)  
+# Rewrite to index.php/access_denied/URL
+RewriteRule ^(.*)$ index.php/access_denied/$1 [PT,L]  
+# Do not enable rewriting for files that exist
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-d
+RewriteCond $1 !/index.+  
+# Rewrite to index.php/URL
+RewriteRule ^(.*)$ /index.php/$1 [PT,L]
+</code></pre>
+
+<p>If you have any questions then please do not hesitate to contact me about
+them!</p>
+
+<p><strong><a href="#downloads-unavailable">[Download the QT movie here]</a> <a href="#downloads-unavailable">[Download the compressed movie here]</a> </strong><br/>
+/Matt</p>
+
+<p><strong>EDIT</strong> &ndash; The second part in this series has now been posted up and is available <a href="https://ninjapenguin.co.uk/blog/2008/02/24/kohana-simple-blog-screencast/">here </a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Wishlist application]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2008/01/12/wishlist-application/"/>
+    <updated>2008-01-12T19:20:27+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2008/01/12/wishlist-application</id>
+    <content type="html"><![CDATA[<p><img src="/images/blog/wishlist.gif" alt="Ninjapenguin Wishlist logo" /></p>
+
+<p>So today I got around to writing up the accompanying &lsquo;article&rsquo; for my small
+wishlist application. The app was written in conjunction with the miniseries I
+wrote on &lsquo;Modern Project Management&rsquo; (of which I&rsquo;m still formatting the last
+article).</p>
+
+<p>The app was used over christmas by me and a few friends and seemed to serve
+its purpose! (I did quite well off of my list :P).</p>
+
+<p>Written in CodeIgniter with a generous splash of Mootools thrown in for some
+AJAX&#8217;y goodness the app is quick and liteweight and allows users to create a
+list, add and delete items (asynchronously) and mark other users items as
+bought. The app also has a built in help system.</p>
+
+<p>Check out the article
+<a href="https://ninjapenguin.co.uk/articles/wishlist_application">here</a> for some
+screenshots, or alternatively head over to the application and sign up at <a href="/blog/2008/01/12/wishlist-application/">htt
+p://www.ninjapenguin.co.uk/wishlist/signup.</a></p>
+
+<p>The application was only written as a proof of concept, not as a production
+level app so if you find any bugs then just give me a shout.I have written a
+few useful small Javascript classes that I will be posting up separately,
+including a form validation class and a modal pop up class, so keep an eye out
+for them!</p>
+
+<p><a href="https://ninjapenguin.co.uk/articles/wishlist_application">Read the article here
+</a></p>
+
+<p>~Matt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mootools bind function]]></title>
+    <link href="https://ninjapenguin.co.uk/blog/2007/12/15/mootools-bind-function/"/>
+    <updated>2007-12-15T23:08:10+00:00</updated>
+    <id>https://ninjapenguin.co.uk/blog/2007/12/15/mootools-bind-function</id>
+    <content type="html"><![CDATA[<p>Well it&rsquo;s my first blog entry for a little while (I have a few almost ready to
+publish) and its going to be a short one.</p>
+
+<p>I have been doing a lot of client side scripting work recently, mostly with
+the <a href="http://mootools.net">Mootools</a> framework, if you havn&rsquo;t heard of it then
+it&rsquo;s definitely worth a look, it is a really powerfull javascript framework
+made of modules that you can pick and mix in, meaning that it is increadably
+lightweight when compared to the likes of prototype etc.</p>
+
+<p>One really cool little function is the <em>bind</em> function. The bind function is
+prototyped to the function element and so is called directly upon a function.
+When calling bind you pass it an element to which the &lsquo;this&rsquo; of the function
+then corresponds to. A demonstration is probably in order!</p>
+
+<pre><code>element.addEvent('focus', function(e) {
+    alert(this.id)
+})
+</code></pre>
+
+<p>The above code would attach the focus event to &lsquo;element&rsquo;, on focus the browser
+would alert the id of that element.</p>
+
+<pre><code>element.addEvent('focus', function(e) {
+    alert(this.id)
+}.bind(element2))
+</code></pre>
+
+<p>This time the alert would output the id of element2. This practise is
+particularly handy within classes, meaning that the event listener can be
+bound to the instance of the class, and not the element that is firing the
+event.</p>
+
+<p>Hope that helps someone!</p>
+
+<p>Matt</p>
+]]></content>
+  </entry>
+  
+</feed>

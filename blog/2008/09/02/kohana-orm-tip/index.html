@@ -1,0 +1,228 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Kohana ORM Tip - ninjapenguin</title>
+	<meta name="author" content="Matthew Wells">
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+	<meta name="description" content="Well, I havn&rsquo;t posted anything for a little while, what with work, work and
+even some personal things i&rsquo;ve been working on time just &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="ninjapenguin" type="application/atom+xml">
+	
+	<link rel="canonical" href="https://ninjapenguin.co.uk/blog/2008/09/02/kohana-orm-tip">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+	<link href='https://fonts.googleapis.com/css?text=ninjapenguin&family=Slackey' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+	
+	
+
+</head>
+
+
+<body>
+    <div id="wrapper">
+    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
+<h1 class="animated bounceInDown">
+    <div id="headerbg">
+        ninjapenguin
+    </div>
+</h1>
+<br>
+
+<ul id="social-links" style="text-align:center">
+  
+  <!-- GitHub -->
+  <li>
+  <a href="https://github.com/ninjapenguin" class="github" title="Github"></a>
+  </li>
+  
+  
+  
+  
+  <!-- Twitter -->
+  <li>
+  <a href="http://www.twitter.com/ninja_p" class="twitter" title="Twitter"></a>
+  </li>
+  
+  
+  
+  
+  
+</ul>
+
+
+<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+    <li id="ajax"><a href="/blog/index.html">Blog</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+    
+</ul>
+
+
+
+
+</header>
+
+<div id="toload">
+<!-- begin toload --> 
+    <div id="content" class="inner">
+        <article class="post">
+	<h2 class="title">Kohana ORM Tip</h2>
+	<div class="meta">
+		<div class="date">Published on: 
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-02T19:49:24+01:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2008</time></div>
+		<div class="tags">Tags: 
+
+
+	<a class='category' href='/blog/categories/kohana/'>Kohana</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+
+
+</div>
+	</div>
+	<div class="entry-content"><p>Well, I havn&rsquo;t posted anything for a little while, what with work, work and
+even some personal things i&rsquo;ve been working on time just seems to of
+evapourated.</p>
+
+<p>During the time Kohana 2.2 has been released, congratulations to everyone
+involved in that, there now seems to be the slow but inevitable move towards
+bringing the documentation up to date. Im hoping that I will find the time to
+put together a few tutorials soon to show of some of the new features in
+Kohana, and with even more hope I will be releasing a couple of small apps
+(fngers crossed)</p>
+
+<p>So in an attempt to kick things off I thought I would mention a small but
+often overlooked feature of the ORM library: <strong>unique_key</strong>.</p>
+
+<p>The orm library provides a function within it called unique_key, which is
+primarily meant to be overloaded by any extending classes, by overloading this
+method we have the ability to load models based on any unique field in our
+table.</p>
+
+<p>For instance:</p>
+
+<pre><code>$a = new Blog_Model(1);
+</code></pre>
+
+<p>The above will load a blog model with an &lsquo;id&rsquo; field (our primary key) value of
+1, all very standard. What if each blog had a &lsquo;slug&rsquo; field, this slug was a
+user readable/friendly unique attribute given to each blog post, wouldnt it be
+great if we could load a blog post by this attribute? . .well we can with the
+unique_key function!</p>
+
+<pre><code>public function unique_key($id)
+{
+    if(is_string($id) AND ! ctype_digit($id))
+    {
+        //the id passed to the constructor was a string
+        return 'slug';
+    }  
+    //default to returning the standard orm field ('id')
+    return parent::unique_key($id);
+}
+</code></pre>
+
+<p>With this function in our Blog_Model class we can now do the following:</p>
+
+<pre><code>$a = new Blog_Model("user_friendly_blog_name");
+</code></pre>
+
+<p>A very nice little piece of functionality, bear in mind though that you must
+ensure that the field returned by unique_key must be unique in your system in
+order to be effective.</p>
+
+<p>Hope that helps someone!</p>
+
+<p>/Matt</p>
+</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+    </div>
+    <footer id="footer">
+    <div style="display:inline">
+    Copyright &copy; 2013
+
+    Matthew Wells
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+
+    </footer>
+    <script src="/javascripts/fabric.js"></script>
+
+
+
+
+
+
+
+<!-- end toload --> 
+</div>
+</div>
+<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
+/*]]>*/
+</script><!-- remove it to remove the scroll to top button -->
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: https://ninjapenguin.co.uk/sitemap.xml 
