@@ -1,209 +1,81 @@
-
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-	<title>Mootools bind function - ninjapenguin</title>
-	<meta name="author" content="Matthew Wells">
-
-	<meta name="HandheldFriendly" content="True">
-	<meta name="MobileOptimized" content="320">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	
-	<meta name="description" content="Well it&rsquo;s my first blog entry for a little while (I have a few almost ready to
-publish) and its going to be a short one. I have been doing a &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="ninjapenguin" type="application/atom+xml">
-	
-	<link rel="canonical" href="https://ninjapenguin.co.uk/blog/2007/12/15/mootools-bind-function">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-
-	<link href='https://fonts.googleapis.com/css?text=ninjapenguin&family=Slackey' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
-
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-
-	
-	
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mootools bind function - ninjapenguin</title>
+  <meta name="description" content="Well it's my first blog entry for a little while (I have a few almost ready to
+publish) and its going to be a short one. I have been doing a ...">
+  <link rel="canonical" href="https://ninjapenguin.co.uk/blog/2007/12/15/mootools-bind-function/">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/stylesheets/minimal.css">
 </head>
-
-
-<body>
-    <div id="wrapper">
-    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
-<h1 class="animated bounceInDown">
-    <div id="headerbg">
-        ninjapenguin
-    </div>
-</h1>
-<br>
-
-<ul id="social-links" style="text-align:center">
-  
-  <!-- GitHub -->
-  <li>
-  <a href="https://github.com/ninjapenguin" class="github" title="Github"></a>
-  </li>
-  
-  
-  
-  
-  <!-- Twitter -->
-  <li>
-  <a href="http://www.twitter.com/ninja_p" class="twitter" title="Twitter"></a>
-  </li>
-  
-  
-  
-  
-  
-</ul>
-
-
-<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
-<ul id="nav">
-	<li id="ajax"><a href="/index.html">Home</a></li>
-    <li id="ajax"><a href="/blog/index.html">Blog</a></li>
-	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
-    <li><a href="/atom.xml">RSS</a></li>
+<body class="post-page">
+  <header class="site-header">
+    <a class="site-title" href="/">ninjapenguin</a>
+    <nav aria-label="Primary">
+      <a href="/blog/archives/">Archive</a>
+    </nav>
+  </header>
+  <main class="site-main">
+    <article class="post">
+    	<h2 class="title">Mootools Bind Function</h2>
+    	<div class="meta">
+    		<div class="date">Published on: 
     
-    <li>
-    <div id="dark">
-        <form method="get" action="/search.html" id="search">
-            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
-        </form>
-    </div>
-    </li>
     
-</ul>
-
-
-
-
-</header>
-
-<div id="toload">
-<!-- begin toload --> 
-    <div id="content" class="inner">
-        <article class="post">
-	<h2 class="title">Mootools Bind Function</h2>
-	<div class="meta">
-		<div class="date">Published on: 
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-12-15T23:08:10+00:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time></div>
-		<div class="tags">Tags: 
-
-
-	<a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/mootools/'>Mootools</a>
-
-
-</div>
-	</div>
-	<div class="entry-content"><p>Well it&rsquo;s my first blog entry for a little while (I have a few almost ready to
-publish) and its going to be a short one.</p>
-
-<p>I have been doing a lot of client side scripting work recently, mostly with
-the <a href="http://mootools.net">Mootools</a> framework, if you havn&rsquo;t heard of it then
-it&rsquo;s definitely worth a look, it is a really powerfull javascript framework
-made of modules that you can pick and mix in, meaning that it is increadably
-lightweight when compared to the likes of prototype etc.</p>
-
-<p>One really cool little function is the <em>bind</em> function. The bind function is
-prototyped to the function element and so is called directly upon a function.
-When calling bind you pass it an element to which the &lsquo;this&rsquo; of the function
-then corresponds to. A demonstration is probably in order!</p>
-
-<pre><code>element.addEvent('focus', function(e) {
-    alert(this.id)
-})
-</code></pre>
-
-<p>The above code would attach the focus event to &lsquo;element&rsquo;, on focus the browser
-would alert the id of that element.</p>
-
-<pre><code>element.addEvent('focus', function(e) {
-    alert(this.id)
-}.bind(element2))
-</code></pre>
-
-<p>This time the alert would output the id of element2. This practise is
-particularly handy within classes, meaning that the event listener can be
-bound to the instance of the class, and not the element that is firing the
-event.</p>
-
-<p>Hope that helps someone!</p>
-
-<p>Matt</p>
-</div>
-
-<div class="meta">
-	
-</div>
-</article>
-
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-	
-	
-	<a class="addthis_button_tweet"></a>
-	
-	
-	<a class="addthis_counter addthis_pill_style"></a>
-	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
-</div>
-
-
-
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    <time datetime="2007-12-15T23:08:10+00:00" pubdate data-updated="true">Dec 15<span>th</span>, 2007</time></div>
+    	</div>
+    	<div class="entry-content"><p>Well it&rsquo;s my first blog entry for a little while (I have a few almost ready to
+    publish) and its going to be a short one.</p>
+    
+    <p>I have been doing a lot of client side scripting work recently, mostly with
+    the <a href="http://mootools.net">Mootools</a> framework, if you havn&rsquo;t heard of it then
+    it&rsquo;s definitely worth a look, it is a really powerfull javascript framework
+    made of modules that you can pick and mix in, meaning that it is increadably
+    lightweight when compared to the likes of prototype etc.</p>
+    
+    <p>One really cool little function is the <em>bind</em> function. The bind function is
+    prototyped to the function element and so is called directly upon a function.
+    When calling bind you pass it an element to which the &lsquo;this&rsquo; of the function
+    then corresponds to. A demonstration is probably in order!</p>
+    
+    <pre><code>element.addEvent('focus', function(e) {
+        alert(this.id)
+    })
+    </code></pre>
+    
+    <p>The above code would attach the focus event to &lsquo;element&rsquo;, on focus the browser
+    would alert the id of that element.</p>
+    
+    <pre><code>element.addEvent('focus', function(e) {
+        alert(this.id)
+    }.bind(element2))
+    </code></pre>
+    
+    <p>This time the alert would output the id of element2. This practise is
+    particularly handy within classes, meaning that the event listener can be
+    bound to the instance of the class, and not the element that is firing the
+    event.</p>
+    
+    <p>Hope that helps someone!</p>
+    
+    <p>Matt</p>
     </div>
-    <footer id="footer">
-    <div style="display:inline">
-    Copyright &copy; 2013
-
-    Matthew Wells
-. Powered by <a href="http://octopress.org">Octopress</a> | 
-    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
-</div>
-
-
-    </footer>
-    <script src="/javascripts/fabric.js"></script>
-
-
-
-
-
-
-
-<!-- end toload --> 
-</div>
-</div>
-<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
-/*]]>*/
-</script><!-- remove it to remove the scroll to top button -->
+    
+    <div class="meta">
+    	
+    </div>
+    </article>
+  </main>
 </body>
 </html>

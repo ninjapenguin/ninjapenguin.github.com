@@ -1,362 +1,230 @@
-
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-	<title>Kohana and Gearman - Practical Multitasking - ninjapenguin</title>
-	<meta name="author" content="Matthew Wells">
-
-	<meta name="HandheldFriendly" content="True">
-	<meta name="MobileOptimized" content="320">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	
-	<meta name="description" content="Quite a large proportion of my day-to-day job involves the design,
-implementation and ongoing improvement of an in-house API. As a result of this, a &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="ninjapenguin" type="application/atom+xml">
-	
-	<link rel="canonical" href="https://ninjapenguin.co.uk/blog/2011/08/29/kohana-and-gearman-practical-multitasking">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-
-	<link href='https://fonts.googleapis.com/css?text=ninjapenguin&family=Slackey' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
-
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-
-	
-	
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kohana and Gearman - Practical Multitasking - ninjapenguin</title>
+  <meta name="description" content="Quite a large proportion of my day-to-day job involves the design,
+implementation and ongoing improvement of an in-house API. As a result of this, a ...">
+  <link rel="canonical" href="https://ninjapenguin.co.uk/blog/2011/08/29/kohana-and-gearman-practical-multitasking/">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/stylesheets/minimal.css">
 </head>
-
-
-<body>
-    <div id="wrapper">
-    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
-<h1 class="animated bounceInDown">
-    <div id="headerbg">
-        ninjapenguin
-    </div>
-</h1>
-<br>
-
-<ul id="social-links" style="text-align:center">
-  
-  <!-- GitHub -->
-  <li>
-  <a href="https://github.com/ninjapenguin" class="github" title="Github"></a>
-  </li>
-  
-  
-  
-  
-  <!-- Twitter -->
-  <li>
-  <a href="http://www.twitter.com/ninja_p" class="twitter" title="Twitter"></a>
-  </li>
-  
-  
-  
-  
-  
-</ul>
-
-
-<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
-<ul id="nav">
-	<li id="ajax"><a href="/index.html">Home</a></li>
-    <li id="ajax"><a href="/blog/index.html">Blog</a></li>
-	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
-    <li><a href="/atom.xml">RSS</a></li>
+<body class="post-page">
+  <header class="site-header">
+    <a class="site-title" href="/">ninjapenguin</a>
+    <nav aria-label="Primary">
+      <a href="/blog/archives/">Archive</a>
+    </nav>
+  </header>
+  <main class="site-main">
+    <article class="post">
+    	<h2 class="title">Kohana and Gearman - Practical Multitasking</h2>
+    	<div class="meta">
+    		<div class="date">Published on: 
     
-    <li>
-    <div id="dark">
-        <form method="get" action="/search.html" id="search">
-            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
-        </form>
-    </div>
-    </li>
     
-</ul>
-
-
-
-
-</header>
-
-<div id="toload">
-<!-- begin toload --> 
-    <div id="content" class="inner">
-        <article class="post">
-	<h2 class="title">Kohana and Gearman - Practical Multitasking</h2>
-	<div class="meta">
-		<div class="date">Published on: 
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-29T18:11:57+01:00" pubdate data-updated="true">Aug 29<span>th</span>, 2011</time></div>
-		<div class="tags">Tags: 
-
-
-	<a class='category' href='/blog/categories/personal/'>Personal</a>
-
-
-</div>
-	</div>
-	<div class="entry-content"><p><img class="center" src="/images/blog/antz.jpeg" title="Practical Multitasking with Kohana and Gearman" alt="Practical Multitasking with Kohana and Gearman"></p>
-
-<p>Quite a large proportion of my day-to-day job involves the design,
-implementation and ongoing improvement of an in-house API.</p>
-
-<p>As a result of this, a commonly identified bottleneck arises when dealing with
-large, &lsquo;expensive&rsquo; data. This is commonly seen when an application posts a
-large volume of well structured data to the API (that some process must be
-carried out upon), before some form of structured receipt is then returned as
-a request response.</p>
-
-<p>Analysing such a request tends to show high PHP CPU usage with lower database
-consumption. This means that with an increase in data processing capacity we
-could make more use of this redundant database resource.</p>
-
-<p>The structured nature of data exchanged via an API means that we can,
-relatively simply and reliably, divide the submitted data and process it
-simultaneously with the help of a great tool called Gearman.</p>
-
-<!-- more -->
-
-
-<h2>Proposed Solution</h2>
-
-<p>Let&rsquo;s first agree on a contrived, theoretical scenario against which to design
-our solution:</p>
-
-<p>We have an API endpoint which receives a large number of entity ids and
-associated status updates. These ids must first be loaded from the database
-(to validate the ids) before their status is updated according to the posted
-value.</p>
-
-<p>Our current solution iterates the posted data (no matter the size), loading
-and updating as it goes, until the entire posted array of ids is dealt with.
-We then return a response indicating the ids of all entities updated. The time
-taken to process the request is therefore linearly proportional to the number
-of posted entity ids.</p>
-
-<p>Our solution will take the data passed by the user, divide it evenly into
-definable number of chunks and process each chunk in parallel -before finally
-combining the output from the individual processes and returning the
-combination to the user.</p>
-
-<p><img class="center" src="/images/blog/pmkg.gif" title="Practical Multitasking with Kohana and Gearman" alt="Practical Multitasking with Kohana and Gearman"></p>
-
-<h2>Implementation</h2>
-
-<p>Kohana&rsquo;s HMVC methodology lends itself perfectly to this solution. Firstly,
-we&rsquo;ll need a parent controller that will transparently handle the splitting of
-the POSTED data. We&rsquo;ll call this the &lsquo;Farmable Controller&rsquo;. Secondly, we will
-need a Gearman worker &ndash; we&rsquo;ll call this our &lsquo;ant&rsquo; &ndash; which will handle the
-incoming request from Gearman, process the request via Kohana and return the
-output back to our Farmable Controller.</p>
-
-<h3>Controller_Farmable</h3>
-
-<p>You can grab the raw code <a href="https://github.com/ninjapenguin/Ant%0AFarm/blob/master/application/classes/controller/farmable.php">over at github</a>. Essentially
-this is an example controller which deals with the automatic detection of a
-request suitable for parallelisation, and the subsequent splitting, assignment
-and merging of the request data.</p>
-
-<figure class='code'><figcaption><span>Dispatching each sub-request via gearman</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr_chunks</span> <span class="k">as</span> <span class="nv">$chunk</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// Format the string to be passed to the worker $arr_d = $_POST;</span>
-</span><span class='line'>  <span class="nv">$arr_d</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_key_name</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$arr_chunks</span><span class="p">[</span><span class="nv">$c</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nv">$str_data</span> <span class="o">=</span> <span class="nv">$str_route</span> <span class="o">.</span> <span class="s2">&quot;#&quot;</span> <span class="o">.</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$arr_d</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nv">$obj_gearman</span><span class="o">-&gt;</span><span class="na">addTask</span><span class="p">(</span><span class="s1">&#39;make_request&#39;</span><span class="p">,</span> <span class="nv">$str_data</span><span class="p">);</span> <span class="nv">$c</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The above snippet demonstrates how we pass the request &ndash; along with the chunk of data
-that we want it to handle &ndash; to the ant (the Gearman worker).</p>
-
-<h3>Controller_Worker (ant)</h3>
-
-<p>This is our gearman worker. Its sole job is to listen for incoming requests,
-execute the passed request via an internal request and return the response to
-the parent process for later merging. You can view the <a href="https:%0A//github.com/ninjapenguin/AntFarm/blob/master/application/classes/controller/w%0Aorker.php">full code here</a>. The snippet below demonstrates how we make sense of the data
-received as part of the Gearman call, and how we execute the internal request:</p>
-
-<figure class='code'><figcaption><span>Gearman worker example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>  <span class="nv">$arr_pieces</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="nv">$job</span><span class="o">-&gt;</span><span class="na">workload</span><span class="p">());</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// Assign the data</span>
-</span><span class='line'>  <span class="nv">$str_uri</span> <span class="o">=</span> <span class="nv">$arr_pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="nb">parse_str</span><span class="p">(</span><span class="nv">$arr_pieces</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nv">$arr_post</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// Create and execute the request..</span>
-</span><span class='line'>  <span class="nv">$str_data</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">factory</span><span class="p">(</span><span class="nv">$str_uri</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$arr_post</span><span class="p">)</span> <span class="o">-&gt;</span><span class="na">execute</span><span class="p">()</span> <span class="o">-&gt;</span><span class="na">body</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="nv">$str_data</span><span class="p">;</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Controller_update</h3>
-
-<p>This is an example controller which simply takes the data posted to it and
-returns the data prefixed with the work &ldquo;affected&rdquo; (just to prove it has
-executed).</p>
-
-<p>Take note of the class level variables defined within this controller:</p>
-
-<ul>
-<li><p><strong>$_data_key</strong><br/>
-The key within POST which holds the items we are interested in</p></li>
-<li><p><strong>$_workable_limit</strong><br/>
-The number of items within $<em>POST[$</em>data_key] for which to parallelise the request</p></li>
-<li><p><strong>$_worker_count</strong><br/>
-The number of workers (ants) available over which to distribute the request</p></li>
-</ul>
-
-
-<h2>Running the Code</h2>
-
-<p>To run the code, you will need to ensure that you have Gearman installed
-locally as well as the Gearman PHP extension (see
-<a href="http://gearman.org/index.php?id=download">here</a>). Then checkout my example
-project from <a href="https://github.com/ninjapenguin/AntFarm">GitHub</a>.</p>
-
-<p>Once you have the prerequisites in place you can start up the required Gearman
-workers (I recommend three instances). Running the code below will start one
-worker instance (ant).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>your_project_dir/public php index.php --uri<span class="o">=</span>worker &amp;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can then make a request to the dummy update controller with the below</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>php index.php --uri<span class="o">=</span>updater --post<span class="o">=</span><span class="s1">&#39;header=some_data&amp;data;[]=penguin&amp;data;[]=giraffe&amp;data;[]=badger&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>On executing the above request you should see each worker output a debug line
-informing that it has been requested to serve a response. You should also see
-your main request respond with a single request. You can then edit the
-updater.php controller and set the _workable_limit to a fictitiously high
-value and re-run the test (you will need to restart your workers). You should
-now notice the workers are no longer called and the main request should take
-noticeably longer to execute.</p>
-
-<h2>Summary</h2>
-
-<p>Hopefully from this you will have seen some of the powerful capabilies
-available with the HMVC nature of Kohana, which makes this technique so easy
-to achieve. If you haven&rsquo;t come across Gearman before then this is a very
-basic introduction to an incredibly powerful tool, definitely check it out!</p>
-
-<p>Furthermore, we have shown how a slight change in our system architecture has
-transformed the fundamental behaviour, and thus scaleability pattern, of our
-application &ndash; brains before brawn!.</p>
-
-<p>I&rsquo;ve also provided a working demonstration using Gearman and Kohana. Whilst it
-certainly isn&rsquo;t production-ready, it should serve as a solid foundation for
-anyone wanting to play with the technique!</p>
-</div>
-
-<div class="meta">
-	
-</div>
-</article>
-
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-	
-	
-	<a class="addthis_button_tweet"></a>
-	
-	
-	<a class="addthis_counter addthis_pill_style"></a>
-	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
-</div>
-
-
-
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    <time datetime="2011-08-29T18:11:57+01:00" pubdate data-updated="true">Aug 29<span>th</span>, 2011</time></div>
+    	</div>
+    	<div class="entry-content"><p><img class="center" src="/images/blog/antz.jpeg" title="Practical Multitasking with Kohana and Gearman" alt="Practical Multitasking with Kohana and Gearman"></p>
+    
+    <p>Quite a large proportion of my day-to-day job involves the design,
+    implementation and ongoing improvement of an in-house API.</p>
+    
+    <p>As a result of this, a commonly identified bottleneck arises when dealing with
+    large, &lsquo;expensive&rsquo; data. This is commonly seen when an application posts a
+    large volume of well structured data to the API (that some process must be
+    carried out upon), before some form of structured receipt is then returned as
+    a request response.</p>
+    
+    <p>Analysing such a request tends to show high PHP CPU usage with lower database
+    consumption. This means that with an increase in data processing capacity we
+    could make more use of this redundant database resource.</p>
+    
+    <p>The structured nature of data exchanged via an API means that we can,
+    relatively simply and reliably, divide the submitted data and process it
+    simultaneously with the help of a great tool called Gearman.</p>
+    <h2>Proposed Solution</h2>
+    
+    <p>Let&rsquo;s first agree on a contrived, theoretical scenario against which to design
+    our solution:</p>
+    
+    <p>We have an API endpoint which receives a large number of entity ids and
+    associated status updates. These ids must first be loaded from the database
+    (to validate the ids) before their status is updated according to the posted
+    value.</p>
+    
+    <p>Our current solution iterates the posted data (no matter the size), loading
+    and updating as it goes, until the entire posted array of ids is dealt with.
+    We then return a response indicating the ids of all entities updated. The time
+    taken to process the request is therefore linearly proportional to the number
+    of posted entity ids.</p>
+    
+    <p>Our solution will take the data passed by the user, divide it evenly into
+    definable number of chunks and process each chunk in parallel -before finally
+    combining the output from the individual processes and returning the
+    combination to the user.</p>
+    
+    <p><img class="center" src="/images/blog/pmkg.gif" title="Practical Multitasking with Kohana and Gearman" alt="Practical Multitasking with Kohana and Gearman"></p>
+    
+    <h2>Implementation</h2>
+    
+    <p>Kohana&rsquo;s HMVC methodology lends itself perfectly to this solution. Firstly,
+    we&rsquo;ll need a parent controller that will transparently handle the splitting of
+    the POSTED data. We&rsquo;ll call this the &lsquo;Farmable Controller&rsquo;. Secondly, we will
+    need a Gearman worker &ndash; we&rsquo;ll call this our &lsquo;ant&rsquo; &ndash; which will handle the
+    incoming request from Gearman, process the request via Kohana and return the
+    output back to our Farmable Controller.</p>
+    
+    <h3>Controller_Farmable</h3>
+    
+    <p>You can grab the raw code <a href="https://github.com/ninjapenguin/Ant%0AFarm/blob/master/application/classes/controller/farmable.php">over at github</a>. Essentially
+    this is an example controller which deals with the automatic detection of a
+    request suitable for parallelisation, and the subsequent splitting, assignment
+    and merging of the request data.</p>
+    
+    <figure class='code'><figcaption><span>Dispatching each sub-request via gearman</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+    <span class='line-number'>2</span>
+    <span class='line-number'>3</span>
+    <span class='line-number'>4</span>
+    <span class='line-number'>5</span>
+    <span class='line-number'>6</span>
+    <span class='line-number'>7</span>
+    <span class='line-number'>8</span>
+    <span class='line-number'>9</span>
+    <span class='line-number'>10</span>
+    <span class='line-number'>11</span>
+    <span class='line-number'>12</span>
+    <span class='line-number'>13</span>
+    </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+    </span><span class='line'>
+    </span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr_chunks</span> <span class="k">as</span> <span class="nv">$chunk</span><span class="p">)</span> <span class="p">{</span>
+    </span><span class='line'>
+    </span><span class='line'>  <span class="c1">// Format the string to be passed to the worker $arr_d = $_POST;</span>
+    </span><span class='line'>  <span class="nv">$arr_d</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_key_name</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$arr_chunks</span><span class="p">[</span><span class="nv">$c</span><span class="p">];</span>
+    </span><span class='line'>
+    </span><span class='line'>  <span class="nv">$str_data</span> <span class="o">=</span> <span class="nv">$str_route</span> <span class="o">.</span> <span class="s2">&quot;#&quot;</span> <span class="o">.</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$arr_d</span><span class="p">);</span>
+    </span><span class='line'>
+    </span><span class='line'>  <span class="nv">$obj_gearman</span><span class="o">-&gt;</span><span class="na">addTask</span><span class="p">(</span><span class="s1">&#39;make_request&#39;</span><span class="p">,</span> <span class="nv">$str_data</span><span class="p">);</span> <span class="nv">$c</span><span class="o">++</span><span class="p">;</span>
+    </span><span class='line'><span class="p">}</span>
+    </span><span class='line'>
+    </span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+    </span></code></pre></td></tr></table></div></figure>
+    
+    
+    <p>The above snippet demonstrates how we pass the request &ndash; along with the chunk of data
+    that we want it to handle &ndash; to the ant (the Gearman worker).</p>
+    
+    <h3>Controller_Worker (ant)</h3>
+    
+    <p>This is our gearman worker. Its sole job is to listen for incoming requests,
+    execute the passed request via an internal request and return the response to
+    the parent process for later merging. You can view the <a href="https:%0A//github.com/ninjapenguin/AntFarm/blob/master/application/classes/controller/w%0Aorker.php">full code here</a>. The snippet below demonstrates how we make sense of the data
+    received as part of the Gearman call, and how we execute the internal request:</p>
+    
+    <figure class='code'><figcaption><span>Gearman worker example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+    <span class='line-number'>2</span>
+    <span class='line-number'>3</span>
+    <span class='line-number'>4</span>
+    <span class='line-number'>5</span>
+    <span class='line-number'>6</span>
+    <span class='line-number'>7</span>
+    <span class='line-number'>8</span>
+    <span class='line-number'>9</span>
+    <span class='line-number'>10</span>
+    <span class='line-number'>11</span>
+    </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+    </span><span class='line'>  <span class="nv">$arr_pieces</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="nv">$job</span><span class="o">-&gt;</span><span class="na">workload</span><span class="p">());</span>
+    </span><span class='line'>
+    </span><span class='line'>  <span class="c1">// Assign the data</span>
+    </span><span class='line'>  <span class="nv">$str_uri</span> <span class="o">=</span> <span class="nv">$arr_pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="nb">parse_str</span><span class="p">(</span><span class="nv">$arr_pieces</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nv">$arr_post</span><span class="p">);</span>
+    </span><span class='line'>
+    </span><span class='line'>  <span class="c1">// Create and execute the request..</span>
+    </span><span class='line'>  <span class="nv">$str_data</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">factory</span><span class="p">(</span><span class="nv">$str_uri</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$arr_post</span><span class="p">)</span> <span class="o">-&gt;</span><span class="na">execute</span><span class="p">()</span> <span class="o">-&gt;</span><span class="na">body</span><span class="p">();</span>
+    </span><span class='line'>
+    </span><span class='line'>  <span class="k">return</span> <span class="nv">$str_data</span><span class="p">;</span>
+    </span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+    </span></code></pre></td></tr></table></div></figure>
+    
+    
+    <h3>Controller_update</h3>
+    
+    <p>This is an example controller which simply takes the data posted to it and
+    returns the data prefixed with the work &ldquo;affected&rdquo; (just to prove it has
+    executed).</p>
+    
+    <p>Take note of the class level variables defined within this controller:</p>
+    
+    <ul>
+    <li><p><strong>$_data_key</strong><br/>
+    The key within POST which holds the items we are interested in</p></li>
+    <li><p><strong>$_workable_limit</strong><br/>
+    The number of items within $<em>POST[$</em>data_key] for which to parallelise the request</p></li>
+    <li><p><strong>$_worker_count</strong><br/>
+    The number of workers (ants) available over which to distribute the request</p></li>
+    </ul>
+    
+    
+    <h2>Running the Code</h2>
+    
+    <p>To run the code, you will need to ensure that you have Gearman installed
+    locally as well as the Gearman PHP extension (see
+    <a href="http://gearman.org/index.php?id=download">here</a>). Then checkout my example
+    project from <a href="https://github.com/ninjapenguin/AntFarm">GitHub</a>.</p>
+    
+    <p>Once you have the prerequisites in place you can start up the required Gearman
+    workers (I recommend three instances). Running the code below will start one
+    worker instance (ant).</p>
+    
+    <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+    </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>your_project_dir/public php index.php --uri<span class="o">=</span>worker &amp;
+    </span></code></pre></td></tr></table></div></figure>
+    
+    
+    <p>You can then make a request to the dummy update controller with the below</p>
+    
+    <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+    </pre></td><td class='code'><pre><code class='bash'><span class='line'>php index.php --uri<span class="o">=</span>updater --post<span class="o">=</span><span class="s1">&#39;header=some_data&amp;data;[]=penguin&amp;data;[]=giraffe&amp;data;[]=badger&#39;</span>
+    </span></code></pre></td></tr></table></div></figure>
+    
+    
+    <p>On executing the above request you should see each worker output a debug line
+    informing that it has been requested to serve a response. You should also see
+    your main request respond with a single request. You can then edit the
+    updater.php controller and set the _workable_limit to a fictitiously high
+    value and re-run the test (you will need to restart your workers). You should
+    now notice the workers are no longer called and the main request should take
+    noticeably longer to execute.</p>
+    
+    <h2>Summary</h2>
+    
+    <p>Hopefully from this you will have seen some of the powerful capabilies
+    available with the HMVC nature of Kohana, which makes this technique so easy
+    to achieve. If you haven&rsquo;t come across Gearman before then this is a very
+    basic introduction to an incredibly powerful tool, definitely check it out!</p>
+    
+    <p>Furthermore, we have shown how a slight change in our system architecture has
+    transformed the fundamental behaviour, and thus scaleability pattern, of our
+    application &ndash; brains before brawn!.</p>
+    
+    <p>I&rsquo;ve also provided a working demonstration using Gearman and Kohana. Whilst it
+    certainly isn&rsquo;t production-ready, it should serve as a solid foundation for
+    anyone wanting to play with the technique!</p>
     </div>
-    <footer id="footer">
-    <div style="display:inline">
-    Copyright &copy; 2013
-
-    Matthew Wells
-. Powered by <a href="http://octopress.org">Octopress</a> | 
-    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
-</div>
-
-
-    </footer>
-    <script src="/javascripts/fabric.js"></script>
-
-
-
-
-
-
-
-<!-- end toload --> 
-</div>
-</div>
-<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
-/*]]>*/
-</script><!-- remove it to remove the scroll to top button -->
+    
+    <div class="meta">
+    	
+    </div>
+    </article>
+  </main>
 </body>
 </html>

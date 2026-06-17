@@ -1,0 +1,238 @@
+:root {
+  color-scheme: light;
+  --background: #ffffff;
+  --text: #151515;
+  --muted: #6f6f6f;
+  --line: #e8e8e8;
+  --link: #151515;
+  --measure: 680px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  background: var(--background);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.site-header {
+  width: min(var(--measure), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 36px 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-title,
+.site-header nav a,
+.archive-link {
+  font-size: 0.82rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.site-title {
+  font-weight: 650;
+}
+
+.site-main {
+  width: min(var(--measure), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 56px 0 96px;
+}
+
+.home {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.home-main {
+  width: min(440px, calc(100% - 40px));
+  text-align: center;
+  padding: 40px 0;
+}
+
+.avatar {
+  display: block;
+  width: auto;
+  height: 135px;
+  margin: 0 auto 28px;
+}
+
+.home h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  font-weight: 650;
+}
+
+.handle {
+  margin: 0 0 16px;
+  line-height: 1.25;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.handle a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.home p {
+  margin: 0 auto 28px;
+  color: var(--muted);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 0 0 32px;
+  font-size: 1.75rem;
+}
+
+h2 {
+  margin: 44px 0 16px;
+  font-size: 1.25rem;
+}
+
+h3 {
+  margin: 32px 0 12px;
+  font-size: 1.05rem;
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre {
+  margin: 0 0 1.2rem;
+}
+
+blockquote {
+  padding-left: 18px;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+}
+
+pre,
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86rem;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+}
+
+.post .title,
+.page .entry-title {
+  margin-bottom: 10px;
+}
+
+.meta,
+time,
+.archives .date,
+.archives .tags {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.meta {
+  margin-bottom: 36px;
+}
+
+.meta a,
+.archives .tags a {
+  color: var(--muted);
+}
+
+.archives {
+  margin: 0 0 44px;
+}
+
+.archives .year {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.archives article {
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+}
+
+.archives article:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.archives .title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.archives .meta {
+  margin: 3px 0 0;
+}
+
+.entry-content img.left,
+.entry-content img.right,
+.entry-content img.center,
+.entry-content img {
+  display: block;
+  margin: 28px auto;
+}
+
+.pagination,
+.blog-index article + article {
+  margin-top: 48px;
+}
+
+@media (max-width: 560px) {
+  html {
+    font-size: 17px;
+  }
+
+  .site-header {
+    width: min(var(--measure), calc(100% - 28px));
+    padding-top: 24px;
+  }
+
+  .site-main,
+  .home-main {
+    width: min(var(--measure), calc(100% - 28px));
+  }
+}

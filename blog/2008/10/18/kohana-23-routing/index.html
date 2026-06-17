@@ -1,327 +1,195 @@
-
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-	<title>Kohana 2.3 routing - ninjapenguin</title>
-	<meta name="author" content="Matthew Wells">
-
-	<meta name="HandheldFriendly" content="True">
-	<meta name="MobileOptimized" content="320">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	
-	<meta name="description" content="In my last post I mentioned that there&rsquo;s a change in the works for Kohana 2.3,
-and I wasn&rsquo;t lying! If you watch the forum then you will &hellip;">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="ninjapenguin" type="application/atom+xml">
-	
-	<link rel="canonical" href="https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-routing">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-
-	<link href='https://fonts.googleapis.com/css?text=ninjapenguin&family=Slackey' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
-
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-
-	
-	
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kohana 2.3 routing - ninjapenguin</title>
+  <meta name="description" content="In my last post I mentioned that there's a change in the works for Kohana 2.3,
+and I wasn't lying! If you watch the forum then you will ...">
+  <link rel="canonical" href="https://ninjapenguin.co.uk/blog/2008/10/18/kohana-23-routing/">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="/stylesheets/minimal.css">
 </head>
-
-
-<body>
-    <div id="wrapper">
-    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
-<h1 class="animated bounceInDown">
-    <div id="headerbg">
-        ninjapenguin
-    </div>
-</h1>
-<br>
-
-<ul id="social-links" style="text-align:center">
-  
-  <!-- GitHub -->
-  <li>
-  <a href="https://github.com/ninjapenguin" class="github" title="Github"></a>
-  </li>
-  
-  
-  
-  
-  <!-- Twitter -->
-  <li>
-  <a href="http://www.twitter.com/ninja_p" class="twitter" title="Twitter"></a>
-  </li>
-  
-  
-  
-  
-  
-</ul>
-
-
-<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
-<ul id="nav">
-	<li id="ajax"><a href="/index.html">Home</a></li>
-    <li id="ajax"><a href="/blog/index.html">Blog</a></li>
-	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
-    <li><a href="/atom.xml">RSS</a></li>
+<body class="post-page">
+  <header class="site-header">
+    <a class="site-title" href="/">ninjapenguin</a>
+    <nav aria-label="Primary">
+      <a href="/blog/archives/">Archive</a>
+    </nav>
+  </header>
+  <main class="site-main">
+    <article class="post">
+    	<h2 class="title">Kohana 2.3 Routing</h2>
+    	<div class="meta">
+    		<div class="date">Published on: 
     
-    <li>
-    <div id="dark">
-        <form method="get" action="/search.html" id="search">
-            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
-        </form>
-    </div>
-    </li>
     
-</ul>
-
-
-
-
-</header>
-
-<div id="toload">
-<!-- begin toload --> 
-    <div id="content" class="inner">
-        <article class="post">
-	<h2 class="title">Kohana 2.3 Routing</h2>
-	<div class="meta">
-		<div class="date">Published on: 
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-18T14:29:11+01:00" pubdate data-updated="true">Oct 18<span>th</span>, 2008</time></div>
-		<div class="tags">Tags: 
-
-
-	<a class='category' href='/blog/categories/personal/'>Personal</a>
-
-
-</div>
-	</div>
-	<div class="entry-content"><p><img class="left" src="/images/blog/routing.png" title="Kohana Routing" alt="Kohana Routing">
-In my last post I mentioned that there&rsquo;s a change in the works for Kohana 2.3,
-and I wasn&rsquo;t lying! If you watch the forum then you will of certainly seen
-some discussions on it, of particular note are:<a href="http://forum.kohanaphp.com/comments.php?DiscussionID=1096&amp;page=1#Item_0">Routing in
-2.3</a>
-and <a href="http://forum.kohanaphp.com/comments.php?DiscussionI%0AD=1217&amp;page=1#Item_0">2.3 Routing Examples</a>.</p>
-
-<p>I think initially the change was met with skepticism , as these things so
-often are, people don&rsquo;t like future compatibility issues, which is
-understandable, but in this case I think the additional advantage gained is
-great enough to offset this potential cause of frustration. Hopefully this
-post will outline some of those benefits to you, allowing you to make up your
-own mind!</p>
-
-<!-- more -->
-
-
-<p><strong>Configuration</strong>
-So the first thing you will notice is that routing is now configured
-differently, imo when you get to grips with that is going on then it is
-actually now SIMPLER to setup more complex routes, you can now achieve
-scenarios with equal or greater flexibility to those of before but without the
-use of any regular expressions. The new default route is as follows:</p>
-
-<pre><code>$config['default'] = array
-(
-    // Default routing
-    ':controller/:method/:id',
-    // Defaults for route keys
-    'controller' =&gt; 'welcome',
-    'method' =&gt; 'index',
-);
-</code></pre>
-
-<p><strong>$config[&lsquo;default&rsquo;]</strong> Now this may or may not appear self-explanatory, we&rsquo;ll go through it anyway! Routes are now given a name, this route is called &lsquo;default&rsquo;, the name itself is not technically important, though we will come to their usage later!
-<strong>&lsquo;:controller/:method/:id&rsquo;</strong> This is the definition of our routing arguments, prefixing a segment with a colon &lsquo;:&rsquo; makes it a router argument, and interpretable as such, :controller and :method are ignored as arguments and if present are used as you would imagine (:controller is used as the request controller, :method for the method)
-<strong>&lsquo;controller&rsquo; => &lsquo;welcome&rsquo;,&lsquo;method&rsquo; => &lsquo;index&rsquo;,</strong> Here we set the defaults, this basically says that if the controller is not present then use the &lsquo;welcome&rsquo; controller and the &lsquo;index&rsquo; method within it. If controller is present with no method then use the index method within whichever controller
-<strong>Play Time</strong> Confused? maybe, but with that under our belt we can now start playing around with this. Best way to get to grips with this is to grab a checkout of the development head (<a href="http://source.kohanaphp.com/trunk">http://source.kohanaphp.com/trunk</a> (or <a href="http://dev.kohanaphp.com/browser/trunk">http://dev.kohanaphp.com/browser/trunk</a> if your more graphically inclined)) and set yourself up a sandbox! Once installed if you go to your local address you should be presented with the nice new green welcome page.
-<strong>New Controller</strong> Create yourself a new controller &lsquo;Page&rsquo; (remember controllers are now defined as &lsquo;class Controller_Page&rsquo;), and give it an empty index method which echos your favorite hello world substitute before exiting. Going to &lt;your-site>/page will now show you your hello world substitute. This behavior shouldn&rsquo;t bowl you off your feet, in fact the more astute will probably of noticed that this is <em>exactly the same as with the previous (read current) release!</em>.
-Going to <em>&lt;your-site>/page/index</em> will provide the same, <em>&lt;your-
-site>/page/index/12</em> will give the same again (notice the trend),  <em>&lt;your-
-site>/page/index/12/long</em> <strong>WILL BREAK</strong> however, this is in contrast to
-previous (current) versions in which we could continue to add War and Peace
-after the matched route and the framework would continue to hurry us along
-without any problem, this gives us MUCH tighter control over our routes and
-could potentially provide security benefits (I havn&rsquo;t worked through that
-scenario yet &ndash; any input?). It means if we want to capture data then we have
-to define it within our route.</p>
-
-<p>If we wanted to capture that fourth segment potentially then we could change
-our default route to:</p>
-
-<pre><code>$config['default'] = array
-(
-    // Default routing
-    ':controller/:method/:id/:style',
-    // Defaults for route keys
-    'controller' =&gt; 'welcome',
-    'method' =&gt; 'index',
-);
-</code></pre>
-
-<p>Above we have added another router argument called &lsquo;<em>style</em>&rsquo;, visiting our
-page with 4 segments no longer gives us an error &hellip; making any more sense
-yet?</p>
-
-<p><strong>Accessing URI parameters (arguments)</strong>
-So above we have seen how to add additional parameters to the route, how can
-we access these named parameters? <strong>Router::$arguments</strong> is the answer, add to
-your index method in your page controller the following, then visit your four
-segment route again:</p>
-
-<pre><code>    var_dump(router::$arguments['style']);
-</code></pre>
-
-<p>Very nice. We now have a nice, unified way of accessing these named
-parameters.</p>
-
-<p><strong>Practical Example</strong>
-So lets now run quickly through a practical example to demonstrate some more
-of the functionality we can leverage from this . .yes there is more!</p>
-
-<p>Lets re-use our page controller and add a blog_posts function to it. We define
-the following route:</p>
-
-<pre><code>$config['blog_post'] = array
-(
-    // Default routing
-    'post/:year/:month/:day',
-    // Defaults for route keys
-    'controller'    =&gt; 'page',
-    'method'    =&gt; 'blog_post',
-    'year'      =&gt; date('Y'),
-    //Ensure we get the correct date formats!
-    'regex'     =&gt; array(
-                'year'  =&gt; '[0-9]{4}',
-                'month' =&gt; '[0-9]{2}',
-                'day'   =&gt; '[0-9]{2}'
-                )
-);
-</code></pre>
-
-<p>The above has introduced the <em>regex</em> functionality, hopefully it is relatively
-self-explanatory there. We can basically provide individual regex patterns for
-each of our defined url arguments, which makes for some <strong>really</strong>
-nice and simple pattern matching options. Also note how we define our default
-year to be the current one, very simple, very effective and very future proof!
-All from the routing configuration.</p>
-
-<p>Add the below function into your Page controller (from before):</p>
-
-<pre><code>public function blog_post()
-{
-  $year     = router::$arguments['year'];
-  $month    = isset(router::$arguments['month']) ? router::$arguments['month'] : null ;
-  $day  = isset(router::$arguments['day']) ? router::$arguments['day'] : null ;
-  echo "Blog Post";
-  var_dump($year);
-  var_dump($month);
-  var_dump($day);
-  exit;
-}
-</code></pre>
-
-<p>Now visit &lt;your-site>/post and you should see what is going on here! I think
-that the set up we&rsquo;re looking at here is really only scratching the surface of
-how versatile and solid the new routing solution will be. Any thoughts?</p>
-
-<p><strong>Reverse Routing</strong>
-Just to finish this off lets take a look at what really tidies all this up
-into a neat package: Reverse routing. This allows us to generate application
-links using our configured routes set-up. For instance:</p>
-
-<pre><code>echo router::uri('blog_post', array(
-    'year' =&gt; '1983',
-    'month' =&gt; '08',
-    'day' =&gt; '22')
-);
-</code></pre>
-
-<p>The above will now happily generate the route <em>post/1983/08/22</em>. On its own
-not to fantastic, and it came at the price of a slightly longer link
-generation syntax. However as some of you are probably realising if we ship
-this app over to the states where they do everything backwards ( :) ) we now
-want to switch our urls to read &lsquo;post/:year/:day/:month&rsquo;, so by making that
-<strong>ONE</strong> change in our routes config every single one of our application links
-will now match this backwards way of doing things, and because we retrieve our
-url arguments by name none of our code will be affected . . truly awsome.
-Reorganising methods and controllers is no longer an issue either. Play around
-with it and see what you think. Hopefully you will be impressed!</p>
-
-<p><em>Breath</em> &ndash; That turned out to be a bit longer than anticipated so hopefully you got all the way through it, as usual any problems, glaring omissions then please don&rsquo;t hesitate to drop me a line!
-/Matt</p>
-</div>
-
-<div class="meta">
-	
-</div>
-</article>
-
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-	
-	
-	<a class="addthis_button_tweet"></a>
-	
-	
-	<a class="addthis_counter addthis_pill_style"></a>
-	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
-</div>
-
-
-
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    <time datetime="2008-10-18T14:29:11+01:00" pubdate data-updated="true">Oct 18<span>th</span>, 2008</time></div>
+    	</div>
+    	<div class="entry-content"><p><img class="left" src="/images/blog/routing.png" title="Kohana Routing" alt="Kohana Routing">
+    In my last post I mentioned that there&rsquo;s a change in the works for Kohana 2.3,
+    and I wasn&rsquo;t lying! If you watch the forum then you will of certainly seen
+    some discussions on it, of particular note are:<a href="http://forum.kohanaphp.com/comments.php?DiscussionID=1096&amp;page=1#Item_0">Routing in
+    2.3</a>
+    and <a href="http://forum.kohanaphp.com/comments.php?DiscussionI%0AD=1217&amp;page=1#Item_0">2.3 Routing Examples</a>.</p>
+    
+    <p>I think initially the change was met with skepticism , as these things so
+    often are, people don&rsquo;t like future compatibility issues, which is
+    understandable, but in this case I think the additional advantage gained is
+    great enough to offset this potential cause of frustration. Hopefully this
+    post will outline some of those benefits to you, allowing you to make up your
+    own mind!</p>
+    <p><strong>Configuration</strong>
+    So the first thing you will notice is that routing is now configured
+    differently, imo when you get to grips with that is going on then it is
+    actually now SIMPLER to setup more complex routes, you can now achieve
+    scenarios with equal or greater flexibility to those of before but without the
+    use of any regular expressions. The new default route is as follows:</p>
+    
+    <pre><code>$config['default'] = array
+    (
+        // Default routing
+        ':controller/:method/:id',
+        // Defaults for route keys
+        'controller' =&gt; 'welcome',
+        'method' =&gt; 'index',
+    );
+    </code></pre>
+    
+    <p><strong>$config[&lsquo;default&rsquo;]</strong> Now this may or may not appear self-explanatory, we&rsquo;ll go through it anyway! Routes are now given a name, this route is called &lsquo;default&rsquo;, the name itself is not technically important, though we will come to their usage later!
+    <strong>&lsquo;:controller/:method/:id&rsquo;</strong> This is the definition of our routing arguments, prefixing a segment with a colon &lsquo;:&rsquo; makes it a router argument, and interpretable as such, :controller and :method are ignored as arguments and if present are used as you would imagine (:controller is used as the request controller, :method for the method)
+    <strong>&lsquo;controller&rsquo; => &lsquo;welcome&rsquo;,&lsquo;method&rsquo; => &lsquo;index&rsquo;,</strong> Here we set the defaults, this basically says that if the controller is not present then use the &lsquo;welcome&rsquo; controller and the &lsquo;index&rsquo; method within it. If controller is present with no method then use the index method within whichever controller
+    <strong>Play Time</strong> Confused? maybe, but with that under our belt we can now start playing around with this. Best way to get to grips with this is to grab a checkout of the development head (<a href="http://source.kohanaphp.com/trunk">http://source.kohanaphp.com/trunk</a> (or <a href="http://dev.kohanaphp.com/browser/trunk">http://dev.kohanaphp.com/browser/trunk</a> if your more graphically inclined)) and set yourself up a sandbox! Once installed if you go to your local address you should be presented with the nice new green welcome page.
+    <strong>New Controller</strong> Create yourself a new controller &lsquo;Page&rsquo; (remember controllers are now defined as &lsquo;class Controller_Page&rsquo;), and give it an empty index method which echos your favorite hello world substitute before exiting. Going to &lt;your-site>/page will now show you your hello world substitute. This behavior shouldn&rsquo;t bowl you off your feet, in fact the more astute will probably of noticed that this is <em>exactly the same as with the previous (read current) release!</em>.
+    Going to <em>&lt;your-site>/page/index</em> will provide the same, <em>&lt;your-
+    site>/page/index/12</em> will give the same again (notice the trend),  <em>&lt;your-
+    site>/page/index/12/long</em> <strong>WILL BREAK</strong> however, this is in contrast to
+    previous (current) versions in which we could continue to add War and Peace
+    after the matched route and the framework would continue to hurry us along
+    without any problem, this gives us MUCH tighter control over our routes and
+    could potentially provide security benefits (I havn&rsquo;t worked through that
+    scenario yet &ndash; any input?). It means if we want to capture data then we have
+    to define it within our route.</p>
+    
+    <p>If we wanted to capture that fourth segment potentially then we could change
+    our default route to:</p>
+    
+    <pre><code>$config['default'] = array
+    (
+        // Default routing
+        ':controller/:method/:id/:style',
+        // Defaults for route keys
+        'controller' =&gt; 'welcome',
+        'method' =&gt; 'index',
+    );
+    </code></pre>
+    
+    <p>Above we have added another router argument called &lsquo;<em>style</em>&rsquo;, visiting our
+    page with 4 segments no longer gives us an error &hellip; making any more sense
+    yet?</p>
+    
+    <p><strong>Accessing URI parameters (arguments)</strong>
+    So above we have seen how to add additional parameters to the route, how can
+    we access these named parameters? <strong>Router::$arguments</strong> is the answer, add to
+    your index method in your page controller the following, then visit your four
+    segment route again:</p>
+    
+    <pre><code>    var_dump(router::$arguments['style']);
+    </code></pre>
+    
+    <p>Very nice. We now have a nice, unified way of accessing these named
+    parameters.</p>
+    
+    <p><strong>Practical Example</strong>
+    So lets now run quickly through a practical example to demonstrate some more
+    of the functionality we can leverage from this . .yes there is more!</p>
+    
+    <p>Lets re-use our page controller and add a blog_posts function to it. We define
+    the following route:</p>
+    
+    <pre><code>$config['blog_post'] = array
+    (
+        // Default routing
+        'post/:year/:month/:day',
+        // Defaults for route keys
+        'controller'    =&gt; 'page',
+        'method'    =&gt; 'blog_post',
+        'year'      =&gt; date('Y'),
+        //Ensure we get the correct date formats!
+        'regex'     =&gt; array(
+                    'year'  =&gt; '[0-9]{4}',
+                    'month' =&gt; '[0-9]{2}',
+                    'day'   =&gt; '[0-9]{2}'
+                    )
+    );
+    </code></pre>
+    
+    <p>The above has introduced the <em>regex</em> functionality, hopefully it is relatively
+    self-explanatory there. We can basically provide individual regex patterns for
+    each of our defined url arguments, which makes for some <strong>really</strong>
+    nice and simple pattern matching options. Also note how we define our default
+    year to be the current one, very simple, very effective and very future proof!
+    All from the routing configuration.</p>
+    
+    <p>Add the below function into your Page controller (from before):</p>
+    
+    <pre><code>public function blog_post()
+    {
+      $year     = router::$arguments['year'];
+      $month    = isset(router::$arguments['month']) ? router::$arguments['month'] : null ;
+      $day  = isset(router::$arguments['day']) ? router::$arguments['day'] : null ;
+      echo "Blog Post";
+      var_dump($year);
+      var_dump($month);
+      var_dump($day);
+      exit;
+    }
+    </code></pre>
+    
+    <p>Now visit &lt;your-site>/post and you should see what is going on here! I think
+    that the set up we&rsquo;re looking at here is really only scratching the surface of
+    how versatile and solid the new routing solution will be. Any thoughts?</p>
+    
+    <p><strong>Reverse Routing</strong>
+    Just to finish this off lets take a look at what really tidies all this up
+    into a neat package: Reverse routing. This allows us to generate application
+    links using our configured routes set-up. For instance:</p>
+    
+    <pre><code>echo router::uri('blog_post', array(
+        'year' =&gt; '1983',
+        'month' =&gt; '08',
+        'day' =&gt; '22')
+    );
+    </code></pre>
+    
+    <p>The above will now happily generate the route <em>post/1983/08/22</em>. On its own
+    not to fantastic, and it came at the price of a slightly longer link
+    generation syntax. However as some of you are probably realising if we ship
+    this app over to the states where they do everything backwards ( :) ) we now
+    want to switch our urls to read &lsquo;post/:year/:day/:month&rsquo;, so by making that
+    <strong>ONE</strong> change in our routes config every single one of our application links
+    will now match this backwards way of doing things, and because we retrieve our
+    url arguments by name none of our code will be affected . . truly awsome.
+    Reorganising methods and controllers is no longer an issue either. Play around
+    with it and see what you think. Hopefully you will be impressed!</p>
+    
+    <p><em>Breath</em> &ndash; That turned out to be a bit longer than anticipated so hopefully you got all the way through it, as usual any problems, glaring omissions then please don&rsquo;t hesitate to drop me a line!
+    /Matt</p>
     </div>
-    <footer id="footer">
-    <div style="display:inline">
-    Copyright &copy; 2013
-
-    Matthew Wells
-. Powered by <a href="http://octopress.org">Octopress</a> | 
-    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
-</div>
-
-
-    </footer>
-    <script src="/javascripts/fabric.js"></script>
-
-
-
-
-
-
-
-<!-- end toload --> 
-</div>
-</div>
-<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
-/*]]>*/
-</script><!-- remove it to remove the scroll to top button -->
+    
+    <div class="meta">
+    	
+    </div>
+    </article>
+  </main>
 </body>
 </html>
