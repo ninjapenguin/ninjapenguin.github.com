@@ -8,3 +8,5 @@ are no longer required.
 
 The previous Tapir search integration has been removed. `/search.html` now sends
 queries to Google with `sitesearch=ninjapenguin.co.uk`.
+
+GitHub Pages serves `ninjapenguin.co.uk` from `master` at the repository root.
