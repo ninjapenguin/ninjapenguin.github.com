@@ -26,24 +26,24 @@
       </header>
       <div class="entry-content">
         <h2 id="intro">Intro</h2>
-        <p>I think we’re nearing the end of the “prompt demo” phase of AI. The door is now firmly ajar on the engineering phase, and the exciting news for engineers is that these shiny new agentic systems are bringing all the hard bits back again.</p>
+        <p>I think we’re nearing the end of the “prompt demo” phase of AI. The door is now firmly ajar on the engineering phase, and the exciting news for engineers is that these shiny new agentic systems are bringing all the hard bits back again.<sup id="cite-ref-1" class="reference"><a href="#cite-note-1">[1]</a></sup></p>
         <h2 id="the-great-prompt-illusion">The Great Prompt Illusion</h2>
         <p>There’s been a lot of focus on the prompt as the product up until this point. It makes sense, the barrier is low, the wow factor high: the worm on that hook is juicy. The next step on the journey to getting that prompt into production . . <strong>cavernous</strong></p>
-        <p>That prompt looks so nicely defined sitting all alone in its well styled textarea, but in the real world? It needs a runtime, it needs model access, tools, state, orchestration, continued evaluation (testing), deploying, monitoring. The list goes on and, its all very predictable from an engineering standpoint.</p>
+        <p>That prompt looks so nicely defined sitting all alone in its well styled textarea, but in the real world? It needs a runtime, it needs model access, tools, state, orchestration, continued evaluation (testing), deploying, monitoring.<sup id="cite-ref-2" class="reference"><a href="#cite-note-2">[2]</a></sup> The list goes on and, its all very predictable from an engineering standpoint.</p>
         <h2 id="an-agent-it-takes-a-village-of-engineers">An Agent? It takes a village (of engineers)</h2>
-        <p>And now Agents. Now that single prompt has autonomy! An Agent requires state (actually it likely requires a LOT of it). It has dependencies, credentials (probably a lot of these as well - looking at you MCP), significant side effects, multiple users, costs… the list goes on. They’re powerful and have the potential for real, impactful, business consequences but they’re almost a perfectly designed thought experiment aimed at stressing all the assumptions of modern day infrastructure. So this brand new, shiny technology . . .means we now need to go back to ensuring we’re doing all those fundamentals again.</p>
+        <p>And now Agents. Now that single prompt has autonomy! An Agent requires state (actually it likely requires a LOT of it). It has dependencies, credentials (probably a lot of these as well - looking at you MCP), significant side effects, multiple users, costs… the list goes on.<sup id="cite-ref-3" class="reference"><a href="#cite-note-3">[3]</a></sup> They’re powerful and have the potential for real, impactful, business consequences but they’re almost a perfectly designed thought experiment aimed at stressing all the assumptions of modern day infrastructure. So this brand new, shiny technology . . .means we now need to go back to ensuring we’re doing all those fundamentals again.</p>
         <h2 id="return-of-the-stateful-process">Return of the Stateful Process</h2>
         <p>Engineering for scale is hard, coupled with the fact that the bar for “scale” keeps moving. In fact, we keep inventing new terms just to try to get a handle on it: enterprise scale became web scale, web scale became hyperscale, hyperscale became planet scale…</p>
-        <p>We’ve worked hard and learned a lot. Small, stateless, short-lived, horizontally scalable, easily replaceable processes are where we’ve been aiming. Containers, Kubernetes, ‘serverless’, edge compute are infrastructural tools and approaches we’ve been using to get there.</p>
+        <p>We’ve worked hard and learned a lot. Small, stateless, short-lived, horizontally scalable, easily replaceable processes are where we’ve been aiming.<sup id="cite-ref-4" class="reference"><a href="#cite-note-4">[4]</a></sup> Containers, Kubernetes, ‘serverless’, edge compute are infrastructural tools and approaches we’ve been using to get there.</p>
         <p>Agents, <em>significantly</em>, complicate this.</p>
-        <p>They are often long-running processes with large amounts of working context, mutable workspaces, local codebases, browser sessions, authenticated tools, and an ever-growing backlog of memory. They communicate over long-running streams. They accumulate state. They make decisions based on context that often don’t fit neatly into a request-response lifecycle.</p>
+        <p>They are often long-running processes with large amounts of working context, mutable workspaces, local codebases, browser sessions, authenticated tools, and an ever-growing backlog of memory.<sup id="cite-ref-5" class="reference"><a href="#cite-note-5">[5]</a></sup> They communicate over long-running streams. They accumulate state. They make decisions based on context that often don’t fit neatly into a request-response lifecycle.<sup id="cite-ref-6" class="reference"><a href="#cite-note-6">[6]</a></sup></p>
         <p>That is to say: almost the exact opposite of what we have been aiming for.</p>
         <h2 id="so-whats-the-problem">So what’s the problem?</h2>
         <p>The problem is not that long-running, stateful systems are impossible. We have been building them forever (we <em>used</em> to mostly default to building them!). The problem is that agents make stateful systems feel easy to create and hard to operate.</p>
         <p>With their very particular <del>set of skills</del> flavour of requirements Agents in production require that we ask a lot of those familiar questions again: What if this long process gets halfway through and dies? Can it safely resume? Can we adequately explain why it made a specific decision/tool call? How do we consider cost control? Can its credentials be revoked quickly? Can we accurately discern the difference between a model error, a tool error, a permissions issue, a bad prompt, stale context or plain vendor outage?</p>
         <p>The key here is that none of these are AI-specific problems, but then again Agents aren’t remotely interested in quacking like the ducks our infrastructure has been evolving to handle.</p>
         <h2 id="and-the-new-problems-are-new">And the new problems ARE new</h2>
-        <p>As well as making us now reconsider those old familiar problems again Agents also present a number of genuinely new ones. Non-deterministic execution, prompt injection, tool misuse/call failures, hallucinated actions, highly variable latency, wildly unpredictable costs, evaluation difficulty.</p>
+        <p>As well as making us now reconsider those old familiar problems again Agents also present a number of genuinely new ones. Non-deterministic execution, prompt injection, tool misuse/call failures, hallucinated actions, highly variable latency, wildly unpredictable costs<sup id="cite-ref-6-2" class="reference"><a href="#cite-note-6">[6]</a></sup>, evaluation difficulty.<sup id="cite-ref-7" class="reference"><a href="#cite-note-7">[7]</a></sup></p>
         <p>On the face of it, some of these challenges seem diametrically opposed to many of the objectives we’ve been striving toward for years.</p>
         <blockquote>
         <p>“What’s the expected runtime of this new system?” “Somewhere between 2 and 20 minutes”</p>
@@ -52,11 +52,11 @@
         <p>“What does the output look like?” “Ah well that’s, technically, random but most of the time it should hopefully be…”</p>
         </blockquote>
         <blockquote>
-        <p>“What’s the expected operating cost?” “We have a figure, but the potential upper bound is 30x.”</p>
+        <p>“What’s the expected operating cost?” “We have a figure, but the potential upper bound is 30x.”<sup id="cite-ref-6-3" class="reference"><a href="#cite-note-6">[6]</a></sup></p>
         </blockquote>
         <p>…that would traditionally make for a reasonably rocky start to any production readiness review.</p>
         <h2 id="the-fundamentals-matter-so-much-more-now">The fundamentals matter so much more now</h2>
-        <p>Security, observability, testing, governance and, my personal favourite, resilience now, more than ever, must become first-class product features for these systems.</p>
+        <p>Security, observability, testing, governance and, my personal favourite, resilience now, more than ever, must become first-class product features for these systems.<sup id="cite-ref-8" class="reference"><a href="#cite-note-8">[8]</a></sup><sup id="cite-ref-9" class="reference"><a href="#cite-note-9">[9]</a></sup><sup id="cite-ref-10" class="reference"><a href="#cite-note-10">[10]</a></sup></p>
         <p>With these systems acting autonomously on behalf of real-world users or businesses, we must understand what they’re doing, why they’re doing it, what has been affected and, critically, how to stop and/or recover it. The exciting bit? There’s some real engineering complexity in solving the approach to many of these.</p>
         <h2 id="the-production-agent-readiness-checklist">The production Agent Readiness Checklist</h2>
         <p>We’ve spent a lot of time considering the kinds of questions an enterprise grade platform for running production Agents need to be able to answer. As a result a first draft of an Agent readiness checklist perhaps looks something like:</p>
@@ -69,7 +69,22 @@
         <li>Can behaviour be accurately assessed before and after deployments?</li>
         <li>Are there realistic checkpoints/intervention gates ahead of critical actions?</li>
         </ol>
-        <p>Our aim is to continue to address these challenges and provide a world leading runtime for our customers production Agentic tooling. The goal is to then allow them to focus their time exclusively on that real business directly within their existing systems whilst not having to think about the hard parts!</p>
+        <p>Our aim at <a href="https://rightbrain.ai">rightbrain.ai</a> is to continue to address these challenges and provide a world leading runtime for our customers production Agentic tooling. The goal is to then allow them to focus their time exclusively on that real business directly within their existing systems whilst not having to think about the hard parts!</p>
+        <section class="references" aria-labelledby="references">
+          <h2 id="references">References</h2>
+          <ol>
+            <li id="cite-note-1"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai">The state of AI in 2025: Agents, innovation, and transformation</a>, McKinsey &amp; Company. <a class="reference-back" href="#cite-ref-1" aria-label="Back to reference 1">back</a></li>
+            <li id="cite-note-2"><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/">A practical guide to building agents</a>, OpenAI. <a class="reference-back" href="#cite-ref-2" aria-label="Back to reference 2">back</a></li>
+            <li id="cite-note-3"><a href="https://learn.microsoft.com/en-us/azure/foundry/agents/overview">What is Microsoft Foundry Agent Service?</a>, Microsoft Learn. <a class="reference-back" href="#cite-ref-3" aria-label="Back to reference 3">back</a></li>
+            <li id="cite-note-4"><a href="https://12factor.net/processes">The Twelve-Factor App: VI. Processes</a>, The Twelve-Factor App. <a class="reference-back" href="#cite-ref-4" aria-label="Back to reference 4">back</a></li>
+            <li id="cite-note-5"><a href="https://adk.dev/artifacts/">Artifacts</a>, Agent Development Kit (ADK). <a class="reference-back" href="#cite-ref-5" aria-label="Back to reference 5">back</a></li>
+            <li id="cite-note-6"><a href="https://www.anthropic.com/engineering/multi-agent-research-system">How we built our multi-agent research system</a>, Anthropic. <span class="reference-back">back: <a href="#cite-ref-6" aria-label="Back to reference 6a">a</a> <a href="#cite-ref-6-2" aria-label="Back to reference 6b">b</a> <a href="#cite-ref-6-3" aria-label="Back to reference 6c">c</a></span></li>
+            <li id="cite-note-7"><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a>, Anthropic. <a class="reference-back" href="#cite-ref-7" aria-label="Back to reference 7">back</a></li>
+            <li id="cite-note-8"><a href="https://www.businessinsider.com/replit-ceo-apologizes-ai-coding-tool-delete-company-database-2025-7">Replit's CEO apologizes after its AI agent wiped a company's code base in a test run and lied about it</a>, Business Insider. <a class="reference-back" href="#cite-ref-8" aria-label="Back to reference 8">back</a></li>
+            <li id="cite-note-9"><a href="https://arstechnica.com/ai/2025/04/cursor-ai-support-bot-invents-fake-policy-and-triggers-user-uproar/">Cursor AI support bot invents fake policy and triggers user uproar</a>, Ars Technica. <a class="reference-back" href="#cite-ref-9" aria-label="Back to reference 9">back</a></li>
+            <li id="cite-note-10"><a href="https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/">BC Tribunal Confirms Companies Remain Liable for Information Provided by AI Chatbot</a>, American Bar Association. <a class="reference-back" href="#cite-ref-10" aria-label="Back to reference 10">back</a></li>
+          </ol>
+        </section>
       </div>
     </article>
   </main>

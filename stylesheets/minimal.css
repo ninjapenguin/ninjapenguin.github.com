@@ -5,6 +5,7 @@
   --muted: #6f6f6f;
   --line: #e8e8e8;
   --link: #151515;
+  --accent: #ff1493;
   --measure: 680px;
 }
 
@@ -172,6 +173,25 @@ blockquote {
   border-left: 1px solid var(--line);
 }
 
+.reference {
+  margin-left: 0.12em;
+  font-size: 0.72em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.reference a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.reference a:hover,
+.reference a:focus,
+.reference-back:hover,
+.reference-back:focus {
+  text-decoration: underline;
+}
+
 pre,
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -224,6 +244,45 @@ pre {
 .post-summary p:last-child {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.references {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.references h2 {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.references ol {
+  margin-bottom: 0;
+  padding-left: 1.35rem;
+}
+
+.references li {
+  padding-left: 0.2rem;
+}
+
+.reference-back {
+  margin-left: 0.35em;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.reference-back a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.reference-back a:hover,
+.reference-back a:focus {
+  text-decoration: underline;
 }
 
 .meta,
