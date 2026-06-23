@@ -12,8 +12,10 @@ implementation and ongoing improvement of an in-house API. As a result of this, 
 </head>
 <body class="post-page">
   <header class="site-header">
-    <a class="site-title" href="/">ninjapenguin</a>
+    <a class="site-title" href="/"><img class="site-avatar" src="/images/np.jpg" alt="">ninjapenguin</a>
     <nav aria-label="Primary">
+      <a href="/blog/">Blog</a>
+      <span class="nav-separator" aria-hidden="true">|</span>
       <a href="/blog/archives/">Archive</a>
     </nav>
   </header>
@@ -128,7 +130,7 @@ implementation and ongoing improvement of an in-house API. As a result of this, 
     
     <p>This is our gearman worker. Its sole job is to listen for incoming requests,
     execute the passed request via an internal request and return the response to
-    the parent process for later merging. You can view the <a href="https:%0A//github.com/ninjapenguin/AntFarm/blob/master/application/classes/controller/w%0Aorker.php">full code here</a>. The snippet below demonstrates how we make sense of the data
+    the parent process for later merging. You can view the <a href="https://github.com/ninjapenguin/AntFarm/blob/master/application/classes/controller/worker.php">full code here</a>. The snippet below demonstrates how we make sense of the data
     received as part of the Gearman call, and how we execute the internal request:</p>
     
     <figure class='code'><figcaption><span>Gearman worker example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

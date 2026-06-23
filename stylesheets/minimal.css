@@ -43,6 +43,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  flex-wrap: wrap;
   border-bottom: 1px solid var(--line);
 }
 
@@ -56,7 +57,30 @@ img {
 }
 
 .site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 650;
+}
+
+.site-avatar {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.site-header nav,
+.home-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nav-separator {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1;
 }
 
 .site-main {
@@ -106,6 +130,10 @@ img {
 .home p {
   margin: 0 auto 28px;
   color: var(--muted);
+}
+
+.home-links {
+  margin-top: 2px;
 }
 
 h1,
@@ -159,6 +187,43 @@ pre {
 .post .title,
 .page .entry-title {
   margin-bottom: 10px;
+}
+
+.post-header {
+  margin-bottom: 42px;
+}
+
+.post-header h1 {
+  margin-bottom: 0;
+}
+
+.post-date {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.post-list {
+  margin-top: 28px;
+}
+
+.post-summary {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.post-summary:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.post-summary h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.post-summary p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
 }
 
 .meta,

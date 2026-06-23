@@ -1,6 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>https://ninjapenguin.co.uk/blog/</loc>
+        <lastmod>2026-06-19T00:00:00+00:00</lastmod>
+    </url>
+    <url>
+        <loc>https://ninjapenguin.co.uk/blog/2026/06/19/agents-make-engineering-hard-again/</loc>
+        <lastmod>2026-06-19T00:00:00+00:00</lastmod>
+    </url>
+    <url>
         <loc>https://ninjapenguin.co.uk/blog/2007/09/16/welcome-to-the-new-ninjapenguin/</loc>
         <lastmod>2013-11-30T14:30:45+00:00</lastmod>
     </url>
@@ -122,10 +130,6 @@
     </url>
     <url>
         <loc>https://ninjapenguin.co.uk/blog/archives/</loc>
-        <lastmod>2013-11-30T22:25:06+00:00</lastmod>
-    </url>
-    <url>
-        <loc>https://ninjapenguin.co.uk/blog/</loc>
         <lastmod>2013-11-30T22:25:06+00:00</lastmod>
     </url>
     <url>
