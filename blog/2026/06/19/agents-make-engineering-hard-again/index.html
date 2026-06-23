@@ -28,17 +28,17 @@
         <h2 id="intro">Intro</h2>
         <p>I think we’re nearing the end of the “prompt demo” phase of AI. The door is now firmly ajar on the engineering phase, and the exciting news for engineers is that these shiny new agentic systems are bringing all the hard bits back again.</p>
         <h2 id="the-great-prompt-illusion">The Great Prompt Illusion</h2>
-        <p>Theres been a lot of focus on the prompt as the product up until this point. It makes sense, the barrier is low, the wow factor high: the worm on that hook is juicy. The next step on the journey to getting that prompt into production . . <strong>cavenous</strong></p>
+        <p>There’s been a lot of focus on the prompt as the product up until this point. It makes sense, the barrier is low, the wow factor high: the worm on that hook is juicy. The next step on the journey to getting that prompt into production . . <strong>cavernous</strong></p>
         <p>That prompt looks so nicely defined sitting all alone in its well styled textarea, but in the real world? It needs a runtime, it needs model access, tools, state, orchestration, continued evaluation (testing), deploying, monitoring. The list goes on and, its all very predictable from an engineering standpoint.</p>
         <h2 id="an-agent-it-takes-a-village-of-engineers">An Agent? It takes a village (of engineers)</h2>
         <p>And now Agents. Now that single prompt has autonomy! An Agent requires state (actually it likely requires a LOT of it). It has dependencies, credentials (probably a lot of these as well - looking at you MCP), significant side effects, multiple users, costs… the list goes on. They’re powerful and have the potential for real, impactful, business consequences but they’re almost a perfectly designed thought experiment aimed at stressing all the assumptions of modern day infrastructure. So this brand new, shiny technology . . .means we now need to go back to ensuring we’re doing all those fundamentals again.</p>
         <h2 id="return-of-the-stateful-process">Return of the Stateful Process</h2>
-        <p>Engineering for scale is hard, coupled with the fact that the bar for “scale” keeps moving. In fact, we keep inventing new terms just to try get a handle on it: enterprise scale became web scale, web scale became hyperscale, hyperscale became planet scale…</p>
-        <p>We’ve worked hard and learned a lot. Small, stateless, short-lived, horizontally scalable, easily replaceable process are where we’ve been aiming. Containers, Kubernetes, ‘serverless’, edge compute are infrastructural tools and approaches we’ve been using to get there.</p>
+        <p>Engineering for scale is hard, coupled with the fact that the bar for “scale” keeps moving. In fact, we keep inventing new terms just to try to get a handle on it: enterprise scale became web scale, web scale became hyperscale, hyperscale became planet scale…</p>
+        <p>We’ve worked hard and learned a lot. Small, stateless, short-lived, horizontally scalable, easily replaceable processes are where we’ve been aiming. Containers, Kubernetes, ‘serverless’, edge compute are infrastructural tools and approaches we’ve been using to get there.</p>
         <p>Agents, <em>significantly</em>, complicate this.</p>
-        <p>They are often long-running processes with large amounts of working context, mutable workspaces, local codebases, browser sessions, authenticated tools, and an ever growing backlog of memory. They communicate over long-running streams. They accumulate state. They make decisions based on context that often don’t fit neatly into a request-response lifecycle.</p>
+        <p>They are often long-running processes with large amounts of working context, mutable workspaces, local codebases, browser sessions, authenticated tools, and an ever-growing backlog of memory. They communicate over long-running streams. They accumulate state. They make decisions based on context that often don’t fit neatly into a request-response lifecycle.</p>
         <p>That is to say: almost the exact opposite of what we have been aiming for.</p>
-        <h2 id="so-whats-the-problem">So whats the problem?</h2>
+        <h2 id="so-whats-the-problem">So what’s the problem?</h2>
         <p>The problem is not that long-running, stateful systems are impossible. We have been building them forever (we <em>used</em> to mostly default to building them!). The problem is that agents make stateful systems feel easy to create and hard to operate.</p>
         <p>With their very particular <del>set of skills</del> flavour of requirements Agents in production require that we ask a lot of those familiar questions again: What if this long process gets halfway through and dies? Can it safely resume? Can we adequately explain why it made a specific decision/tool call? How do we consider cost control? Can its credentials be revoked quickly? Can we accurately discern the difference between a model error, a tool error, a permissions issue, a bad prompt, stale context or plain vendor outage?</p>
         <p>The key here is that none of these are AI-specific problems, but then again Agents aren’t remotely interested in quacking like the ducks our infrastructure has been evolving to handle.</p>
@@ -46,20 +46,20 @@
         <p>As well as making us now reconsider those old familiar problems again Agents also present a number of genuinely new ones. Non-deterministic execution, prompt injection, tool misuse/call failures, hallucinated actions, highly variable latency, wildly unpredictable costs, evaluation difficulty.</p>
         <p>On the face of it, some of these challenges seem diametrically opposed to many of the objectives we’ve been striving toward for years.</p>
         <blockquote>
-        <p>“Whats the expected runtime of this new system?” “Somewhere between 2 and 20 minutes”</p>
+        <p>“What’s the expected runtime of this new system?” “Somewhere between 2 and 20 minutes”</p>
         </blockquote>
         <blockquote>
-        <p>“What does the output look like?” “Ah well thats, technically, random but most of the time it should hopefully be…”</p>
+        <p>“What does the output look like?” “Ah well that’s, technically, random but most of the time it should hopefully be…”</p>
         </blockquote>
         <blockquote>
-        <p>“Whats the expected operating cost?” “We have a figure, but the potential upper bound is 30x.”</p>
+        <p>“What’s the expected operating cost?” “We have a figure, but the potential upper bound is 30x.”</p>
         </blockquote>
         <p>…that would traditionally make for a reasonably rocky start to any production readiness review.</p>
         <h2 id="the-fundamentals-matter-so-much-more-now">The fundamentals matter so much more now</h2>
         <p>Security, observability, testing, governance and, my personal favourite, resilience now, more than ever, must become first-class product features for these systems.</p>
         <p>With these systems acting autonomously on behalf of real-world users or businesses, we must understand what they’re doing, why they’re doing it, what has been affected and, critically, how to stop and/or recover it. The exciting bit? There’s some real engineering complexity in solving the approach to many of these.</p>
         <h2 id="the-production-agent-readiness-checklist">The production Agent Readiness Checklist</h2>
-        <p>We’ve spent a lot of time considering the kinds of questions an enterprise grade platform for running production Agents need to be able to answer.As a result a first draft of an Agent readiness checklist perhaps looks something like:</p>
+        <p>We’ve spent a lot of time considering the kinds of questions an enterprise grade platform for running production Agents need to be able to answer. As a result a first draft of an Agent readiness checklist perhaps looks something like:</p>
         <ol type="1">
         <li>Can you trace every model call, tool call, skill execution and state change?</li>
         <li>Are you able to replay and/or introspect each failed run?</li>
